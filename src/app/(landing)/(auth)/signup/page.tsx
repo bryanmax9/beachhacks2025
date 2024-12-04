@@ -1,15 +1,11 @@
 
-'use client';
 import SignUpForm from "./_components/signup_form";
-import SignUpBanner from "./_components/banner";
 
 export default function SignUpPage() {
     return (
-        <>
         <div className="w-full flex items-center flex-col">
-            <SignUpBanner/>
+            <h1 className="text-4xl my-20">Sign Up</h1>
             <SignUpForm/>
         </div>
-        </>
     )
 }
