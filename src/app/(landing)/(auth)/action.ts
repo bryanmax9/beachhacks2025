@@ -41,10 +41,14 @@ export const signin_action = async (signInData: signInTypes) => {
         password: signInData.password,
     })
 
-    if (error){
+    if (error) {
         console.log(error);
+        return {
+            success: false,
+            message: error.message,
+            user_email: signInData.email,
+        };
     }
-
     return{
         success: true,
         message: "User has been signed in.",

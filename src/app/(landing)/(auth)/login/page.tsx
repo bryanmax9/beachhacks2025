@@ -8,8 +8,10 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { signin_schema, signInTypes } from "@/lib/schemas/user-signin"
 import { signin_action } from "@/app/(landing)/(auth)/action"
 import Link from 'next/link'
+import {useState} from "react";
 
 export default function LoginPage() {
+    const [serverError, setServerError] = useState<string | null>(null);
     const {
         register,
         formState: { errors },
@@ -26,8 +28,7 @@ export default function LoginPage() {
             console.log(response.user_email);
             // Optionally, redirect the user here
         } else {
-            // Handle error (you might want to set an error state to display it)
-            console.error(response.message);
+            setServerError(response.message);
         }
     }
 
@@ -73,6 +74,14 @@ export default function LoginPage() {
                             Sign Up
                         </Link>
                     </div>
+                    {/* Server Error Message */}
+                    {serverError && (
+                        <div className="text-red-500 text-sm text-center">
+                            {serverError}
+                        </div>
+                    )}
+
+
                 </CardContent>
             </Card>
         </div>
