@@ -3,6 +3,7 @@
 
 import {createServer} from "@/lib/supabase/server";
 import {signupTypes} from "@/lib/schemas/user-signup";
+import {signInTypes} from "@/lib/schemas/user-signin";
 
 export const signup_action = async (signup_data: signupTypes) => {
 
@@ -28,6 +29,26 @@ export const signup_action = async (signup_data: signupTypes) => {
     return {
         success: true,
         message: "User has been created."
+    }
+
+}
+
+export const signin_action = async (signInData: signInTypes) => {
+    const supabase = await createServer();
+
+    const {error} = await supabase.auth.signInWithPassword({
+        email: signInData.email,
+        password: signInData.password,
+    })
+
+    if (error){
+        console.log(error);
+    }
+
+    return{
+        success: true,
+        message: "User has been signed in.",
+        user_email: signInData.email, // You can include user data if needed
     }
 
 }
