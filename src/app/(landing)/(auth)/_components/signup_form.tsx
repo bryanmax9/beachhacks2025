@@ -11,13 +11,17 @@ export default function SignUpForm() {
     const {
         register,
         formState: { errors },
-        handleSubmit
+        handleSubmit,
+        setValue,
+        reset,
+        watch
     } = useForm<signupTypes>({
         resolver: zodResolver(signup_schema)
     });
 
     const handle_signup = async (data: signupTypes) => {
         await signup_action(data);
+        reset();
     };
 
     return (
@@ -58,17 +62,53 @@ export default function SignUpForm() {
                 <label htmlFor="role" className="block text-sm font-medium text-gray-700">
                     Role
                 </label>
-                <select
-                    id="role"
-                    {...register("role")}
-                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                >
-                    <option value="HACKER">HACKER</option>
-                    <option value="JUDGE">JUDGE</option>
-                    <option value="VOLUNTEER">VOLUNTEER</option>
-                    <option value="MENTOR">MENTOR</option>
-                    <option value="SPONSOR">SPONSOR</option>
-                </select>
+                <div className="mt-2 space-x-4">
+                    <button
+                        type="button"
+                        onClick={() => setValue("role", "HACKER")}
+                        className={`px-4 py-2 rounded-md text-sm font-medium ${
+                            watch("role") === "HACKER" ? "bg-indigo-600 text-white" : "bg-gray-200 text-gray-700"
+                        }`}
+                    >
+                        HACKER
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => setValue("role", "JUDGE")}
+                        className={`px-4 py-2 rounded-md text-sm font-medium ${
+                            watch("role") === "JUDGE" ? "bg-indigo-600 text-white" : "bg-gray-200 text-gray-700"
+                        }`}
+                    >
+                        JUDGE
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => setValue("role", "VOLUNTEER")}
+                        className={`px-4 py-2 rounded-md text-sm font-medium ${
+                            watch("role") === "VOLUNTEER" ? "bg-indigo-600 text-white" : "bg-gray-200 text-gray-700"
+                        }`}
+                    >
+                        VOLUNTEER
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => setValue("role", "MENTOR")}
+                        className={`px-4 py-2 rounded-md text-sm font-medium ${
+                            watch("role") === "MENTOR" ? "bg-indigo-600 text-white" : "bg-gray-200 text-gray-700"
+                        }`}
+                    >
+                        MENTOR
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => setValue("role", "SPONSOR")}
+                        className={`px-4 py-2 rounded-md text-sm font-medium ${
+                            watch("role") === "SPONSOR" ? "bg-indigo-600 text-white" : "bg-gray-200 text-gray-700"
+                        }`}
+                    >
+                        SPONSOR
+                    </button>
+                </div>
                 {errors.role && (
                     <p className="mt-1 text-sm text-red-500">{errors.role.message}</p>
                 )}
