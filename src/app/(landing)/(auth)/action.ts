@@ -19,7 +19,7 @@ export const signup_action = async (signup_data: signupTypes) => {
                 first_name: signup_data.firstName,
                 last_name: signup_data.lastName,
                 phone: signup_data.phoneNumber,
-                role: "HACKER"
+                role: signup_data.role 
             }
         }
     });

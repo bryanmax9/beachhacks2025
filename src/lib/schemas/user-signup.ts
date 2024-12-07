@@ -31,7 +31,10 @@ export const signup_schema = z.object({
         .regex(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, {
             message: "Password must contain at least one special character"
         }),
-    confirmPassword: z.string()
+    confirmPassword: z.string(),
+    role: z.enum(['HACKER', 'JUDGE', 'VOLUNTEER', 'MENTOR', 'SPONSOR'], {
+        message: "Invalid role selection"
+    })
 }).refine((data) => data.password === data.confirmPassword, {
     message: "Passwords doesn't match",
     path: ["confirmPassword"]
