@@ -1,11 +1,20 @@
 
-import { type NextRequest } from 'next/server'
+import {type NextRequest, NextResponse} from 'next/server'
 import {updateSession} from "@/lib/supabase/middleware";
+import {privateRoutes} from "@/config/routes";
 
 export async function middleware(request: NextRequest) {
 
-    return await updateSession(request);
+    const path = request.nextUrl.pathname;
+    const isProtectedRoute = privateRoutes.includes(path);
 
+    const user = await updateSession(request);
+
+    if (isProtectedRoute && !user){
+        return NextResponse.redirect(new URL('/', request.nextUrl))
+    }
+
+    return NextResponse.next();
 }
 
 export const config = {
