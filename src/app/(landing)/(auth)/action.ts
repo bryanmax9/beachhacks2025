@@ -2,10 +2,12 @@
 "use server"
 
 import {createServer} from "@/lib/supabase/server";
-import {signupTypes} from "@/lib/schemas/user-signup";
-import {signInTypes} from "@/lib/schemas/user-signin";
+import {signup_schema, signupTypes} from "@/lib/schemas/user-signup";
+import {signin_schema, signInTypes} from "@/lib/schemas/user-signin";
+import {validateFields} from "@/lib/utils";
 
 export const signup_action = async (signup_data: signupTypes) => {
+    validateFields(signup_schema, signup_data);
 
     const supabase = await createServer();
 
@@ -17,13 +19,16 @@ export const signup_action = async (signup_data: signupTypes) => {
                 first_name: signup_data.firstName,
                 last_name: signup_data.lastName,
                 phone: signup_data.phoneNumber,
-                role: "HACKER"
+                role: signup_data.role 
             }
         }
     });
 
     if (error){
-        console.log(error);
+        return {
+            success: false,
+            message: error.message
+        };
     }
 
     return {
@@ -34,6 +39,8 @@ export const signup_action = async (signup_data: signupTypes) => {
 }
 
 export const signin_action = async (signInData: signInTypes) => {
+    validateFields(signin_schema, signInData);
+
     const supabase = await createServer();
 
     const {error} = await supabase.auth.signInWithPassword({
@@ -42,17 +49,15 @@ export const signin_action = async (signInData: signInTypes) => {
     })
 
     if (error) {
-        console.log(error);
         return {
             success: false,
-            message: error.message,
-            user_email: signInData.email,
-        };
+            message: error.message
+        }
     }
-    return{
+
+    return {
         success: true,
         message: "User has been signed in.",
-        user_email: signInData.email, // You can include user data if needed
     }
 
 }

@@ -1,4 +1,6 @@
+
 'use client'
+
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -8,27 +10,31 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { signin_schema, signInTypes } from "@/lib/schemas/user-signin"
 import { signin_action } from "@/app/(landing)/(auth)/action"
 import Link from 'next/link'
+import {Loader} from "lucide-react";
 import {useState} from "react";
+import {useRouter} from "next/navigation";
 
 export default function LoginPage() {
-    const [serverError, setServerError] = useState<string | null>(null);
+
+    const router = useRouter();
+    const [loginError, setLoginError] = useState("");
     const {
         register,
-        formState: { errors },
+        formState: { errors, isSubmitting },
         handleSubmit
     } = useForm<signInTypes>({
         resolver: zodResolver(signin_schema)
     });
 
     const handleSignIn = async (data: signInTypes) => {
+
         const response = await signin_action(data);
 
         if (response.success) {
-            console.log("User has successfully logged in");
-            console.log(response.user_email);
-            // Optionally, redirect the user here
+            console.log(response.message);
+            router.push("/application");
         } else {
-            setServerError(response.message);
+            setLoginError(response.message)
         }
     }
 
@@ -64,24 +70,25 @@ export default function LoginPage() {
                             />
                             {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
                         </div>
-                        <Button type="submit" className="w-full">
+
+                        <Button
+                            disabled={isSubmitting}
+                            type="submit"
+                            className="w-full">
+                            {isSubmitting && <Loader className={"animate-spin"}/> }
                             Sign In
                         </Button>
                     </form>
+
+                    { loginError && (
+                        <p className={"text-red-500 text-sm mt-1 text-center font-medium"}>{loginError}</p>
+                    )}
                     <div className="mt-4 text-center">
-                        <span>Don't have an account yet? </span>
+                        <span>{"Don't have an account yet? "}</span>
                         <Link href="/signup" className="text-blue-500 hover:underline">
                             Sign Up
                         </Link>
                     </div>
-                    {/* Server Error Message */}
-                    {serverError && (
-                        <div className="text-red-500 text-sm text-center">
-                            {serverError}
-                        </div>
-                    )}
-
-
                 </CardContent>
             </Card>
         </div>
