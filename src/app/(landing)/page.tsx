@@ -1,6 +1,10 @@
 
+import Hero from "@/app/(landing)/_components/hero";
+
 export default function Home() {
     return (
-        <h1>Main Page</h1>
+        <>
+            <Hero />
+        </>
     );
 }

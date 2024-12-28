@@ -1,6 +1,6 @@
 
 import type {Metadata} from "next";
-import "./globals.css";
+import "../globals.css";
 import {ReactNode} from "react";
 import {cn} from "@/lib/utils";
 import {inter} from "@/assets/fonts";
