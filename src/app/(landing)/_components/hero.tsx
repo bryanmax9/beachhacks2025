@@ -16,6 +16,27 @@ export default function Hero() {
   const [palmPositionRight, setPalmPositionRight] =
     useState("translate-x-full");
 
+  const [waveBottom, setWaveBottom] = useState("20vh");
+
+  useEffect(() => {
+    const updateWaveBottom = () => {
+      setWaveBottom(
+        window.innerWidth <= 768
+          ? "10vh"
+          : window.innerWidth <= 1024
+          ? "15vh"
+          : "20vh"
+      );
+    };
+
+    updateWaveBottom(); // Set the initial value
+    window.addEventListener("resize", updateWaveBottom);
+
+    return () => {
+      window.removeEventListener("resize", updateWaveBottom);
+    };
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 100) {
@@ -64,61 +85,36 @@ export default function Hero() {
     };
   }, []);
 
-  const constrainPupil = (
-    mouse: { x: number; y: number },
-    eye: HTMLElement,
-    maxRadius: number
-  ) => {
-    const rect = eye.getBoundingClientRect();
-    const eyeCenterX = rect.left + rect.width / 2;
-    const eyeCenterY = rect.top + rect.height / 2;
-
-    const dx = mouse.x - eyeCenterX;
-    const dy = mouse.y - eyeCenterY;
-    const distance = Math.sqrt(dx * dx + dy * dy);
-
-    if (distance < maxRadius) {
-      return { x: dx, y: dy };
-    } else {
-      const angle = Math.atan2(dy, dx);
-      return {
-        x: Math.cos(angle) * maxRadius,
-        y: Math.sin(angle) * maxRadius,
-      };
-    }
-  };
-
   const getCombinedPupilStyle = () => {
     if (!leftEyeRef.current || !rightEyeRef.current) return {};
-  
+
     const leftRect = leftEyeRef.current.getBoundingClientRect();
     const rightRect = rightEyeRef.current.getBoundingClientRect();
-  
+
     // Calculate centers
     const leftEyeCenterX = leftRect.left + leftRect.width / 2;
     const leftEyeCenterY = leftRect.top + leftRect.height / 2;
     const rightEyeCenterX = rightRect.left + rightRect.width / 2;
     const rightEyeCenterY = rightRect.top + rightRect.height / 2;
-  
+
     // Average center
     const avgCenterX = (leftEyeCenterX + rightEyeCenterX) / 2;
     const avgCenterY = (leftEyeCenterY + rightEyeCenterY) / 2;
-  
+
     // Movement relative to average
     const dx = mousePosition.x - avgCenterX;
     const dy = mousePosition.y - avgCenterY;
     const distance = Math.min(Math.sqrt(dx * dx + dy * dy), pupilRadius); // Use pupilRadius here
-  
+
     const angle = Math.atan2(dy, dx);
-  
+
     return {
       transform: `translate(${Math.cos(angle) * distance}px, ${
         Math.sin(angle) * distance
       }px)`,
     };
   };
-  
-  
+
   return (
     <section
       className="relative h-[120vh] flex items-center bg-cover bg-center"
@@ -173,7 +169,7 @@ export default function Hero() {
         >
           <div
             className="absolute w-[12px] h-[12px] bg-white rounded-full transition-transform duration-100 ease-in"
-            style={getCombinedPupilStyle(15)} // Adjust radius for smoother movement
+            style={getCombinedPupilStyle()} // Adjust radius for smoother movement
           ></div>
         </div>
         {/* Right Eye */}
@@ -278,12 +274,7 @@ export default function Hero() {
       <div
         className={`absolute left-0 w-full z-5 transition-all duration-1000 ease-in-out`}
         style={{
-          bottom:
-            window.innerWidth <= 768
-              ? "10vh" // For small screens
-              : window.innerWidth <= 1024
-              ? "15vh" // For medium screens
-              : "20vh", // Default for large screens
+          bottom: waveBottom, // Use the state value instead of directly accessing `window`
         }}
       >
         <svg
