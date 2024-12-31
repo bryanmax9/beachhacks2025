@@ -3,8 +3,8 @@
 const Sponsors = () => {
   const conveyorAnimation = `
     @keyframes submarine {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
+      0% { transform: translateX(155%); }
+      100% { transform: translateX(-135%); }
     }
   `;
 
@@ -33,18 +33,17 @@ const Sponsors = () => {
           style={{ animation: "submarine 20s linear infinite" }}
         >
           <img
-            src="https://i.imgur.com/E19UZDm.png"
+            src="https://i.imgur.com/raG2UgV.png"
             alt="Submarine"
             className="w-auto h-full"
-            style={{ height: "500px" }}
           />
           <div
-            className="sponsor mx-4 w-30 h-12 rounded-full overflow-hidden flex items-center justify-center bg-white"
+            className="sponsor mx-4 w-[128px] h-[125px] rounded-full overflow-hidden flex items-center justify-center bg-white"
             style={{
               position: "absolute",
               top: "50%",
               left: "15%",
-              transform: "translate(-175%, 223%)",
+              transform: "translate(14%, 21%)",
             }}
           >
             <img
@@ -54,94 +53,49 @@ const Sponsors = () => {
             />
           </div>
           <div
-            className="sponsor mx-4 w-12 h-12 rounded-full overflow-hidden flex items-center justify-center bg-white"
+            className="sponsor mx-4 w-[128px] h-[125px] rounded-full overflow-hidden flex items-center justify-center bg-white"
             style={{
               position: "absolute",
               top: "50%",
               left: "30%",
-              transform: "translate(-255%, 223%)",
+              transform: "translate(8%, 21%)",
             }}
           >
             <img
-              src="https://www.adaptivewfs.com/wp-content/uploads/2020/07/logo-placeholder-image.png"
+              src="https://i.imgur.com/C9ZOPur.png"
               alt="Sponsor 2"
               className="w-full h-full object-contain"
             />
           </div>
           <div
-            className="sponsor mx-4 w-12 h-12 rounded-full overflow-hidden flex items-center justify-center bg-white"
+            className="sponsor mx-4 w-[128px] h-[125px] rounded-full overflow-hidden flex items-center justify-center bg-white"
             style={{
               position: "absolute",
               top: "50%",
               left: "45%",
-              transform: "translate(-337%, 223%)",
+              transform: "translate(0%, 21%)",
             }}
           >
             <img
-              src="https://www.adaptivewfs.com/wp-content/uploads/2020/07/logo-placeholder-image.png"
+              src="https://img.uxcel.com/tags/balsamiq-1690452164916-2x.jpg"
               alt="Sponsor 3"
               className="w-full h-full object-contain"
             />
           </div>
           <div
-            className="sponsor mx-4 w-12 h-12 rounded-full overflow-hidden flex items-center justify-center bg-white"
+            className="sponsor mx-4 w-[128px] h-[125px] rounded-full overflow-hidden flex items-center justify-center bg-white"
             style={{
               position: "absolute",
               top: "50%",
               left: "60%",
-              transform: "translate(-417%, 223%)",
+              transform: "translate(-5%, 21%)",
             }}
           >
             <img
-              src="https://www.adaptivewfs.com/wp-content/uploads/2020/07/logo-placeholder-image.png"
+              src="https://i.imgur.com/CIZvFIn.png"
               alt="Sponsor 4"
               className="w-full h-full object-contain"
-            />
-          </div>
-          <div
-            className="sponsor mx-4 w-12 h-12 rounded-full overflow-hidden flex items-center justify-center bg-white"
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "75%",
-              transform: "translate(-500%, 223%)",
-            }}
-          >
-            <img
-              src="https://www.adaptivewfs.com/wp-content/uploads/2020/07/logo-placeholder-image.png"
-              alt="Sponsor 5"
-              className="w-full h-full object-contain"
-            />
-          </div>
-          <div
-            className="sponsor mx-4 w-12 h-12 rounded-full overflow-hidden flex items-center justify-center bg-white"
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "90%",
-              transform: "translate(-580%, 223%)",
-            }}
-          >
-            <img
-              src="https://www.adaptivewfs.com/wp-content/uploads/2020/07/logo-placeholder-image.png"
-              alt="Sponsor 6"
-              className="w-full h-full object-contain"
-            />
-          </div>
-
-          <div
-            className="sponsor mx-4 w-12 h-12 rounded-full overflow-hidden flex items-center justify-center bg-white"
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "90%",
-              transform: "translate(-356%, 223%)",
-            }}
-          >
-            <img
-              src="https://www.adaptivewfs.com/wp-content/uploads/2020/07/logo-placeholder-image.png"
-              alt="Sponsor 7"
-              className="w-full h-full object-contain"
+              style={{ transform: "scale(1.879" }}
             />
           </div>
         </div>
