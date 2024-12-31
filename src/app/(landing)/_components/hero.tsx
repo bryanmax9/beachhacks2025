@@ -179,7 +179,7 @@ export default function Hero() {
         >
           <div
             className="absolute w-[12px] h-[12px] bg-white rounded-full transition-transform duration-100 ease-in"
-            style={getCombinedPupilStyle(15)} // Shared function for both eyes
+            style={getCombinedPupilStyle()} // Shared function for both eyes
           ></div>
         </div>
       </div>
