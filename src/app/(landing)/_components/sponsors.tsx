@@ -3,8 +3,8 @@
 const Sponsors = () => {
   const conveyorAnimation = `
     @keyframes submarine {
-      0% { transform: translateX(155%); }
-      100% { transform: translateX(-135%); }
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
     }
   `;
 
@@ -33,17 +33,18 @@ const Sponsors = () => {
           style={{ animation: "submarine 20s linear infinite" }}
         >
           <img
-            src="https://i.imgur.com/raG2UgV.png"
+            src="https://i.imgur.com/QBqZrF8.png"
             alt="Submarine"
             className="w-auto h-full"
           />
           <div
-            className="sponsor mx-4 w-[128px] h-[125px] rounded-full overflow-hidden flex items-center justify-center bg-white"
+            className="sponsor w-[108px] h-[105px] rounded-full overflow-hidden flex items-center justify-center bg-white border-[10px]"
             style={{
               position: "absolute",
               top: "50%",
               left: "15%",
-              transform: "translate(14%, 21%)",
+              transform: "translate(150%, 35%)",
+              borderColor: "#BEBEBE",
             }}
           >
             <img
@@ -53,49 +54,52 @@ const Sponsors = () => {
             />
           </div>
           <div
-            className="sponsor mx-4 w-[128px] h-[125px] rounded-full overflow-hidden flex items-center justify-center bg-white"
+            className="sponsor w-[108px] h-[105px] rounded-full overflow-hidden flex items-center justify-center bg-white border-[10px]"
             style={{
               position: "absolute",
               top: "50%",
               left: "30%",
-              transform: "translate(8%, 21%)",
+              transform: "translate(90%, 35%)",
+              borderColor: "#BEBEBE",
             }}
           >
             <img
               src="https://i.imgur.com/C9ZOPur.png"
-              alt="Sponsor 2"
+              alt="Sponsor-2-Wolfram"
               className="w-full h-full object-contain"
             />
           </div>
           <div
-            className="sponsor mx-4 w-[128px] h-[125px] rounded-full overflow-hidden flex items-center justify-center bg-white"
+            className="sponsor w-[108px] h-[105px] rounded-full overflow-hidden flex items-center justify-center bg-white border-[10px]"
             style={{
               position: "absolute",
               top: "50%",
               left: "45%",
-              transform: "translate(0%, 21%)",
+              transform: "translate(30%, 35%)",
+              borderColor: "#BEBEBE",
             }}
           >
             <img
               src="https://img.uxcel.com/tags/balsamiq-1690452164916-2x.jpg"
-              alt="Sponsor 3"
+              alt="Sponsor-3-Balsamiq"
               className="w-full h-full object-contain"
             />
           </div>
           <div
-            className="sponsor mx-4 w-[128px] h-[125px] rounded-full overflow-hidden flex items-center justify-center bg-white"
+            className="sponsor w-[108px] h-[105px] rounded-full overflow-hidden flex items-center justify-center bg-white border-[10px]"
             style={{
               position: "absolute",
               top: "50%",
               left: "60%",
-              transform: "translate(-5%, 21%)",
+              transform: "translate(-30%, 35%)",
+              borderColor: "#BEBEBE",
             }}
           >
             <img
               src="https://i.imgur.com/CIZvFIn.png"
               alt="Sponsor 4"
               className="w-full h-full object-contain"
-              style={{ transform: "scale(1.879" }}
+              style={{ transform: "scale(1.879)" }}
             />
           </div>
         </div>
