@@ -1,12 +1,11 @@
 "use client";
-import { useState } from "react";
 
-type FAQItem = {
-    question: string;
-    answer: string;
-};
+import {useState} from "react";
+import {faqs} from "@/app/_data/faqs";
 
-export default function FAQ({ faqs }: { faqs: FAQItem[] }) {
+
+export default function FAQ() {
+
     const [openIndexes, setOpenIndexes] = useState<number[]>([]);
 
     const toggleFAQ = (index: number) => {
@@ -18,7 +17,7 @@ export default function FAQ({ faqs }: { faqs: FAQItem[] }) {
     };
 
     return (
-        <div className="space-y-4 max-w-screen-lg mx-auto mt-8 p-4">
+        <div className="space-y-4 w-full sm:max-w-screen-lg mx-auto mt-8 p-4">
             <div>
                 <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">
                     Frequently Asked Questions
@@ -33,23 +32,23 @@ export default function FAQ({ faqs }: { faqs: FAQItem[] }) {
                         onClick={() => toggleFAQ(index)}
                         className="w-full text-left flex justify-between items-center p-4 focus:outline-none"
                     >
-            <span className="text-lg font-semibold text-gray-800">
-              {faq.question}
-            </span>
+                        <span className="text-lg font-semibold text-gray-800">
+                          {faq.question}
+                        </span>
                         <span
                             className={`text-gray-500 transition-transform duration-300 ${
                                 openIndexes.includes(index) ? "rotate-180" : ""
                             }`}
                         >
-              ▼
-            </span>
+                          ▼
+                    </span>
                     </button>
                     <div
                         className={`overflow-hidden transition-all duration-300 ${
-                            openIndexes.includes(index) ? "max-h-[300px] p-4" : "max-h-0"
+                            openIndexes.includes(index) ? "max-h-[300px]" : "max-h-0"
                         }`}
                     >
-                        <p className="text-gray-600">{faq.answer}</p>
+                        <p className="text-gray-600 p-4">{faq.answer}</p>
                     </div>
                 </div>
             ))}

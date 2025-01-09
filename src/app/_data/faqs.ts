@@ -1,3 +1,4 @@
+
 export const faqs = [
     {
         question: "What is a hackathon?",

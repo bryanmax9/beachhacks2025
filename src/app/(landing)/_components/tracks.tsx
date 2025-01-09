@@ -2,7 +2,7 @@ export default function Tracks() {
     return (
         <div className="flex-col p-6 mx-6">
             <h1 className="text-2xl font-semibold text-center mb-6">Tracks</h1>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {["Education", "AI", "FinTech", "Healthcare", "Sustainability"].map((title, index) => (
                     <div
                         key={index}
