@@ -1,5 +1,8 @@
 "use client";
 
+import {cn} from "@/lib/utils";
+import {dynaPuff} from "@/assets/fonts";
+
 const Sponsors = () => {
   const conveyorAnimation = `
     @keyframes submarine {
@@ -10,14 +13,9 @@ const Sponsors = () => {
 
   return (
     <section className="sponsors-section">
-      <link
-        href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap"
-        rel="stylesheet"
-      />
+
       <style>{conveyorAnimation}</style>
-      <div
-        className="sponsors-header text-center text-5xl font-bold drop-shadow-md mb-6"
-        style={{ fontFamily: "DynaPuff" }}
+      <div className={cn("sponsors-header text-center text-5xl font-bold drop-shadow-md mb-6", dynaPuff.className)}
       >
         <div className="inline-block px-6 py-2 bg-white/15 backdrop-blur-md rounded-full">
           <h2>Our Sponsors</h2>
