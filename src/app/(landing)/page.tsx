@@ -1,6 +1,10 @@
 
+import {happyMonkey} from "@/assets/fonts";
+
 export default function Home() {
     return (
-        <h1>Main Page</h1>
+        <div className={happyMonkey.className}>
+            <h1 className={"text-2xl" + "font-bold"}>Main Page</h1>
+        </div>
     );
 }
