@@ -2,9 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+
+/* Add a smooth transition for scrolling */
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  scroll-behavior: smooth;
 }
+
+/* Navbar background transparency with a blur effect */
+nav {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+nav.bg-transparent {
+  background-color: transparent;
+}
+
+nav.bg-gray-800 {
+  background-color: rgba(31, 41, 55, 0.9); /* Tailwind's gray-800 with opacity */
+  backdrop-filter: blur(10px); /* Adds a blur effect */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+a {
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #9ca3af; /* Tailwind's gray-400 */
+}
+
 
 @layer base {
   :root {
