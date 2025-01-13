@@ -1,7 +1,7 @@
 "use client";
 
-import {cn} from "@/lib/utils";
-import {dynaPuff} from "@/assets/fonts";
+import { cn } from "@/lib/utils";
+import { dynaPuff } from "@/assets/fonts";
 
 const Sponsors = () => {
   const conveyorAnimation = `
@@ -11,11 +11,16 @@ const Sponsors = () => {
     }
   `;
 
+  const sponsorClass = "xxxs:w-[3vh] xxxs:h-[3vh] xxs:w-[4vh] xxs:h-[4vh] xs:w-[4vh] xs:h-[4vh] sm:w-[6vh] sm:h-[6vh] md:w-[8vh] md:h-[8vh] lg:w-[10vh] lg:h-[10vh] xl:w-[12vh] xl:h-[12vh] 2xl:w-[14vh] 2xl:h-[14vh] rounded-full overflow-hidden flex items-center justify-center bg-white sm:border-[0.4rem] md:border-[0.5rem] lg:border-[0.65rem]";
+
   return (
     <section className="sponsors-section">
-
       <style>{conveyorAnimation}</style>
-      <div className={cn("sponsors-header text-center text-5xl font-bold drop-shadow-md mb-6", dynaPuff.className)}
+      <div
+        className={cn(
+          "sponsors-header text-center xxxs:text-1.5xl xxs:text-2xl xs:text-2.5xl sm:text-3xl md:text-3.5xl lg:text-4xl xl:text-4.5xl 2xl:text-5xl font-bold drop-shadow-md",
+          dynaPuff.className
+        )}
       >
         <div className="inline-block px-6 py-2 bg-white/15 backdrop-blur-md rounded-full">
           <h2>Our Sponsors</h2>
@@ -23,82 +28,68 @@ const Sponsors = () => {
       </div>
 
       <div
-        className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative"
-        style={{ height: "600px" }}
+        className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative xxxs:h-[20vh] xxs:h-[25vh] xs:h-[30vh] sm:h-[40vh] md:h-[50vh] lg:h-[60vh] xl:h-[70vh] 2xl:h-[80vh]"
       >
         <div
-          className="submarine absolute flex items-center"
+          className="submarine-container relative flex items-center"
           style={{ animation: "submarine 20s linear infinite" }}
         >
           <img
             src="https://i.imgur.com/QBqZrF8.png"
             alt="Submarine"
-            className="w-auto h-full"
+            className="w-auto"
           />
-          <div
-            className="sponsor w-[108px] h-[105px] rounded-full overflow-hidden flex items-center justify-center bg-white border-[10px]"
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "15%",
-              transform: "translate(150%, 35%)",
-              borderColor: "#BEBEBE",
-            }}
-          >
-            <img
-              src="https://loodibee.com/wp-content/uploads/Google-Logo.png"
-              alt="Sponsor-1-Google"
-              className="w-full h-full object-contain"
-            />
-          </div>
-          <div
-            className="sponsor w-[108px] h-[105px] rounded-full overflow-hidden flex items-center justify-center bg-white border-[10px]"
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "30%",
-              transform: "translate(90%, 35%)",
-              borderColor: "#BEBEBE",
-            }}
-          >
-            <img
-              src="https://i.imgur.com/C9ZOPur.png"
-              alt="Sponsor-2-Wolfram"
-              className="w-full h-full object-contain"
-            />
-          </div>
-          <div
-            className="sponsor w-[108px] h-[105px] rounded-full overflow-hidden flex items-center justify-center bg-white border-[10px]"
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "45%",
-              transform: "translate(30%, 35%)",
-              borderColor: "#BEBEBE",
-            }}
-          >
-            <img
-              src="https://img.uxcel.com/tags/balsamiq-1690452164916-2x.jpg"
-              alt="Sponsor-3-Balsamiq"
-              className="w-full h-full object-contain"
-            />
-          </div>
-          <div
-            className="sponsor w-[108px] h-[105px] rounded-full overflow-hidden flex items-center justify-center bg-white border-[10px]"
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "60%",
-              transform: "translate(-30%, 35%)",
-              borderColor: "#BEBEBE",
-            }}
-          >
-            <img
-              src="https://i.imgur.com/CIZvFIn.png"
-              alt="Sponsor 4"
-              className="w-full h-full object-contain"
-              style={{ transform: "scale(1.879)" }}
-            />
+
+          <div className="sponsors flex justify-around items-center xxxs:w-[18vh] xxs:w-[22vh] xs:w-[30vh] sm:w-[35vh] md:w-[40vh] lg:w-[50vh] xl:w-[60vh] 2xl:w-[68vh] absolute top-[56%] left-[25%] transform -translate-y-1/2">
+            <div
+              className={sponsorClass}
+              style={{
+                borderColor: "#BEBEBE",
+              }}
+            >
+              <img
+                src="https://loodibee.com/wp-content/uploads/Google-Logo.png"
+                alt="Sponsor-1-Google"
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <div
+              className={sponsorClass}
+              style={{
+                borderColor: "#BEBEBE",
+              }}
+            >
+              <img
+                src="https://i.imgur.com/C9ZOPur.png"
+                alt="Sponsor-2-Wolfram"
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <div
+              className={sponsorClass}
+              style={{
+                borderColor: "#BEBEBE",
+              }}
+            >
+              <img
+                src="https://img.uxcel.com/tags/balsamiq-1690452164916-2x.jpg"
+                alt="Sponsor-3-Balsamiq"
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <div
+              className={sponsorClass}
+              style={{
+                borderColor: "#BEBEBE",
+              }}
+            >
+              <img
+                src="https://i.imgur.com/CIZvFIn.png"
+                alt="Sponsor-4-DainAI"
+                className="w-full h-full object-contain"
+                style={{ transform: "scale(2)" }}
+              />
+            </div>
           </div>
         </div>
       </div>
