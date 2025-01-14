@@ -1,6 +1,6 @@
-import Hero from "@/app/(landing)/_components/hero";
 
 export default function Home() {
+
   return (
     <div>
       <Hero />
@@ -23,4 +23,5 @@ export default function Home() {
       </div>
     </div>
   );
+
 }
