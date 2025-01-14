@@ -24,9 +24,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
         />
       </head>
       <body className={cn("antialiased", inter.className)}>
-        {/* Navbar */}
-        <Navbar />
-        {/* Main Content */}
         <main>{children}</main>
       </body>
     </html>
