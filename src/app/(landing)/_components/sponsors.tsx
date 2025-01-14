@@ -1,21 +1,26 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 import { dynaPuff } from "@/assets/fonts";
 
 const Sponsors = () => {
-  const conveyorAnimation = `
-    @keyframes submarine {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
-    }
-  `;
+  const sponsorClass =
+    "xxxs:w-[3vh] xxxs:h-[3vh] xxs:w-[4vh] xxs:h-[4vh] xs:w-[4vh] xs:h-[4vh] sm:w-[6vh] sm:h-[6vh] md:w-[8vh] md:h-[8vh] lg:w-[10vh] lg:h-[10vh] xl:w-[12vh] xl:h-[12vh] 2xl:w-[14vh] 2xl:h-[14vh] rounded-full overflow-hidden flex items-center justify-center bg-white sm:border-[0.4rem] md:border-[0.5rem] lg:border-[0.65rem]";
 
-  const sponsorClass = "xxxs:w-[3vh] xxxs:h-[3vh] xxs:w-[4vh] xxs:h-[4vh] xs:w-[4vh] xs:h-[4vh] sm:w-[6vh] sm:h-[6vh] md:w-[8vh] md:h-[8vh] lg:w-[10vh] lg:h-[10vh] xl:w-[12vh] xl:h-[12vh] 2xl:w-[14vh] 2xl:h-[14vh] rounded-full overflow-hidden flex items-center justify-center bg-white sm:border-[0.4rem] md:border-[0.5rem] lg:border-[0.65rem]";
+  const submarineAnimation = {
+    animate: {
+      x: ["100%", "-100%"],
+    },
+    transition: {
+      duration: 20,
+      ease: "linear",
+      repeat: Infinity,
+    },
+  };
 
   return (
     <section className="sponsors-section">
-      <style>{conveyorAnimation}</style>
       <div
         className={cn(
           "sponsors-header text-center xxxs:text-1.5xl xxs:text-2xl xs:text-2.5xl sm:text-3xl md:text-3.5xl lg:text-4xl xl:text-4.5xl 2xl:text-5xl font-bold drop-shadow-md",
@@ -27,12 +32,10 @@ const Sponsors = () => {
         </div>
       </div>
 
-      <div
-        className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative xxxs:h-[20vh] xxs:h-[25vh] xs:h-[30vh] sm:h-[40vh] md:h-[50vh] lg:h-[60vh] xl:h-[70vh] 2xl:h-[80vh]"
-      >
-        <div
+      <div className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative xxxs:h-[20vh] xxs:h-[25vh] xs:h-[30vh] sm:h-[40vh] md:h-[50vh] lg:h-[60vh] xl:h-[70vh] 2xl:h-[80vh]">
+        <motion.div
           className="submarine-container relative flex items-center"
-          style={{ animation: "submarine 20s linear infinite" }}
+          {...submarineAnimation}
         >
           <img
             src="https://i.imgur.com/QBqZrF8.png"
@@ -91,7 +94,7 @@ const Sponsors = () => {
               />
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
