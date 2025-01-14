@@ -117,9 +117,9 @@ export default function Hero() {
 
   return (
     <section
-      className="relative h-[120vh] flex items-center bg-cover bg-center"
+      className="hero relative h-[120vh] flex items-center bg-cover bg-center"
       style={{
-        backgroundImage: "url('https://i.imgur.com/KsaXy7t.png')",
+        backgroundImage: "linear-gradient(to bottom, #87CEEB, #B0E0E6)", // Sky blue gradient
       }}
     >
       {/* Load Google Font */}
@@ -141,20 +141,10 @@ export default function Hero() {
           className="w-[400px] h-[530px] md:w-[400px] md:h-[530px]  sm:w-[400px] sm:h-[530px] "
         />
       </div>
-      {/* Right Palm Tree */}
-      <div
-        className={`absolute top-[40%] right-0 transform ${palmPositionRight} translate-y-[-50%] z-20 transition-all duration-700 ease-in-out`}
-      >
-        <img
-          src="https://i.imgur.com/futk94Z.png" // Replace with your palm tree image URL
-          alt="Right Palm Tree"
-          className="w-[400px] h-[530px] md:w-[350px] md:h-[480px] sm:w-[300px] sm:h-[400px]"
-        />
-      </div>
 
       {/* CSULB Crab */}
       <div
-        className="absolute bottom-[10%] right-[5%] transform z-30"
+        className="absolute bottom-[2%]  right-[5%] transform z-30"
         style={{ width: "280px", height: "280px" }}
       >
         <img
@@ -179,49 +169,36 @@ export default function Hero() {
         >
           <div
             className="absolute w-[12px] h-[12px] bg-white rounded-full transition-transform duration-100 ease-in"
-            style={getCombinedPupilStyle(15)} // Shared function for both eyes
+            style={getCombinedPupilStyle()} // Shared function for both eyes
           ></div>
         </div>
       </div>
 
       {/* Content */}
-      <div
-        className="absolute right-[50%] top-[13%] transform translate-x-1/2 translate-y-1/2 z-30 text-center px-4 md:px-0"
-        style={{ fontFamily: "'Bangers', cursive" }}
-      >
+      <div className="content-container">
         {/* Blurred Background */}
-        <div
-          className="absolute inset-0 rounded-xl bg-gradient-to-b from-[#6cccc4] via-[#54b4c4] to-[#ecbc7c] blur-md opacity-75 -z-10"
-          style={{
-            filter: "blur(20px)",
-          }}
-        ></div>
+        <div className="blurred-background"></div>
 
         {/* Text Content */}
-        <h1 className="text-7xl md:text-6xl sm:text-5xl font-extrabold mb-4 leading-tight tracking-wide drop-shadow-lg text-white">
-          Welcome to BeachHacks 7.0
-        </h1>
-        <p className="text-4xl md:text-3xl sm:text-2xl font-normal tracking-wide text-gray-100/90 mb-8">
+        <h1 className="content-title">Welcome to BeachHacks 7.0</h1>
+        <p className="content-description">
           Join us for an{" "}
-          <span className="font-bold text-white">amazing hackathon</span>{" "}
+          <span className="highlighted-text">amazing hackathon</span>{" "}
           experience!
         </p>
 
         {/* Apply Button */}
-        <a
-          href="#apply"
-          className="inline-block bg-gradient-to-r from-blue-500 to-green-400 text-white font-bold text-lg py-3 px-8 rounded-lg shadow-lg hover:from-green-600 hover:to-blue-600 hover:scale-110 hover:text-blue-400 transform transition-all duration-500 ease-in-out"
-        >
+        <a href="#apply" className="apply-button">
           Apply Now
         </a>
       </div>
 
       {/* First SVG Wave */}
-      <div className="absolute bottom-0 left-0 w-full z-20">
+      <div className="first-svg-wave">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1440 400"
-          className="w-full h-auto"
+          className="svg-content"
         >
           <path
             fill="#ecbc7c"
@@ -229,14 +206,20 @@ export default function Hero() {
             d="M0,160L48,160C96,160,192,160,288,150.7C384,141,480,117,576,96C672,75,768,53,864,69.3C960,85,1056,149,1152,154.7C1248,160,1344,128,1392,112L1440,96L1440,400L1392,400C1344,400,1248,400,1152,400C1056,400,960,400,864,400C768,400,672,400,576,400C480,400,384,400,288,400C192,400,96,400,48,400L0,400Z"
           ></path>
         </svg>
+        {/* Adjust pyramid position for medium and small screens */}
+        <img
+          src="https://i.imgur.com/CjXsMoO.png"
+          alt="pyramid csulb"
+          className="pyramid"
+        />
       </div>
 
       {/* Second SVG Wave */}
-      <div className="absolute bottom-52 sm:bottom-40 md:bottom-44 left-0 w-full z-15">
+      <div className="second-svg-wave">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1440 320"
-          className="w-full h-auto"
+          className="svg-content"
         >
           <path
             fill="#f8d48c"
@@ -247,9 +230,7 @@ export default function Hero() {
       </div>
 
       {/* Third SVG Wave */}
-      <div
-        className={`absolute bottom-60 sm:bottom-40 md:bottom-30 left-0 w-full z-10 transition-all duration-1000 ease-in-out ${translateY}`}
-      >
+      <div className={`third-svg ${translateY}`}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1440 320"
@@ -265,18 +246,13 @@ export default function Hero() {
 
       {/* Shark Image */}
       <div
-        className={`absolute left-1/2 transform -translate-x-1/2 z-6 transition-all duration-1000 ease-in-out ${sharkAnimation} bottom-[75px] sm:bottom-[-92px] md:bottom-[130px]`}
+        className={`shark-image absolute left-1/2 transform -translate-x-1/2 transition-all duration-1000 ease-in-out ${sharkAnimation}`}
       >
         <img src="https://i.imgur.com/NA0Yvn1.png" alt="Shark" />
       </div>
 
       {/* Fourth SVG Wave */}
-      <div
-        className={`absolute left-0 w-full z-5 transition-all duration-1000 ease-in-out`}
-        style={{
-          bottom: waveBottom, // Use the state value instead of directly accessing `window`
-        }}
-      >
+      <div className="fourth-svg">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1440 320"
