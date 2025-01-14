@@ -20,14 +20,16 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-gray-800/90 backdrop-blur-md shadow-lg" : "bg-transparent"
+        isScrolled || isMenuOpen
+          ? "bg-gray-800/90 backdrop-blur-md shadow-lg"
+          : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
         {/* Logo */}
         <div className="text-white font-bold text-2xl flex items-center">
           <img
-            src="https://i.imgur.com/sTPoVUg.png" // Replace with your actual logo path
+            src="https://i.imgur.com/sTPoVUg.png" 
             alt="Logo"
             className="h-8 w-8 mr-2"
           />
