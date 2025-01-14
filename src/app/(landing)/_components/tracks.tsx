@@ -29,6 +29,7 @@ function Modal ({ isOpen, closeModal, content, track }: ModalProps) {
 
 
 export default function Tracks() {
+
     const [isModalOpen, setModalOpen] = useState(false);
     const [modalContent, setModalContent] = useState<{
         track: string | null;
