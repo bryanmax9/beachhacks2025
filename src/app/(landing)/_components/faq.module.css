@@ -1,0 +1,28 @@
+
+.container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.heading {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    color: #333;
+}
+
+.question {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 12px 0;
+    color: #444;
+}
+
+.answer {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #666;
+    margin-left: 20px;
+}

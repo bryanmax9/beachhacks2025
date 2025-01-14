@@ -1,8 +1,11 @@
+import Hero from "@/app/(landing)/_components/hero";
+import Faq from "@/app/(landing)/_components/faq";
 
 export default function Home() {
 
   return (
     <div>
+        <Faq />
       <Hero />
       <div
         className="relative h-[200vh] flex items-center justify-center text-lg"
