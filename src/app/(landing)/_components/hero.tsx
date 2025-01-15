@@ -13,7 +13,7 @@ export default function Hero() {
   });
 
   // Customizable target date
-  const targetDate = new Date(`${new Date().getFullYear()}-03-25T00:00:00`);
+  const targetDate = new Date(`${new Date().getFullYear()}-03-22T00:00:00`);
 
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const leftEyeRef = useRef<HTMLDivElement>(null);
@@ -146,7 +146,7 @@ export default function Hero() {
 
       <div className="content-container">
         <h1 className="content-title">BeachHacks 7.0</h1>
-        <p className="content-description">March 25th-26th</p>
+        <p className="content-description">March 22th-23th</p>
         <div className="countdown">
           <div>
             <span>{timeLeft.days.toString().padStart(2, "0")}</span>
