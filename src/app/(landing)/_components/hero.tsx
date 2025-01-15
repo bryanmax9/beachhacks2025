@@ -1,87 +1,64 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import "./hero.css";
 
 export default function Hero() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [pupilRadius, setPupilRadius] = useState(7.5); // Default radius
+  // Timer countdown
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
+  // Customizable target date
+  const targetDate = new Date(`${new Date().getFullYear()}-03-25T00:00:00`);
+
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const leftEyeRef = useRef<HTMLDivElement>(null);
   const rightEyeRef = useRef<HTMLDivElement>(null);
-  const [translateY, setTranslateY] = useState("translate-y-20 opacity-0");
-  const [sharkAnimation, setSharkAnimation] = useState(
-    "translate-y-20 opacity-0"
-  );
-  const [palmPosition, setPalmPosition] = useState("-translate-x-full"); // Initial position for the palm tree
-  const [palmPositionRight, setPalmPositionRight] =
-    useState("translate-x-full");
+  const [palmPosition, setPalmPosition] = useState("-translate-x-full"); // Initial position for the left palm tree
 
-  const [waveBottom, setWaveBottom] = useState("20vh");
-
+  // Countdown logic
   useEffect(() => {
-    const updateWaveBottom = () => {
-      setWaveBottom(
-        window.innerWidth <= 768
-          ? "10vh"
-          : window.innerWidth <= 1024
-          ? "15vh"
-          : "20vh"
-      );
-    };
+    const interval = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate.getTime() - now;
 
-    updateWaveBottom(); // Set the initial value
-    window.addEventListener("resize", updateWaveBottom);
-
-    return () => {
-      window.removeEventListener("resize", updateWaveBottom);
-    };
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 100) {
-        setTranslateY("translate-y-40 opacity-100");
-        setSharkAnimation("translate-y-10 opacity-100");
-        setPalmPosition("-translate-x-[20%]"); // Left tree moves slightly off-screen
-        setPalmPositionRight("translate-x-[20%]"); // Right tree moves slightly off-screen
+      if (distance > 0) {
+        setTimeLeft({
+          days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+          hours: Math.floor(
+            (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+          ),
+          minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((distance % (1000 * 60)) / 1000),
+        });
       } else {
-        setTranslateY("translate-y-10 opacity-100");
-        setSharkAnimation("translate-y-0 opacity-100");
-        setPalmPosition("translate-x-0"); // Left tree fully visible
-        setPalmPositionRight("translate-x-0"); // Right tree fully visible
+        clearInterval(interval);
       }
-    };
+    }, 1000);
 
-    // Trigger animations on load
+    return () => clearInterval(interval);
+  }, [targetDate]);
+
+  // Animate the left palm tree on load
+  useEffect(() => {
     setTimeout(() => {
-      setTranslateY("translate-y-10 opacity-100");
-      setSharkAnimation("translate-y-0 opacity-100");
-      setPalmPosition("translate-x-0"); // Animate left tree into view
-      setPalmPositionRight("translate-x-0"); // Animate right tree into view
+      setPalmPosition("translate-x-0");
     }, 300);
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
   }, []);
 
+  // Track mouse position for eye animation
   useEffect(() => {
-    let throttleTimeout: NodeJS.Timeout | null = null;
-
     const handleMouseMove = (event: MouseEvent) => {
-      if (!throttleTimeout) {
-        throttleTimeout = setTimeout(() => {
-          setMousePosition({ x: event.clientX, y: event.clientY });
-          throttleTimeout = null;
-        }, 16); // Roughly 60fps (1000ms/60 = ~16ms)
-      }
+      setMousePosition({ x: event.clientX, y: event.clientY });
     };
 
     window.addEventListener("mousemove", handleMouseMove);
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
-      if (throttleTimeout) clearTimeout(throttleTimeout);
     };
   }, []);
 
@@ -104,7 +81,7 @@ export default function Hero() {
     // Movement relative to average
     const dx = mousePosition.x - avgCenterX;
     const dy = mousePosition.y - avgCenterY;
-    const distance = Math.min(Math.sqrt(dx * dx + dy * dy), pupilRadius); // Use pupilRadius here
+    const distance = Math.min(Math.sqrt(dx * dx + dy * dy), 7.5);
 
     const angle = Math.atan2(dy, dx);
 
@@ -114,7 +91,6 @@ export default function Hero() {
       }px)`,
     };
   };
-
   return (
     <section
       className="hero relative h-[120vh] flex items-center bg-cover bg-center"
@@ -122,12 +98,6 @@ export default function Hero() {
         backgroundImage: "linear-gradient(to bottom, #87CEEB, #B0E0E6)", // Sky blue gradient
       }}
     >
-      {/* Load Google Font */}
-      <link
-        href="https://fonts.googleapis.com/css2?family=Bangers&display=swap"
-        rel="stylesheet"
-      />
-
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-blue-900/70 via-blue-800/40 to-transparent"></div>
 
@@ -136,7 +106,7 @@ export default function Hero() {
         className={`absolute top-[40%] left-0 transform ${palmPosition} translate-y-[-50%] z-20 transition-all duration-700 ease-in-out`}
       >
         <img
-          src="https://i.imgur.com/aZ8QBCP.png"
+          src="/left-palms.png"
           alt="Palm Tree"
           className="w-[400px] h-[530px] md:w-[400px] md:h-[530px]  sm:w-[400px] sm:h-[530px] "
         />
@@ -148,7 +118,7 @@ export default function Hero() {
         style={{ width: "280px", height: "280px" }}
       >
         <img
-          src="https://i.imgur.com/qdBWmf2.png"
+          src="/csulb-crab.png"
           alt="CSULB Crab"
           className="absolute w-full h-full"
         />
@@ -174,20 +144,27 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Content */}
       <div className="content-container">
-        {/* Blurred Background */}
-        <div className="blurred-background"></div>
-
-        {/* Text Content */}
-        <h1 className="content-title">Welcome to BeachHacks 7.0</h1>
-        <p className="content-description">
-          Join us for an{" "}
-          <span className="highlighted-text">amazing hackathon</span>{" "}
-          experience!
-        </p>
-
-        {/* Apply Button */}
+        <h1 className="content-title">BeachHacks 7.0</h1>
+        <p className="content-description">March 25th-26th</p>
+        <div className="countdown">
+          <div>
+            <span>{timeLeft.days.toString().padStart(2, "0")}</span>
+            <p>Days</p>
+          </div>
+          <div>
+            <span>{timeLeft.hours.toString().padStart(2, "0")}</span>
+            <p>Hours</p>
+          </div>
+          <div>
+            <span>{timeLeft.minutes.toString().padStart(2, "0")}</span>
+            <p>Minutes</p>
+          </div>
+          <div>
+            <span>{timeLeft.seconds.toString().padStart(2, "0")}</span>
+            <p>Seconds</p>
+          </div>
+        </div>
         <a href="#apply" className="apply-button">
           Apply Now
         </a>
@@ -207,11 +184,7 @@ export default function Hero() {
           ></path>
         </svg>
         {/* Adjust pyramid position for medium and small screens */}
-        <img
-          src="https://i.imgur.com/CjXsMoO.png"
-          alt="pyramid csulb"
-          className="pyramid"
-        />
+        <img src="/csulb-pyramid.png" alt="pyramid csulb" className="pyramid" />
       </div>
 
       {/* Second SVG Wave */}
@@ -229,41 +202,34 @@ export default function Hero() {
         </svg>
       </div>
 
-      {/* Third SVG Wave */}
-      <div className={`third-svg ${translateY}`}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1440 320"
-          className="w-full h-auto"
-        >
-          <path
-            fill="#6cccc4"
-            fillOpacity="1"
-            d="M0,32L40,64C80,96,160,160,240,181.3C320,203,400,181,480,176C560,171,640,181,720,176C800,171,880,149,960,144C1040,139,1120,149,1200,149.3C1280,149,1360,139,1400,133.3L1440,128L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"
-          ></path>
-        </svg>
-      </div>
+      {/* Wave container 🌊 */}
 
-      {/* Shark Image */}
-      <div
-        className={`shark-image absolute left-1/2 transform -translate-x-1/2 transition-all duration-1000 ease-in-out ${sharkAnimation}`}
-      >
-        <img src="https://i.imgur.com/NA0Yvn1.png" alt="Shark" />
-      </div>
-
-      {/* Fourth SVG Wave */}
-      <div className="fourth-svg">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1440 320"
-          className="w-full h-auto"
-        >
-          <path
-            fill="#54b4c4"
-            fillOpacity="1"
-            d="M0,160L40,144C80,128,160,96,240,90.7C320,85,400,107,480,122.7C560,139,640,149,720,149.3C800,149,880,139,960,144C1040,149,1120,171,1200,154.7C1280,139,1360,85,1400,58.7L1440,32L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"
-          ></path>
-        </svg>
+      <div className="wave-container">
+        {Array.from({ length: 4 }).map((_, index) => (
+          <svg
+            key={index}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1440 320"
+            preserveAspectRatio="none"
+            className={`wave ${index % 2 === 1 ? "wave-reflected" : ""}`}
+          >
+            <path
+              fill={index % 2 === 0 ? "#00bfff" : "#87ceeb"}
+              fillOpacity="0.6"
+              d="M0,224L48,213.3C96,203,192,181,288,176C384,171,480,181,576,176C672,171,768,149,864,128C960,107,1056,85,1152,74.7C1248,64,1344,64,1392,64L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+            >
+              <animate
+                attributeName="d"
+                dur={`${3 + index * 2}s`}
+                repeatCount="indefinite"
+                values="
+            M0,224L48,213.3C96,203,192,181,288,176C384,171,480,181,576,176C672,171,768,149,864,128C960,107,1056,85,1152,74.7C1248,64,1344,64,1392,64L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;
+            M0,192L48,176C96,160,192,128,288,128C384,128,480,160,576,181.3C672,203,768,213,864,197.3C960,181,1056,139,1152,112C1248,85,1344,75,1392,69.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;
+            M0,224L48,213.3C96,203,192,181,288,176C384,171,480,181,576,176C672,171,768,149,864,128C960,107,1056,85,1152,74.7C1248,64,1344,64,1392,64L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+              ></animate>
+            </path>
+          </svg>
+        ))}
       </div>
     </section>
   );
