@@ -8,13 +8,17 @@ interface PrizeWidgetProps {
 export default function PrizeWidget({name, image}: PrizeWidgetProps) {
     return(
         <div>
+            {/* image container */}
+            <div className="w-48 h-48 relative">
             <Image 
                 src={image}
                 alt="prize pic"
-                width={150}
-                height={150}
+                layout="fill"
+                objectFit="fill"
+                className="absolute"
             />
-            <p className="italic">{name}</p>
+            </div>
+            <p className="italic text-center">{name}</p>
         </div>
     )
 }
