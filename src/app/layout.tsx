@@ -22,11 +22,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
           href="https://fonts.googleapis.com/css2?family=Happy+Monkey&display=swap"
           rel="stylesheet"
         />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Dynapuff&display=swap"
+          rel="stylesheet"
+        />
       </head>
       <body className={cn("antialiased", inter.className)}>
-        {/* Navbar */}
-        <Navbar />
-        {/* Main Content */}
         <main>{children}</main>
       </body>
     </html>
