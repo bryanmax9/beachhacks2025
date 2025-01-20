@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* Add a smooth transition for scrolling */
 body {
   margin: 0;
@@ -98,4 +97,67 @@ a:hover {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/**
+For Tracks.tsx
+*/
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-30px);
+  }
+}
+
+.float-slow {
+  animation: float 6s ease-in-out infinite;
+}
+
+.bubble {
+  background: radial-gradient(circle at 30% 30%, #ffffff, #cce7ff);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(255, 255, 255, 0.5);
+  transition: transform 0.3s ease-in-out;
+}
+
+.bubble:hover {
+  transform: scale(1.1);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+
+@keyframes moveAcross {
+  0% {
+    transform: translateX(150%);
+  }
+  49.9% {
+    transform: translateX(-150%);
+  }
+  50% {
+    transform: translateX(150%);
+  }
+  100% {
+    transform: translateX(-150%);
+  }
+}
+
+
+.animate-moveAcross {
+  animation: moveAcross 25s linear infinite;
 }

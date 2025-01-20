@@ -5,8 +5,8 @@ import Tracks from "@/app/(landing)/_components/tracks";
 export default function Home() {
     return (
         <div>
-            <FAQ />
             <Tracks />
+            <FAQ/>
         </div>
     );
 }
