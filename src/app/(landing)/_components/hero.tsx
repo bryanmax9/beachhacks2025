@@ -145,7 +145,7 @@ export default function Hero() {
       </div>
 
       <div className="content-container">
-        <h1 className="content-title">BeachHacks 7.0</h1>
+        <h1 className="content-title">BeachHacks 8.0</h1>
         <p className="content-description">March 22th-23th</p>
         <div className="countdown">
           <div>
