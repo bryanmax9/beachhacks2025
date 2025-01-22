@@ -17,20 +17,17 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-    <head>
+      <head>
         <link
-            href="https://fonts.googleapis.com/css2?family=Happy+Monkey&display=swap"
-            rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Happy+Monkey&display=swap"
+          rel="stylesheet"
         />
         <link
-            href="https://fonts.googleapis.com/css2?family=DynaPuff&display=swap"
-            rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Dynapuff&display=swap"
+          rel="stylesheet"
         />
-    </head>
-    <body className={cn("antialiased", inter.className)}>
-    {/* Navbar */}
-    <Navbar />
-        {/* Main Content */}
+      </head>
+      <body className={cn("antialiased", inter.className)}>
         <main>{children}</main>
       </body>
     </html>

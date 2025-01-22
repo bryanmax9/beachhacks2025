@@ -1,0 +1,65 @@
+/* Navbar container */
+.navbar {
+  position: absolute; /* Keeps the navbar above the section below */
+  top: 0;
+  left: 0;
+  z-index: 9999; /* Ensures it's above other content */
+  width: 100%; /* Stretches across the screen */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Background when menu is open */
+.navbar.bg-gray-900 {
+  background-color: rgba(31, 41, 55); /* Solid gray for open menu */
+}
+
+/* Transparent background for default state */
+.navbar.bg-transparent {
+  background-color: transparent;
+}
+
+/* Navigation menu */
+.menu {
+  z-index: 9999; /* Ensures the menu is above all other content */
+  background-color: rgba(31, 41, 55); /* Matches navbar background */
+  padding: 1rem;
+  border-radius: 0.25rem; /* Optional: rounded corners */
+}
+
+/* Navigation links */
+.menu a {
+  background: none; /* Removes any background color */
+  color: white; /* Text color */
+  text-decoration: none;
+  transition: color 0.3s ease;
+  padding: 0.5rem 1rem; /* Adds spacing for better appearance */
+}
+
+.menu a:hover {
+  color: #9ca3af; /* Tailwind's gray-400 for hover effect */
+}
+
+/* Buttons (e.g., Log In) */
+.menu a:last-child {
+  border: 1px solid white; /* Border around the Log In button */
+  border-radius: 0.25rem; /* Rounded corners */
+  padding: 0.5rem 1rem; /* Adjust padding */
+}
+
+.menu a:last-child:hover {
+  background: white; /* White background on hover */
+  color: rgba(31, 41, 55); /* Text color changes to match navbar */
+}
+
+/* Ensure no background color on large screens */
+@media (min-width: 1024px) {
+  .menu {
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+  }
+  .menu a {
+    background: none;
+    padding: 0.5rem;
+  }
+}
