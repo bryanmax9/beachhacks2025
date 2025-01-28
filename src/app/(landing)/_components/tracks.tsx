@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { tracks } from "@/app/_data/tracks";
-
+import styles from "./track.module.css";
 /**
  * A simple enum to indicate the layout mode.
  * BUBBLE => below 1000px
@@ -14,6 +14,12 @@ enum LayoutMode {
     STACKED = "stacked",
     SIDE = "side",
 }
+
+// Define the props interface
+interface FishProps {
+    positionTop?: string;
+}
+
 
 /** Abbreviations for certain tracks */
 const track_abrv: Record<string, string> = {
@@ -42,7 +48,6 @@ interface ModalProps {
     track: string | null;
 }
 
-/** A simple modal */
 function Modal({ isOpen, closeModal, content, track }: ModalProps) {
     if (!isOpen) return null;
 
@@ -78,6 +83,29 @@ function Modal({ isOpen, closeModal, content, track }: ModalProps) {
         </div>
     );
 }
+
+function Fish({positionTop} : FishProps) {
+    return (
+        <div
+            className={styles.fishContainer}
+            // This absolute container has a low z-index or none, so submarines appear on top
+            style={{
+                position:  "absolute",
+                top:  positionTop ||"50%",
+                left: "-100px",   // start offscreen
+                transform: "translateY(-50%)",
+                pointerEvents: "none",
+            }}
+        >
+            <img
+                src="/fish.png"
+                alt="fish"
+                className={styles.fish} // the actual animation is in track.module.css
+            />
+        </div>
+    );
+}
+
 
 /**
  * A bubble for the "mobile" layout.
@@ -271,10 +299,12 @@ export default function TracksPage() {
 
     return (
         <div className="relative w-full h-screen bg-gradient-to-b from-blue-300 to-blue-900 overflow-hidden">
+
+            <Fish />
             {layoutMode === LayoutMode.BUBBLE ? (
                 // BUBBLE layout
                 <div className="flex flex-col items-center justify-center h-full p-4">
-                    <div className="absolute top-0 left-1/4 transform -translate-x-1/2 animate-moveAcross" style={{ pointerEvents: 'none' }}>
+                    <div className={styles.animateMoveAcross + " absolute top-0 left-1/4 transform -translate-x-1/2 "} style={{ pointerEvents: 'none' }}>
                         <img src="/submarine.png" />
                     </div>
                     <h2 className="text-white text-xl mb-4">Tracks</h2>
@@ -300,7 +330,7 @@ export default function TracksPage() {
                 >
                     {layoutMode === LayoutMode.STACKED ? (
                         // 1000px <= w < 1200px => stacked submarines
-                        <div className="float-slow relative w-full h-full">
+                        <div className={styles.floatSlow +" relative w-full h-full"}>
                             <div
                                 id="sub-0"
                                 style={{
@@ -334,10 +364,20 @@ export default function TracksPage() {
                         </div>
                     ) : (
                         // layoutMode === LayoutMode.SIDE => side-by-side
-                        <div className="float-slow relative w-full h-full">
+                        <div className={styles.floatSlow +" relative w-full h-full"}>
+                            <div
+                                style={{position: "absolute", top: 20, left: 0, width: "20vw"}}
+                            >
+                                <img src={`groupoffish.png`}/>
+                            </div>
+                            <div
+                                style={{position: "absolute", top: 20, left: 1200, width: "20vw", transform: "rotate(180deg)"}}
+                            >
+                                <img src={`groupoffish.png`}/>
+                            </div>
                             <div
                                 id="sub-0"
-                                style={{ position: "absolute", top: 0, left: 200, width: "49vw" }}
+                                style={{ position: "absolute", top: 0, left: 150, width: "49vw" }}
                             >
                                 <Submarine
                                     tracks={tracks.slice(0, 3)}
@@ -347,7 +387,7 @@ export default function TracksPage() {
                             </div>
                             <div
                                 id="sub-1"
-                                style={{ position: "absolute", top: 200, left: 700, width: "50vw" }}
+                                style={{ position: "absolute", top: 200, left: 800, width: "50vw" }}
                             >
                                 <Submarine
                                     tracks={tracks.slice(3, 5)}
@@ -359,7 +399,7 @@ export default function TracksPage() {
                     )}
                 </div>
             )}
-
+            <Fish positionTop={"90%"}/>
             {/* Shared modal */}
             <Modal
                 isOpen={isModalOpen}

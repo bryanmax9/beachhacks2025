@@ -1,5 +1,6 @@
 import Hero from "@/app/(landing)/_components/hero";
 import Faq from "@/app/(landing)/_components/faq";
+import TracksPage from "@/app/(landing)/_components/tracks";
 
 export default function Home() {
 
@@ -7,6 +8,7 @@ export default function Home() {
     <div>
         <Faq />
       <Hero />
+        <TracksPage/>
       <div
         className="relative h-[200vh] flex items-center justify-center text-lg"
         style={{ backgroundColor: "#54b4c4" }}

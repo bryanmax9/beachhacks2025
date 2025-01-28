@@ -1,0 +1,84 @@
+/**
+For Tracks.tsx
+*/
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-30px);
+    }
+}
+
+.floatSlow {
+    animation: float 6s ease-in-out infinite;
+}
+
+.bubble {
+    background: radial-gradient(circle at 30% 30%, #ffffff, #cce7ff);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(255, 255, 255, 0.5);
+    transition: transform 0.3s ease-in-out;
+}
+
+.bubble:hover {
+    transform: scale(1.1);
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.animateFloat {
+    animation: float 3s ease-in-out infinite;
+}
+
+
+@keyframes moveAcross {
+    0% {
+        transform: translateX(150%);
+    }
+    49.9% {
+        transform: translateX(-150%);
+    }
+    50% {
+        transform: translateX(150%);
+    }
+    100% {
+        transform: translateX(-150%);
+    }
+}
+
+
+.animateMoveAcross {
+    animation: moveAcross 25s linear infinite;
+}
+
+/**
+ANIMATE FISH
+*/
+
+.fishContainer {
+    z-index: 0; /* or none */
+}
+.fish {
+    width: 100px; /* adjust size */
+    animation: swim 15s linear infinite reverse;
+}
+
+@keyframes swim {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(150vw); /* some large distance across screen */
+    }
+}
+
