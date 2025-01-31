@@ -146,23 +146,15 @@ For Tracks.tsx
   animation: float 3s ease-in-out infinite;
 }
 
-
 @keyframes moveAcross {
   0% {
-    transform: translateX(150%);
-  }
-  49.9% {
-    transform: translateX(-150%);
-  }
-  50% {
-    transform: translateX(150%);
+    transform: translateX(100vw);
   }
   100% {
-    transform: translateX(-150%);
+    transform: translateX(-100vw); /* Adjust as needed */
   }
 }
 
-
 .animate-moveAcross {
-  animation: moveAcross 25s linear infinite;
+  animation: moveAcross 15s linear infinite;
 }
