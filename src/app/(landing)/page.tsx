@@ -9,6 +9,7 @@ export default function Home() {
     return (
         <div>
             <Hero/>
+
             <OceanWaves>
                 <TracksPage />
                 <Sponsors />
