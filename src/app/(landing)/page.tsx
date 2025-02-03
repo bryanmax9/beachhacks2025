@@ -3,6 +3,7 @@ import Hero from "@/app/(landing)/_components/hero";
 import OceanWaves from "@/components/ocean-waves";
 import TracksPage from "@/app/(landing)/_components/tracks";
 import Sponsors from "@/app/(landing)/_components/sponsors";
+import Prizes from "./_components/prizes";
 
 export default function Home() {
 
@@ -13,7 +14,7 @@ export default function Home() {
             <OceanWaves>
                 <TracksPage />
                 <Sponsors />
-                {/*<Prizes />*/}
+                <Prizes />
             </OceanWaves>
         </div>
     );

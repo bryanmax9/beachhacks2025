@@ -5,10 +5,10 @@ import star_fish from "../../../../public/star_fish.png"
 import Image from "next/image"
 export default function Prizes() {
     return (
-        <div className="relative">
-            <h1 className="font-bold text-5xl text-center">Prizes</h1>
+        <div className="relative flex items-center flex-col justify-center align-middle w-full">
+            <h2 className="text-3xl font-bold mb-4 text-blue-900 bg-white bg-opacity-90 p-2 shadow-xl rounded-xl w-fit">Prizes</h2>
             {/* star fish container to scale on mobile */}
-            <div className="md:w-32 w-24 md:h-32 h-24 absolute z-10 bottom-20 md:left-10 left-5">
+            <div className="md:w-32 w-24 md:h-32 h-24 absolute z-10 bottom-20 md:left-10 left-5 float-animation">
                 <Image
                     src={star_fish}
                     alt="star_fish"
@@ -16,7 +16,7 @@ export default function Prizes() {
                     objectFit="fill"
                 />
             </div>
-            <div className="md:w-32 w-24 md:h-32 h-24 absolute z-10 md:top-10 top-80 md:right-10 right-5">
+            <div className="md:w-32 w-24 md:h-32 h-24 absolute z-10 md:top-10 top-80 md:right-10 right-4 float-animation">
                 <Image
                     src={red_fish}
                     alt="red_fish"
