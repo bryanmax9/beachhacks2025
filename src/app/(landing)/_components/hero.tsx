@@ -2,6 +2,10 @@
 
 import { useEffect, useState, useRef } from "react";
 import "./hero.css";
+import {cn} from "@/lib/utils";
+import {dynaPuff} from "@/assets/fonts";
+import Link from "next/link";
+import ApplyButton from "@/components/apply-button";
 
 export default function Hero() {
   // Timer countdown
@@ -93,7 +97,7 @@ export default function Hero() {
   };
   return (
     <section
-      className="hero relative h-[120vh] flex items-center bg-cover bg-center"
+      className="-mt-24 select-none hero relative h-[120vh] flex items-center bg-cover bg-center"
       style={{
         backgroundImage: "linear-gradient(to bottom, #87CEEB, #B0E0E6)", // Sky blue gradient
       }}
@@ -144,10 +148,10 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="content-container">
+      <div className={cn("content-container", dynaPuff.className)}>
         <h1 className="content-title">BeachHacks 8.0</h1>
-        <p className="content-description">March 22th-23th</p>
-        <div className="countdown">
+        <p className={cn("content-description font-semibold", dynaPuff.className)}>March 22th-23th</p>
+        <div className={cn("countdown", dynaPuff.className)}>
           <div>
             <span>{timeLeft.days.toString().padStart(2, "0")}</span>
             <p>Days</p>
@@ -165,9 +169,7 @@ export default function Hero() {
             <p>Seconds</p>
           </div>
         </div>
-        <a href="#apply" className="apply-button">
-          Apply Now
-        </a>
+        <ApplyButton />
       </div>
 
       {/* First SVG Wave */}

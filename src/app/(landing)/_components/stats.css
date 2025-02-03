@@ -1,0 +1,303 @@
+
+
+/*************************************************
+ * OVERALL SECTION LAYOUT
+ *************************************************/
+.stats-section {
+    position: relative;
+    overflow: hidden; /* Keeps shark within section bounds */
+    font-family: "Bangers", cursive;
+}
+
+.stats-heading {
+    position: relative;   /* Needed for z-index to apply */
+    z-index: 5;          /* Higher than the shark's z-index of 0 */
+}
+
+/*************************************************
+ * SHARK STYLING
+ *************************************************/
+#shark {
+    width: 30vmin;
+    height: 10vmin;
+    position: absolute;
+    z-index: 0; /* Behind bubbles */
+    transform: translate(0, 0) scaleX(1);
+    transition: left 2s ease, top 2s ease, transform 0.2s ease;
+}
+
+/* Shark floats after movement */
+#shark.floating {
+    animation: floatShark 3s infinite ease-in-out;
+}
+
+@keyframes floatShark {
+    0% {
+        transform: translate(0, 0) scaleX(var(--direction, 1));
+    }
+    50% {
+        transform: translate(0, -1vmin) scaleX(var(--direction, 1));
+    }
+    100% {
+        transform: translate(0, 0) scaleX(var(--direction, 1));
+    }
+}
+
+/* Direction for floating shark */
+#shark[data-direction="1"].floating {
+    --direction: 1;
+}
+#shark[data-direction="-1"].floating {
+    --direction: -1;
+}
+
+/* Shark body parts */
+#shark div {
+    position: absolute;
+    box-sizing: border-box;
+}
+
+.shark-body {
+    left: 0vmin;
+    width: 30vmin;
+    height: 20vmin;
+    background: #aaa;
+    border-radius: 50%;
+    transform: translate(0, -50%);
+    clip-path: polygon(0% 50%, 100% 50%, 100% 90%, 70% 70%, 90% 100%, 0% 100%);
+}
+
+.shark-eye {
+    width: 1.5vmin;
+    height: 1.5vmin;
+    border-radius: 50%;
+    background: white;
+    box-shadow: inset -0.2vmin -0.45vmin 0 0.6vmin;
+    top: 1.5vmin;
+    right: 4vmin;
+}
+
+.aleta, .tail, .fin {
+    width: 10vmin;
+    height: 8vmin;
+    box-shadow: 4vmin -0.5vmin #aaa;
+    border-radius: 50%;
+    top: -1vmin;
+    transform: translate(-130%, -3vmin) rotate(10deg);
+}
+
+.aleta {
+    box-shadow: 5vmin 0vmin #999;
+    top: 5vmin;
+    left: 3vmin;
+    transform: none;
+    clip-path: polygon(0% 50%, 200% 40%, 200% 100%, 0% 100%);
+}
+
+.fin {
+    box-shadow: 5vmin 0vmin #aaa;
+    left: 15vmin;
+}
+
+.gill {
+    width: 6vmin;
+    height: 9vmin;
+    border-radius: 100%;
+    box-shadow: -2vmin 0 0 -1.7vmin rgba(0, 0, 0, 0.25);
+    left: 18.5vmin;
+}
+.gill-2 {
+    transform: translate(-1vmin, 0) scale(0.9);
+}
+.gill-3 {
+    transform: translate(-2vmin, 0) scale(0.8);
+}
+
+/*************************************************
+ * BUBBLE STYLING (REPLACES CARDS)
+ *************************************************/
+.bubble-stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    z-index: 10; /* Above shark */
+    position: relative;
+}
+
+.bubble-wrapper {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bubble {
+    /*
+       We remove the overall opacity from .bubble
+       and move it into a pseudo-element so text
+       remains fully opaque.
+     */
+    animation: bubbleFloat 3.5s ease-in-out infinite;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    /* Create a transparent background using a pseudo-element */
+    background: none; /* bubble itself is fully opaque now */
+    z-index: 1; /* Place text above pseudo-element background */
+}
+
+.bubble::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    opacity: 0.6; /* Only background is partially transparent */
+    z-index: 0;   /* Pseudo-element behind content */
+
+    background: radial-gradient(
+            circle at 75% 30%,
+            white 5px,
+            aqua 8%,
+            darkblue 60%,
+            aqua 100%
+    );
+    box-shadow:
+            inset 0 0 20px #fff,
+            inset 10px 0 46px #eaf5fc,
+            inset 88px 0px 60px #c2d8fe,
+            inset -20px -60px 100px #fde9ea,
+            inset 0 50px 140px #fde9ea,
+            0 0 90px #fff;
+}
+
+/* Floating animation for bubble */
+@keyframes bubbleFloat {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-40px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Text remains fully opaque */
+.stat-value {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #000;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+    z-index: 1;
+    position: relative;
+}
+
+.stat-label {
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+    color: #000;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+    text-align: center;
+    z-index: 1;
+    position: relative;
+}
+
+/* Bubble shadow below bubble */
+.bubble-shadow {
+    background: rgba(0, 0, 0, 0.1);
+    width: 120px;
+    height: 20px;
+    top: 75%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    position: absolute;
+    animation: shadowExpand 3.5s ease-in-out infinite;
+}
+
+@keyframes shadowExpand {
+    0%, 100% {
+        transform: translateX(-50%) scale(0.8);
+    }
+    50% {
+        transform: translateX(-50%) scale(1.1);
+    }
+}
+
+/*************************************************
+ * RESPONSIVE MEDIA QUERIES
+ *************************************************/
+@media only screen and (max-width: 500px) {
+    .bubble-wrapper {
+        width: 120px;
+        height: 120px;
+    }
+
+    .bubble {
+        animation: bubbleFloatMobile 4.5s ease-in-out infinite;
+        width: 120px;
+        height: 120px;
+    }
+
+    .bubble::before {
+        background: radial-gradient(
+                circle at 65% 35%,
+                white 5px,
+                aqua 15%,
+                darkblue 50%,
+                aqua 100%
+        );
+        box-shadow:
+                inset 0 -20px 30px #fff,
+                inset 40px 0 46px #eaf5fc,
+                inset 58px 0px 60px #c2d8fe,
+                inset -8px -30px 100px #fde9ea,
+                inset 0 20px 110px #fde9ea,
+                0 0 90px #fff;
+    }
+
+    @keyframes bubbleFloatMobile {
+        0% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-30px);
+        }
+        100% {
+            transform: translateY(0);
+        }
+    }
+
+    .bubble-shadow {
+        width: 70px;
+        height: 15px;
+        top: 70%;
+        animation: shadowExpandMobile 4.5s ease-in-out infinite;
+    }
+
+    @keyframes shadowExpandMobile {
+        0%, 100% {
+            transform: translateX(-50%) scale(0.8);
+        }
+        50% {
+            transform: translateX(-50%) scale(1.1);
+        }
+    }
+
+    .stat-value {
+        font-size: 1.2rem;
+    }
+    .stat-label {
+        font-size: 0.9rem;
+    }
+}
