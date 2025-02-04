@@ -7,7 +7,9 @@ import {
     TooltipProvider,
     TooltipTrigger
 } from "@/components/ui/tooltip";
-
+import {cn} from "@/lib/utils";
+import {dynaPuff} from "@/assets/fonts";
+import styles from "../_components/track.module.css"
 // Enhanced track data with more hackathon-specific information
 const tracks = [
     {
@@ -52,22 +54,39 @@ function Modal({ isOpen, closeModal, track }: ModalProps) {
     if (!isOpen || !track) return null;
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center ">
-            <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm " onClick={closeModal} />
-            <div className="relative bg-white bg-opacity-90 p-8 rounded-xl shadow-xl max-w-2xl w-full mx-4">
-                <h2 className="text-3xl font-bold mb-4 text-blue-900 text-center">{track.track}</h2>
+        <div className={cn("fixed inset-0 z-50 flex items-center justify-center", dynaPuff.className)}>
+            {/* Blurred Overlay (lowest z-index) */}
+            <div
+                className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-10"
+                onClick={closeModal}
+            />
+
+            {/* Jellyfish Image (middle z-index) */}
+            <img
+                src="/jellyfish.png"
+                alt="jellyfish"
+                className={`absolute top-[240px] transform -translate-y-1/2 md:w-56 lg:w-64 z-20`}
+
+            />
+
+            <div className="relative bg-white bg-opacity-100 p-8 rounded-xl shadow-xl max-w-2xl w-full mx-4 z-30 overflow-visible">
+                <h2 className="text-3xl font-bold mb-4 text-blue-900 text-center">
+                    {track.track}
+                </h2>
                 <p className="text-lg mb-6 text-gray-700">{track.description}</p>
 
-
                 <div className="mb-6">
-                    <h3 className="text-xl font-semibold mb-2 text-blue-800">Requirements</h3>
+                    <h3 className="text-xl font-semibold mb-2 text-blue-800">
+                        Requirements
+                    </h3>
                     <ul className="list-disc pl-5 text-gray-700">
                         {track.requirements.map((req: string, index: number) => (
-                            <li key={index} className="mb-1">{req}</li>
+                            <li key={index} className="mb-1">
+                                {req}
+                            </li>
                         ))}
                     </ul>
                 </div>
-
 
                 <button
                     onClick={closeModal}
@@ -79,6 +98,9 @@ function Modal({ isOpen, closeModal, track }: ModalProps) {
         </div>
     );
 }
+
+
+
 
 function JellyFish({ track, onClick }: { track: any; onClick: () => void }) {
     const [offset, setOffset] = useState({ x: 0, y: 0 });
