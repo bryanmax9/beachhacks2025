@@ -78,23 +78,3 @@ body {
     @apply bg-background text-foreground;
   }
 }
-@layer utilities {
-  @keyframes float {
-      0% {
-          transform: translateY(0px);
-      }
-      50% {
-          transform: translateY(-10px);
-      }
-      75% {
-        transform: translateY(10px);
-      }
-      100% {
-          transform: translateY(0px);
-      }
-  }
-
-  .float-animation {
-      animation: float 5s ease-in-out infinite  ;
-  }
-}

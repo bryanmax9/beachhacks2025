@@ -5,6 +5,7 @@ import TracksPage from "@/app/(landing)/_components/tracks";
 import Sponsors from "@/app/(landing)/_components/sponsors";
 import Prizes from "./_components/prizes";
 import Stats from "@/app/(landing)/_components/stats"
+import TeamsComponent from "./_components/teams";
 
 export default function Home() {
 
@@ -17,6 +18,7 @@ export default function Home() {
                 <Sponsors />
                 <Prizes />
                 <Stats />
+                <TeamsComponent/>
             </OceanWaves>
         </div>
     );

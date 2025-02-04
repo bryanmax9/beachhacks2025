@@ -8,7 +8,7 @@ export default function Prizes() {
         <div className="relative flex items-center flex-col justify-center align-middle w-full">
             <h2 className="text-3xl font-bold mb-4 text-blue-900 bg-white bg-opacity-90 p-2 shadow-xl rounded-xl w-fit">Prizes (Coming soon!)</h2>
             {/* star fish container to scale on mobile */}
-            <div className="floating md:w-32 w-24 md:h-32 h-24 absolute z-10 bottom-4 md:left-10 left-5 ">
+            <div className="md:w-32 w-24 md:h-32 h-24 absolute z-10 bottom-4 md:left-10 left-5 floating-fish">
                 <Image
                     src={star_fish}
                     alt="star_fish"
@@ -16,7 +16,7 @@ export default function Prizes() {
                     objectFit="fill"
                 />
             </div>
-            <div className="floating md:w-32 w-24 md:h-32 h-24 absolute z-10 md:top-10 top-80 md:right-10 right-4 ">
+            <div className="md:w-32 w-24 md:h-32 h-24 absolute z-10 md:top-10 top-80 md:right-10 right-4 floating-fish">
                 <Image
                     src={red_fish}
                     alt="red_fish"
