@@ -1,9 +1,10 @@
 "use client";
 import {cn} from "@/lib/utils";
-import { useState } from "react";
-import { faqs } from "../../_data/faqs";
+import {useState} from "react";
+import {faqs} from "../../_data/faqs";
 import styles from "../_components/faq.module.css"
 import {dynaPuff} from "@/assets/fonts";
+
 export default function FAQ() {
     const [openIndexes, setOpenIndexes] = useState<number[]>([]);
 
