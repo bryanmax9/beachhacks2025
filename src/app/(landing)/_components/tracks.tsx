@@ -52,11 +52,10 @@ function Modal({ isOpen, closeModal, track }: ModalProps) {
     if (!isOpen || !track) return null;
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
-
-            <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm" onClick={closeModal} />
+        <div className="fixed inset-0 z-50 flex items-center justify-center ">
+            <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm " onClick={closeModal} />
             <div className="relative bg-white bg-opacity-90 p-8 rounded-xl shadow-xl max-w-2xl w-full mx-4">
-                <h2 className="text-3xl font-bold mb-4 text-blue-900">{track.track}</h2>
+                <h2 className="text-3xl font-bold mb-4 text-blue-900 text-center">{track.track}</h2>
                 <p className="text-lg mb-6 text-gray-700">{track.description}</p>
 
 
