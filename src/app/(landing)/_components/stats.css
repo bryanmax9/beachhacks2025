@@ -6,7 +6,7 @@
 .stats-section {
     position: relative;
     overflow: hidden; /* Keeps shark within section bounds */
-    font-family: "Bangers", cursive;
+    font-family: "Dynapuff", cursive;
 }
 
 .stats-heading {
@@ -141,8 +141,8 @@
        remains fully opaque.
      */
     animation: bubbleFloat 3.5s ease-in-out infinite;
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     position: relative;
     display: flex;
@@ -176,7 +176,7 @@
             inset 88px 0px 60px #c2d8fe,
             inset -20px -60px 100px #fde9ea,
             inset 0 50px 140px #fde9ea,
-            0 0 90px #fff;
+            0 0 0px #fff;
 }
 
 /* Floating animation for bubble */
@@ -263,7 +263,7 @@
                 inset 58px 0px 60px #c2d8fe,
                 inset -8px -30px 100px #fde9ea,
                 inset 0 20px 110px #fde9ea,
-                0 0 90px #fff;
+                0 0 0px #fff;
     }
 
     @keyframes bubbleFloatMobile {
