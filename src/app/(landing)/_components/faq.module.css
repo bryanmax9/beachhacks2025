@@ -26,3 +26,31 @@
     color: #666;
     margin-left: 20px;
 }
+
+@keyframes swayLeft {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(10deg);
+    }
+}
+
+@keyframes swayRight {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(10deg);
+    }
+}
+
+.animateCoralSwayLeft {
+    animation: swayRight 5s ease-in-out infinite;
+}
+
+.animateCoralSwayRight {
+    animation: swayLeft 5s ease-in-out infinite;
+}
+
+
