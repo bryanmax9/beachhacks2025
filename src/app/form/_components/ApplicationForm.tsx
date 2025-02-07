@@ -1,122 +1,197 @@
 "use client";
-import { useForm } from "react-hook-form"
+import { useForm } from "react-hook-form";
 import { sendForm } from "../_services/sendForm";
+import styles from "./ApplicationForm.module.css"; // Import CSS module
 
 export interface ApplicationFormTypes {
-    school: string;
-    emergency_contact: string;
-    why_interested: string;
-    experience: number;
-    have_team: string;
-    age: number;
-    graduation_year: number;
-    resume: File[];
+  school: string;
+  emergency_contact: string;
+  why_interested: string;
+  experience: number;
+  have_team: string;
+  age: number;
+  graduation_year: number;
+  resume: File[];
 }
-export default function ApplicationForm () {
-    const {register, handleSubmit, reset} = useForm<ApplicationFormTypes>();
-    const onSubmit = (data: ApplicationFormTypes) => {
-        sendForm(data);
+
+export default function ApplicationForm() {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<ApplicationFormTypes>({ mode: "onBlur" }); // Validate on blur
+
+  const onSubmit = async (data: ApplicationFormTypes) => {
+    if (!data.resume || data.resume.length === 0) {
+      alert("Please upload your resume before submitting.");
+      return;
     }
-    return (
-        <>
-        <form className="w-1/2">
-            <label htmlFor="school" className="block text-sm font-semibold text-blue-900">
-               School 
-            </label>
-            <input
-                id="school"
-                type="text"
-                {...register("school")}
-                placeholder="CSULB"
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-            />
+    await sendForm(data);
+    alert("Form submitted successfully!");
+    reset(); // Reset form after successful submission
+  };
 
-            <label htmlFor="emergency_contact" className="block text-sm font-semibold text-blue-900">
-                Emergency Contact 
-            </label>
-            <input
-                id="emergency_contact"
-                type="text"
-                {...register("emergency_contact")}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-            />
+  return (
+    <div className={styles.background}>
+      {/* Bubble Elements */}
+      {[...Array(15)].map((_, i) => (
+        <div key={i} className={styles.bubble}></div>
+      ))}
 
-            <label htmlFor="why_interested" className="block text-sm font-semibold text-blue-900">
-                Why are you interested? 
-            </label>
-            <input
-                id="why_interested"
-                type="text"
-                {...register("why_interested")}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-            />
+      <div className={styles.formContainer}>
+        {/* Styled Title (Matching "Our Sponsors" Style) */}
+        <div className={styles.formTitle}>
+          <h2>Application Form</h2>
+        </div>
 
-            <label htmlFor="experience" className="block text-sm font-semibold text-blue-900">
-                Experience
-            </label>
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+          {/* School */}
+          <div className={styles.formGroup}>
+            <label htmlFor="school">School</label>
             <input
-                id="experience"
-                type="number"
-                {...register("experience")}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              id="school"
+              type="text"
+              {...register("school", { required: "School is required" })}
+              placeholder="CSULB"
             />
+            {errors.school && (
+              <span className={styles.error}>{errors.school.message}</span>
+            )}
+          </div>
 
-            <label htmlFor="have_team" className="block text-sm font-semibold text-blue-900">
-                Do you have a team?
-            </label>
-            <div className="flex items-center align-middle justify-center bg-red-50">
+          {/* Emergency Contact */}
+          <div className={styles.formGroup}>
+            <label htmlFor="emergency_contact">Emergency Contact</label>
             <input
-                id="have_team"
+              id="emergency_contact"
+              type="text"
+              {...register("emergency_contact", {
+                required: "Emergency contact is required",
+              })}
+            />
+            {errors.emergency_contact && (
+              <span className={styles.error}>
+                {errors.emergency_contact.message}
+              </span>
+            )}
+          </div>
+
+          {/* Why Interested */}
+          <div className={styles.formGroup}>
+            <label htmlFor="why_interested">Why are you interested?</label>
+            <input
+              id="why_interested"
+              type="text"
+              {...register("why_interested", {
+                required: "This field is required",
+              })}
+            />
+            {errors.why_interested && (
+              <span className={styles.error}>
+                {errors.why_interested.message}
+              </span>
+            )}
+          </div>
+
+          {/* Experience */}
+          <div className={styles.formGroup}>
+            <label htmlFor="experience">Experience</label>
+            <input
+              id="experience"
+              type="number"
+              {...register("experience", {
+                required: "Experience is required",
+                min: { value: 0, message: "Must be 0 or more" },
+              })}
+            />
+            {errors.experience && (
+              <span className={styles.error}>{errors.experience.message}</span>
+            )}
+          </div>
+
+          {/* Have a Team? */}
+          <div className={styles.formGroup}>
+            <label htmlFor="have_team">Do you have a team?</label>
+            <div className={styles.radioGroup}>
+              <input
+                id="have_team_yes"
                 type="radio"
-                {...register("have_team")}
+                {...register("have_team", {
+                  required: "Please select an option",
+                })}
                 value="yes"
-                className="mt-1 block border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-            />
-            <span>yes</span>
-            </div>
-            <div className="flex items-center align-middle justify-center bg-red-50">
-            <input
-                id="have_team"
+              />
+              <label htmlFor="have_team_yes">Yes</label>
+
+              <input
+                id="have_team_no"
                 type="radio"
-                {...register("have_team")}
+                {...register("have_team", {
+                  required: "Please select an option",
+                })}
                 value="no"
-                className="mt-1 block border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-            />
-            <span>no</span>
+              />
+              <label htmlFor="have_team_no">No</label>
             </div>
+            {errors.have_team && (
+              <span className={styles.error}>{errors.have_team.message}</span>
+            )}
+          </div>
 
-            <label htmlFor="age" className="block text-sm font-semibold text-blue-900">
-                Age
-            </label>
+          {/* Age */}
+          <div className={styles.formGroup}>
+            <label htmlFor="age">Age</label>
             <input
-                id="age"
-                type="number"
-                {...register("age")}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              id="age"
+              type="number"
+              {...register("age", {
+                required: "Age is required",
+                min: { value: 10, message: "Must be at least 10" },
+              })}
             />
+            {errors.age && (
+              <span className={styles.error}>{errors.age.message}</span>
+            )}
+          </div>
 
-            <label htmlFor="graduation_year" className="block text-sm font-semibold text-blue-900">
-                Graduation Year
-            </label>
+          {/* Graduation Year */}
+          <div className={styles.formGroup}>
+            <label htmlFor="graduation_year">Graduation Year</label>
             <input
-                id="graduation_year"
-                type="number"
-                {...register("graduation_year")}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              id="graduation_year"
+              type="number"
+              {...register("graduation_year", {
+                required: "Graduation year is required",
+                min: { value: 2000, message: "Enter a valid year" },
+              })}
             />
+            {errors.graduation_year && (
+              <span className={styles.error}>
+                {errors.graduation_year.message}
+              </span>
+            )}
+          </div>
 
-            <label htmlFor="resume" className="block text-sm font-semibold text-blue-900">
-                Resume
-            </label>
+          {/* Resume Upload */}
+          <div className={styles.formGroup}>
+            <label htmlFor="resume">Resume</label>
             <input
-                id="resume"
-                type="file"
-                {...register("resume")}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              id="resume"
+              type="file"
+              {...register("resume", { required: "Resume upload is required" })}
             />
+            {errors.resume && (
+              <span className={styles.error}>{errors.resume.message}</span>
+            )}
+          </div>
 
-            <button onClick={handleSubmit(onSubmit)}>Submit</button>
+          {/* Submit Button */}
+          <button type="submit" className={styles.submitButton}>
+            Submit
+          </button>
         </form>
-        </>
-    )
+      </div>
+    </div>
+  );
 }
