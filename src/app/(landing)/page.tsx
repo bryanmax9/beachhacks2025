@@ -10,6 +10,7 @@ import FAQ from "@/app/(landing)/_components/faq";
 
 export default function Home() {
 
+    // <3
     return (
         <div className={`relative`}>
             <Hero/>
