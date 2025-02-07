@@ -282,8 +282,7 @@
   transform: scale(1);
 }
 
-html,
-body {
+:global(html, body) {
   height: auto;
   overflow-y: auto; /* Allow scrolling */
 }
