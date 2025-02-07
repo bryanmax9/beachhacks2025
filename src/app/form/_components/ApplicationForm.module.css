@@ -282,10 +282,6 @@
   transform: scale(1);
 }
 
-:global(html, body) {
-  height: auto;
-  overflow-y: auto; /* Allow scrolling */
-}
 /* Error Message Styling */
 .error {
     color: #ff4747;
