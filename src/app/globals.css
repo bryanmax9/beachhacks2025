@@ -78,3 +78,20 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+
+@keyframes swimAcrossComponents {
+  0% {
+    transform: translate(150px, 150px);
+  }
+  50% {
+    transform: translate(calc(100vw + 150px), calc(100vh + 150px));
+  }
+  100% {
+    transform: translate(-150px, -150px);
+  }
+}
+
+.animate-swim-across-components {
+  animation: swimAcrossComponents 30s linear infinite;
+}
