@@ -13,22 +13,22 @@ const Sponsors = () => {
   }, []);
 
   const goldSponsorClass =
-    "xxxs:w-[4vh] xxxs:h-[4vh] xxs:w-[5vh] xxs:h-[5vh] xs:w-[5vh] xs:h-[5vh] sm:w-[7vh] sm:h-[7vh] md:w-[9vh] md:h-[9vh] lg:w-[11vh] lg:h-[11vh] xl:w-[13vh] xl:h-[13vh] 2xl:w-[15vh] 2xl:h-[15vh] rounded-full overflow-hidden flex items-center justify-center bg-white xxxs:border-[0.2rem] xxs:border-[0.3rem] xs:border-[0.4rem] sm:border-[0.4rem] md:border-[0.5rem] lg:border-[0.65rem]";
+    "sm:w-[7vh] sm:h-[7vh] md:w-[9vh] md:h-[9vh] lg:w-[11vh] lg:h-[11vh] xl:w-[13vh] xl:h-[13vh] 2xl:w-[15vh] 2xl:h-[15vh] rounded-full overflow-hidden flex items-center justify-center bg-white sm:border-[0.4rem] lg:border-[0.45rem] xl:border-[0.65rem]";
 
   const silverSponsorClass =
-    "xxxs:w-[3vh] xxxs:h-[3vh] xxs:w-[4vh] xxs:h-[4vh] xs:w-[4vh] xs:h-[4vh] sm:w-[5vh] sm:h-[5vh] md:w-[7vh] md:h-[7vh] lg:w-[9vh] lg:h-[9vh] xl:w-[11vh] xl:h-[11vh] 2xl:w-[13vh] 2xl:h-[13vh] rounded-full overflow-hidden flex items-center justify-center bg-white xxxs:border-[0.2rem] xxs:border-[0.3rem] xs:border-[0.4rem] sm:border-[0.4rem] md:border-[0.5rem] lg:border-[0.65rem]";
+    "sm:w-[5vh] sm:h-[5vh] md:w-[7vh] md:h-[7vh] lg:w-[9vh] lg:h-[9vh] xl:w-[11vh] xl:h-[11vh] 2xl:w-[13vh] 2xl:h-[13vh] rounded-full overflow-hidden flex items-center justify-center bg-white sm:border-[0.4rem] lg:border-[0.45rem] xl:border-[0.65rem]";
 
   const blueSponsorClass =
-    "xxxs:w-[3vh] xxxs:h-[3vh] xxs:w-[4vh] xxs:h-[4vh] xs:w-[4vh] xs:h-[4vh] sm:w-[5vh] sm:h-[5vh] md:w-[7vh] md:h-[7vh] lg:w-[9vh] lg:h-[9vh] xl:w-[11vh] xl:h-[11vh] 2xl:w-[13vh] 2xl:h-[13vh] rounded-full overflow-hidden flex items-center justify-center bg-white xxxs:border-[0.2rem] xxs:border-[0.3rem] xs:border-[0.4rem] sm:border-[0.4rem] md:border-[0.5rem] lg:border-[0.65rem]";
+    "sm:w-[5vh] sm:h-[5vh] md:w-[7vh] md:h-[7vh] lg:w-[9vh] lg:h-[9vh] xl:w-[11vh] xl:h-[11vh] 2xl:w-[13vh] 2xl:h-[13vh] rounded-full overflow-hidden flex items-center justify-center bg-white sm:border-[0.4rem] lg:border-[0.45rem] xl:border-[0.65rem]";
 
   const goldSubmarineAnimation = {
     animate: {
-      x: ["100%", "-100%"],
+      x: ["100vw", "-100vw"],
       y: [0, -10, 0],
     },
     transition: {
       x: {
-        duration: 20,
+        duration: 13,
         ease: "linear",
         repeat: Number.POSITIVE_INFINITY,
       },
@@ -42,17 +42,17 @@ const Sponsors = () => {
 
   const silverSubmarineAnimation = {
     animate: {
-      x: ["100%", "-100%"],
+      x: ["100vw", "-100vw"],
       y: [0, 10, 0],
     },
     transition: {
       x: {
-        duration: 25,
+        duration: 18,
         ease: "linear",
         repeat: Number.POSITIVE_INFINITY,
       },
       y: {
-        duration: 6,
+        duration: 5,
         ease: "easeInOut",
         repeat: Number.POSITIVE_INFINITY,
       },
@@ -60,17 +60,17 @@ const Sponsors = () => {
   };
   const blueSubmarineAnimation = {
     animate: {
-      x: ["100%", "-100%"],
+      x: ["100vw", "-100vw"],
       y: [0, 20, 0],
     },
     transition: {
       x: {
-        duration: 30,
+        duration: 23,
         ease: "linear",
         repeat: Number.POSITIVE_INFINITY,
       },
       y: {
-        duration: 7,
+        duration: 5,
         ease: "easeInOut",
         repeat: Number.POSITIVE_INFINITY,
       },
@@ -120,9 +120,10 @@ const Sponsors = () => {
         style={{
           top: top,
           right: right,
-          transform: "translateY(-50%)",
+          transform: "translate(0, -50%)",
           display: "flex",
           gap: "0.5rem",
+          position: "absolute",
         }}
       >
         {[...Array(15)].map((_, i) => (
@@ -154,7 +155,7 @@ const Sponsors = () => {
   };
 
   return (
-    <section className="sponsors-section">
+    <section className="sponsors-section w-full h-full overflow-hidden">
       <div
         className={cn(
           "sponsors-header text-center xxxs:text-1.5xl xxs:text-2xl xs:text-2.5xl sm:text-3xl md:text-3.5xl lg:text-4xl xl:text-4.5xl 2xl:text-5xl font-bold drop-shadow-md",
@@ -166,92 +167,92 @@ const Sponsors = () => {
         </div>
       </div>
 
-      <div className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative md:h-[80vh] lg:h-[90vh]">
-        <motion.div
-          className="submarine-container relative flex items-center w-full"
-          {...goldSubmarineAnimation}
-        >
-          <img
-            src="/gold-submarine-test.png"
-            alt="Submarine"
-            className="w-auto"
-          />
-          <div className="sponsors flex justify-around items-center xxxs:w-[12vh] xxs:w-[15vh] xs:w-[22vh] sm:w-[23vh] md:w-[29vh] lg:w-[34vh] xl:w-[40vh] 2xl:w-[45vh] absolute top-[55.5%] left-[33.5%] transform -translate-y-1/2">
-            <a href="https://google.com/" target="_blank">
-              <SponsorLogo
-                src="https://loodibee.com/wp-content/uploads/Google-Logo.png"
-                alt="Sponsor-1-Google"
-                borderColor="#705A00"
-                sponsorClass={goldSponsorClass}
-              />
-            </a>
-            <a href="https://dain.org/" target="_blank">
-              <SponsorLogo
-                src="/dainai.png"
-                alt="Sponsor-2-DainAI"
-                borderColor="#705A00"
-                customStyle={{ transform: "scale(2)" }}
-                sponsorClass={goldSponsorClass}
-              />
-            </a>
+      <div className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative md:h-[80vh] lg:h-[90vh] w-full h-full mb-24">
+        <motion.div className="submarine-container relative flex items-center w-full h-full"
+          {...goldSubmarineAnimation}>
+          <div className="relative w-[961px] min-w-[360px]">
+            <img
+              src="/gold-submarine.svg"
+              alt="Submarine"
+              className="w-full"
+            />
+            <div className="sponsors absolute top-[67%] left-[43%] -translate-x-1/2 flex justify-around items-center w-[40%] gap-4">
+              <a href="https://google.com/" target="_blank">
+                <SponsorLogo
+                  src="https://loodibee.com/wp-content/uploads/Google-Logo.png"
+                  alt="Sponsor-1-Google"
+                  borderColor="#705A00"
+                  sponsorClass={goldSponsorClass}
+                />
+              </a>
+              <a href="https://dain.org/" target="_blank">
+                <SponsorLogo
+                  src="/dainai.png"
+                  alt="Sponsor-2-DainAI"
+                  borderColor="#705A00"
+                  customStyle={{ transform: "scale(2)" }}
+                  sponsorClass={goldSponsorClass}
+                />
+              </a>
+            </div>
+            <BubbleTrail top="18.5em" right="2.5em" />
           </div>
-          <BubbleTrail top="52%" right="18%" />
         </motion.div>
       </div>
-      <div className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative h-[40vh] md:h-[50vh] lg:h-[60vh]">
-        <motion.div
-          className="submarine-container relative flex items-center w-full"
-          {...silverSubmarineAnimation}
-        >
-          <img
-            src="/silver-submarine-test.png"
-            alt="Submarine"
-            className="w-auto"
-          />
+      <div className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative h-[40vh] md:h-[50vh] lg:h-[60vh] w-full h-full mb-16">
+        <motion.div className="submarine-container relative flex items-center w-full h-full"
+        {...silverSubmarineAnimation}>
+          <div className="relative w-[801px] min-w-[360px]">
+            <img
+              src="/silver-submarine.svg"
+              alt="Submarine"
+              className="w-full"
+            />
 
-          <div className="sponsors flex justify-around items-center xxxs:w-[18vh] xxs:w-[22vh] xs:w-[30vh] sm:w-[35vh] md:w-[40vh] lg:w-[50vh] xl:w-[60vh] 2xl:w-[68vh] absolute top-[57.5%] left-[28%] transform -translate-y-1/2">
-            <a href="https://www.codeandcoffee.dev/" target="_blank">
-              <SponsorLogo
-                src="/code-and-coffee.svg"
-                alt="Sponsor-3-code-and-coffee"
-                borderColor="#777777"
-                customStyle={{ transform: "scale(0.87)" }}
-                sponsorClass={silverSponsorClass}
-              />
-            </a>
+            <div className="sponsors absolute top-[67%] left-[44%] -translate-x-1/2 flex justify-around items-center w-[30%]">
+              <a href="https://www.codeandcoffee.dev/" target="_blank">
+                <SponsorLogo
+                  src="/code-and-coffee.svg"
+                  alt="Sponsor-3-code-and-coffee"
+                  borderColor="#777777"
+                  customStyle={{ transform: "scale(0.87)" }}
+                  sponsorClass={silverSponsorClass}
+                />
+              </a>
+            </div>
+            <BubbleTrail top="15.5em" right="3.23em" />
           </div>
-          <BubbleTrail top="55%" right="24%" />
         </motion.div>
       </div>
 
-      <div className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative h-[40vh] md:h-[50vh] lg:h-[60vh]">
-        <motion.div
-          className="submarine-container relative flex items-center w-full"
-          {...blueSubmarineAnimation}
-        >
-          <img src="/blue-submarine.png" alt="Submarine" className="w-auto" />
-          <div className="sponsors flex justify-around items-center xxxs:w-[8vh] xxs:w-[12vh] xs:w-[20vh] sm:w-[25vh] md:w-[30vh] lg:w-[35vh] xl:w-[40vh] 2xl:w-[45vh] absolute top-[55.5%] left-[33%] transform -translate-y-1/2">
-            <a
-              href="https://balsamiq.com/?gad_source=1&gclid=CjwKCAiA74G9BhAEEiwA8kNfpVWbLV0lGKPMG9zPEz4gXWk22PcAEhz-Q7A3fwhNBavZ_eBRoNHfMhoClUEQAvD_BwE"
-              target="_blank"
-            >
-              <SponsorLogo
-                src="/balsamiq-1690452164916-2x.png"
-                alt="Sponsor-4-balsamiq"
-                borderColor="#5D7FA3"
-                sponsorClass={blueSponsorClass}
-              />
-            </a>
-            <a href="https://www.interviewcake.com/" target="_blank">
-              <SponsorLogo
-                src="/cake_logo_blue_gray.svg"
-                alt="Sponsor-5-interview-cake"
-                borderColor="#5D7FA3"
-                sponsorClass={blueSponsorClass}
-              />
-            </a>
+      <div className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative h-[40vh] md:h-[50vh] lg:h-[60vh] w-full h-[290px] mb-8">
+        <motion.div className="submarine-container relative flex items-center w-full h-full"
+        {...blueSubmarineAnimation}>
+          <div className="relative w-[744px] min-w-[360px]">
+            <img src="/blue-submarine.svg" alt="Submarine" className="w-full" />
+            <div className="sponsors absolute top-[65%] left-[42%] -translate-x-1/2 flex justify-around items-center w-[40%] gap-4">
+              <a
+                href="https://balsamiq.com/?gad_source=1&gclid=CjwKCAiA74G9BhAEEiwA8kNfpVWbLV0lGKPMG9zPEz4gXWk22PcAEhz-Q7A3fwhNBavZ_eBRoNHfMhoClUEQAvD_BwE"
+                target="_blank"
+              >
+                <SponsorLogo
+                  src="/balsamiq-1690452164916-2x.png"
+                  alt="Sponsor-4-balsamiq"
+                  borderColor="#5D7FA3"
+                  sponsorClass={blueSponsorClass}
+                />
+              </a>
+              <a href="https://www.interviewcake.com/" target="_blank">
+                <SponsorLogo
+                  src="/cake_logo_blue_gray.svg"
+                  alt="Sponsor-5-interview-cake"
+                  borderColor="#5D7FA3"
+                  sponsorClass={blueSponsorClass}
+                />
+              </a>
+            </div>
+            <BubbleTrail top="14.5em" right="3em" />
           </div>
-          <BubbleTrail top="52.5%" right="28%" />
         </motion.div>
       </div>
     </section>
