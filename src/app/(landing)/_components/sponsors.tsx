@@ -155,7 +155,10 @@ const Sponsors = () => {
   };
 
   return (
-    <section className="sponsors-section w-full h-full overflow-hidden">
+    <section
+      id="sponsors"
+      className="sponsors-section w-full h-full overflow-hidden"
+    >
       <div
         className={cn(
           "sponsors-header text-center xxxs:text-1.5xl xxs:text-2xl xs:text-2.5xl sm:text-3xl md:text-3.5xl lg:text-4xl xl:text-4.5xl 2xl:text-5xl font-bold drop-shadow-md",
@@ -168,14 +171,12 @@ const Sponsors = () => {
       </div>
 
       <div className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative md:h-[80vh] lg:h-[90vh] w-full h-full mb-24">
-        <motion.div className="submarine-container relative flex items-center w-full h-full"
-          {...goldSubmarineAnimation}>
+        <motion.div
+          className="submarine-container relative flex items-center w-full h-full"
+          {...goldSubmarineAnimation}
+        >
           <div className="relative w-[961px] min-w-[360px]">
-            <img
-              src="/gold-submarine.svg"
-              alt="Submarine"
-              className="w-full"
-            />
+            <img src="/gold-submarine.svg" alt="Submarine" className="w-full" />
             <div className="sponsors absolute top-[67%] left-[43%] -translate-x-1/2 flex justify-around items-center w-[40%] gap-4">
               <a href="https://google.com/" target="_blank">
                 <SponsorLogo
@@ -200,8 +201,10 @@ const Sponsors = () => {
         </motion.div>
       </div>
       <div className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative h-[40vh] md:h-[50vh] lg:h-[60vh] w-full h-full mb-16">
-        <motion.div className="submarine-container relative flex items-center w-full h-full"
-        {...silverSubmarineAnimation}>
+        <motion.div
+          className="submarine-container relative flex items-center w-full h-full"
+          {...silverSubmarineAnimation}
+        >
           <div className="relative w-[801px] min-w-[360px]">
             <img
               src="/silver-submarine.svg"
@@ -226,8 +229,10 @@ const Sponsors = () => {
       </div>
 
       <div className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative h-[40vh] md:h-[50vh] lg:h-[60vh] w-full h-[290px] mb-8">
-        <motion.div className="submarine-container relative flex items-center w-full h-full"
-        {...blueSubmarineAnimation}>
+        <motion.div
+          className="submarine-container relative flex items-center w-full h-full"
+          {...blueSubmarineAnimation}
+        >
           <div className="relative w-[744px] min-w-[360px]">
             <img src="/blue-submarine.svg" alt="Submarine" className="w-full" />
             <div className="sponsors absolute top-[65%] left-[42%] -translate-x-1/2 flex justify-around items-center w-[40%] gap-4">

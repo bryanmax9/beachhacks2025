@@ -2,8 +2,8 @@
 
 import { useEffect, useState, useRef } from "react";
 import "./hero.css";
-import {cn} from "@/lib/utils";
-import {dynaPuff} from "@/assets/fonts";
+import { cn } from "@/lib/utils";
+import { dynaPuff } from "@/assets/fonts";
 import Link from "next/link";
 import ApplyButton from "@/components/apply-button";
 
@@ -97,7 +97,7 @@ export default function Hero() {
   };
   return (
     <section
-      className="-mt-24 select-none hero relative h-[120vh] flex items-center bg-cover bg-center"
+      className="-mt-24 select-none hero relative h-[110vh] flex items-center bg-cover bg-center"
       style={{
         backgroundImage: "linear-gradient(to bottom, #87CEEB, #B0E0E6)", // Sky blue gradient
       }}
@@ -105,15 +105,14 @@ export default function Hero() {
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-blue-900/70 via-blue-800/40 to-transparent"></div>
 
-      {/* Palm Tree */}
-      <div
-        className={`absolute top-[40%] left-0 transform ${palmPosition} translate-y-[-50%] z-20 transition-all duration-700 ease-in-out`}
-      >
-        <img
-          src="/left-palms.png"
-          alt="Palm Tree"
-          className="w-[400px] h-[530px] md:w-[400px] md:h-[530px]  sm:w-[400px] sm:h-[530px] "
-        />
+      {/* Palm Tree 1 (Original Position) */}
+      <div className="palm-tree palm-tree-1">
+        <img src="/left-palms.png" alt="Palm Tree" />
+      </div>
+
+      {/* Palm Tree 2 (Lower Position) */}
+      <div className="palm-tree palm-tree-2">
+        <img src="/left-palms.png" alt="Palm Tree" />
       </div>
 
       {/* CSULB Crab */}
@@ -150,7 +149,14 @@ export default function Hero() {
 
       <div className={cn("content-container", dynaPuff.className)}>
         <h1 className="content-title">BeachHacks 8.0</h1>
-        <p className={cn("content-description font-semibold", dynaPuff.className)}>March 22th-23th</p>
+        <p
+          className={cn(
+            "content-description font-semibold",
+            dynaPuff.className
+          )}
+        >
+          March 22th-23th
+        </p>
         <div className={cn("countdown", dynaPuff.className)}>
           <div>
             <span>{timeLeft.days.toString().padStart(2, "0")}</span>

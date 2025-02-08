@@ -1,0 +1,111 @@
+/* Footer Base */
+.footer {
+  position: relative;
+  width: 100%;
+
+  color: white;
+  text-align: center;
+  padding: 50px 20px;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Floating Elements (Subtle Underwater Effect) */
+.floating-elements {
+  position: absolute;
+  width: 100%;
+  height: 120px;
+  top: -70px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  opacity: 0.6;
+}
+
+.floating-fish {
+  animation: float 4s infinite ease-in-out alternate;
+  position: absolute;
+  left: 15%;
+}
+
+.floating-starfish {
+  animation: float 6s infinite ease-in-out alternate;
+  position: absolute;
+  right: 20%;
+}
+
+.floating-jellyfish {
+  animation: float 5s infinite ease-in-out alternate;
+  position: absolute;
+  top: -20px;
+}
+
+/* Floating Animation */
+@keyframes float {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-10px);
+  }
+}
+
+/* Footer Links */
+.footer-links {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.footer-links a {
+  color: #a1c4fd;
+  text-decoration: none;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.footer-links a:hover {
+  opacity: 0.7;
+}
+
+/* Social Media Icons */
+.social-icons {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.social-icons a:hover {
+  transform: scale(1.2);
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.social-icon {
+  font-size: 22px;
+  color: white;
+}
+
+/* Footer Text */
+.footer-text {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.highlight {
+  font-weight: bold;
+  color: #a1c4fd;
+}

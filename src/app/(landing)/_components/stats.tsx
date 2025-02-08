@@ -84,7 +84,7 @@ export default function Stats() {
   );
 
   return (
-    <div className="space-y-6 w-full mt-48 p-4 max-w-screen-xl relative overflow-hidden stats-section">
+    <div id="faq" className="space-y-6 w-full mt-48 p-4 max-w-screen-xl relative overflow-hidden stats-section">
       <div>
         <h2 className="stats-heading text-3xl font-bold text-center mb-12 text-gray-800">
           Event Stats
