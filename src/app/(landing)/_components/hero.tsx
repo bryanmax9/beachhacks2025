@@ -4,7 +4,6 @@ import { useEffect, useState, useRef } from "react";
 import "./hero.css";
 import { cn } from "@/lib/utils";
 import { dynaPuff } from "@/assets/fonts";
-import Link from "next/link";
 import ApplyButton from "@/components/apply-button";
 
 export default function Hero() {
@@ -24,8 +23,14 @@ export default function Hero() {
   const rightEyeRef = useRef<HTMLDivElement>(null);
   const [palmPosition, setPalmPosition] = useState("-translate-x-full"); // Initial position for the left palm tree
 
+  // Add check for window object
+  const isClient = typeof window !== 'undefined';
+
   // Countdown logic
   useEffect(() => {
+    // Only run countdown if we're in the browser
+    if (!isClient) return;
+
     const interval = setInterval(() => {
       const now = new Date().getTime();
       const distance = targetDate.getTime() - now;
@@ -45,7 +50,7 @@ export default function Hero() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [targetDate]);
+  }, [isClient, targetDate]);
 
   // Animate the left palm tree on load
   useEffect(() => {
@@ -54,8 +59,10 @@ export default function Hero() {
     }, 300);
   }, []);
 
-  // Track mouse position for eye animation
+  // Add window check for mouse position tracking
   useEffect(() => {
+    if (!isClient) return;
+
     const handleMouseMove = (event: MouseEvent) => {
       setMousePosition({ x: event.clientX, y: event.clientY });
     };
@@ -64,7 +71,7 @@ export default function Hero() {
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, []);
+  }, [isClient]);
 
   const getCombinedPupilStyle = () => {
     if (!leftEyeRef.current || !rightEyeRef.current) return {};

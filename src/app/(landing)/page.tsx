@@ -1,3 +1,5 @@
+
+"use client";
 import Hero from "@/app/(landing)/_components/hero";
 import OceanWaves from "@/components/ocean-waves";
 import TracksPage from "@/app/(landing)/_components/tracks";

@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { dynaPuff } from "@/assets/fonts";
-import styles from "../_components/track.module.css";
 // Enhanced track data with more hackathon-specific information
 const tracks = [
   {

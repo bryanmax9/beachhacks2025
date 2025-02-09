@@ -6,10 +6,14 @@ import Image from "next/image";
 import "@/app/(landing)/_components/navbar.css"; // Import separate CSS file
 
 const Navbar = () => {
+
   const [scrollPercentage, setScrollPercentage] = useState(7.5);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isClient, setClient] = useState(false)
 
   useEffect(() => {
+    setClient(true);
+
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const maxScroll =
@@ -43,7 +47,7 @@ const Navbar = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isClient]);
   const handleMenuClick = (
     event: React.MouseEvent<HTMLAnchorElement>,
     targetId: string
@@ -59,11 +63,17 @@ const Navbar = () => {
   return (
     <>
       {/* Moving Image (Above Navbar) */}
-      {scrollPercentage > 0 && window.innerWidth > 900 && (
-        <div className="moving-image" style={{ left: `${scrollPercentage}%` }}>
-          <Image src="/crab.png" alt="Moving Image" width={120} height={120} />
-        </div>
+
+      { isClient && (
+          <>
+            {scrollPercentage > 0 && window.innerWidth > 900 && (
+                <div className="moving-image" style={{ left: `${scrollPercentage}%` }}>
+                  <Image src="/crab.png" alt="Moving Image" width={120} height={120} />
+                </div>
+            )}
+          </>
       )}
+
 
       <nav className="navbar">
         {/* Left Section: Logo */}

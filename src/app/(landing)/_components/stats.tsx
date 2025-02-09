@@ -3,6 +3,8 @@ import "./stats.css";
 import { useEffect, useRef, useMemo } from "react";
 
 export default function Stats() {
+  const isClient = typeof window !== 'undefined';
+
   const stats = [
     { value: "500+", label: "Participants" },
     { value: "48", label: "Hours" },
@@ -15,7 +17,8 @@ export default function Stats() {
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    // Cast the element to HTMLElement so TypeScript knows it has offsetWidth/offsetHeight
+    if (!isClient) return;
+
     const shark = document.getElementById("shark") as HTMLElement | null;
     const statsSection = document.querySelector(".stats-section") as HTMLElement | null;
     if (!shark || !statsSection) return;
@@ -74,7 +77,7 @@ export default function Stats() {
         clearTimeout(timerRef.current);
       }
     };
-  }, []);
+  }, [isClient]);
 
   // Generate random animation durations for bubbles.
   // This useMemo computes the values only once per component instance.
