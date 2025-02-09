@@ -5,8 +5,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {signup_schema, signupTypes} from "@/lib/schemas/user-signup";
 import {signup_action} from "@/app/(landing)/(auth)/action";
-import {cn} from "@/lib/utils";
-import {quicksand} from "@/assets/fonts";
 
 export default function SignUpForm() {
 
@@ -27,10 +25,10 @@ export default function SignUpForm() {
     };
 
     return (
-        <form className={cn("space-y-6 font-semibold", quicksand.className)} onSubmit={handleSubmit(handle_signup)}>
+        <form className={"space-y-6 font-semibold"} onSubmit={handleSubmit(handle_signup)}>
             <div className="grid grid-cols-2 gap-4">
                 <div>
-                    <label htmlFor="firstName" className="block text-sm font-semibold text-blue-900">
+                    <label htmlFor="firstName" className="block text-sm font-semibold ">
                         First Name
                     </label>
                     <input
@@ -45,7 +43,7 @@ export default function SignUpForm() {
                     )}
                 </div>
                 <div>
-                    <label htmlFor="lastName" className="block text-sm font-semibold text-blue-900">
+                    <label htmlFor="lastName" className="block text-sm font-semibold ">
                         Last Name
                     </label>
                     <input
@@ -61,7 +59,7 @@ export default function SignUpForm() {
                 </div>
             </div>
             <div>
-                <label htmlFor="role" className="block text-sm font-semibold text-blue-900">
+                <label htmlFor="role" className="block text-sm font-semibold ">
                     Role
                 </label>
                 <div className="mt-2 flex flex-wrap gap-2">
@@ -69,7 +67,7 @@ export default function SignUpForm() {
                         type="button"
                         onClick={() => setValue("role", "HACKER")}
                         className={`px-4 py-2 rounded-md text-sm font-semibold ${
-                            watch("role") === "HACKER" ? "bg-indigo-600 text-white" : "bg-white text-blue-900"
+                            watch("role") === "HACKER" ? "bg-indigo-600 text-white" : "bg-white text-black"
                         }`}
                     >
                         HACKER
@@ -78,7 +76,7 @@ export default function SignUpForm() {
                         type="button"
                         onClick={() => setValue("role", "JUDGE")}
                         className={`px-4 py-2 rounded-md text-sm font-semibold ${
-                            watch("role") === "JUDGE" ? "bg-indigo-600 text-white" : "bg-white text-blue-900"
+                            watch("role") === "JUDGE" ? "bg-indigo-600 text-white" : "bg-white text-black"
                         }`}
                     >
                         JUDGE
@@ -87,7 +85,7 @@ export default function SignUpForm() {
                         type="button"
                         onClick={() => setValue("role", "VOLUNTEER")}
                         className={`px-4 py-2 rounded-md text-sm font-semibold ${
-                            watch("role") === "VOLUNTEER" ? "bg-indigo-600 text-white" : "bg-white text-blue-900"
+                            watch("role") === "VOLUNTEER" ? "bg-indigo-600 text-white" : "bg-white text-black"
                         }`}
                     >
                         VOLUNTEER
@@ -96,7 +94,7 @@ export default function SignUpForm() {
                         type="button"
                         onClick={() => setValue("role", "MENTOR")}
                         className={`px-4 py-2 rounded-md text-sm font-semibold ${
-                            watch("role") === "MENTOR" ? "bg-indigo-600 text-white" : "bg-white text-blue-900"
+                            watch("role") === "MENTOR" ? "bg-indigo-600 text-white" : "bg-white text-black"
                         }`}
                     >
                         MENTOR
@@ -105,7 +103,7 @@ export default function SignUpForm() {
                         type="button"
                         onClick={() => setValue("role", "SPONSOR")}
                         className={`px-4 py-2 rounded-md text-sm font-semibold ${
-                            watch("role") === "SPONSOR" ? "bg-indigo-600 text-white" : "bg-white text-blue-900"
+                            watch("role") === "SPONSOR" ? "bg-indigo-600 text-white" : "bg-white text-black"
                         }`}
                     >
                         SPONSOR
@@ -118,7 +116,7 @@ export default function SignUpForm() {
 
             <div className="space-y-4">
                 <div>
-                    <label htmlFor="phoneNumber" className="block text-sm font-semibold text-blue-900">
+                    <label htmlFor="phoneNumber" className="block text-sm font-semibold text-black">
                         Phone Number
                     </label>
                     <input
@@ -134,7 +132,7 @@ export default function SignUpForm() {
                 </div>
 
                 <div>
-                    <label htmlFor="email" className="block text-sm font-semibold text-blue-900">
+                    <label htmlFor="email" className="block text-sm font-semibold text-black">
                         Email
                     </label>
                     <input
@@ -150,7 +148,7 @@ export default function SignUpForm() {
                 </div>
 
                 <div>
-                    <label htmlFor="password" className="block text-sm font-semibold text-blue-900">
+                    <label htmlFor="password" className="block text-sm font-semibold text-black">
                         Password
                     </label>
                     <input
@@ -166,7 +164,7 @@ export default function SignUpForm() {
                 </div>
 
                 <div>
-                    <label htmlFor="confirmPassword" className="block text-sm font-semibold text-blue-900">
+                    <label htmlFor="confirmPassword" className="block text-sm font-semibold text-black">
                         Confirm Password
                     </label>
                     <input
@@ -185,7 +183,7 @@ export default function SignUpForm() {
             <div>
                 <button
                     type="submit"
-                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-semibold text-white bg-black hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                     Sign Up
                 </button>
