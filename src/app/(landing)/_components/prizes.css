@@ -1,8 +1,8 @@
-.floating-fish {
-    animation: float-fish 3s ease-in-out infinite;
+.ryan-floating-fish {
+    animation: ryan-float-fish 3s ease-in-out infinite;
 }
 
-@keyframes float-fish {
+@keyframes ryan-float-fish {
     0% {
         transform: translateY(0);
     }
