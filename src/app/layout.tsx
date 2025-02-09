@@ -1,13 +1,13 @@
+
 import type { Metadata } from "next";
 import "./globals.css";
 import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { inter } from "@/assets/fonts";
-import Navbar from "@/app/(landing)/_components/navbar";
 
 export const metadata: Metadata = {
-  title: "BeachHacks 2025",
-  description: "beach hacks hackathon for 2025",
+  title: "BeachHacks 2025 - CSULB",
+  description: "CSULB Beach hacks hackathon for 2025",
 };
 
 interface RootLayoutProps {
