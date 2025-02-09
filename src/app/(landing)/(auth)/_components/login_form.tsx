@@ -47,11 +47,11 @@ export default function LoginForm() {
 
     // Generate random kelp properties after component mounts
     useEffect(() => {
-        const kelpData = Array.from({ length: 10 }, (_, index) => ({
+        const kelpData = Array.from({ length: 20 }, (_, index) => ({
             id: index,
-            height: Math.floor(Math.random() * 80) + 300,  // Height: 300px - 380px
-            left: Math.floor(Math.random() * 90),          // Left position: 0% - 90%
-            rotation: Math.random() * 90 - 45              // Rotation: -45° to 45°
+            height: Math.floor(Math.random() * 80) + 300,
+            left: Math.floor(Math.random() * 90),
+            rotation: Math.random() * 90 - 45
         }));
         setKelps(kelpData);
     }, []);
@@ -137,6 +137,9 @@ export default function LoginForm() {
                     </div>
                 </div>
             </div>
+            <img src={'/red_fish.png'} className={`absolute z-[-1] animate-swim-across-components-red-fish`}/>
+            <img src={'/red_fish.png'} className={`absolute top-2/3 z-[-1] animate-swim-across-components-red-fish`}/>
+            <img src={'/green_fish.png'} className={`absolute top-1.5 z-[-1] animate-swim-across-components-green-fish transform`}/>
         </OceanWavesNoSand>
     );
 }

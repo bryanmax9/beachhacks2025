@@ -80,18 +80,34 @@ body {
 }
 
 
-@keyframes swimAcrossComponents {
+@keyframes swimAcrossComponentsGreenFish{
   0% {
-    transform: translate(150px, 150px);
+    transform: translate(-1000px, 0);
   }
   50% {
-    transform: translate(calc(100vw + 150px), calc(100vh + 150px));
+    transform: translate(calc(100vw + 150px), 50vh);
   }
   100% {
-    transform: translate(-150px, -150px);
+    transform: translate(1000px, 0);
   }
 }
 
-.animate-swim-across-components {
-  animation: swimAcrossComponents 30s linear infinite;
+.animate-swim-across-components-green-fish {
+  animation: swimAcrossComponentsGreenFish 20s linear infinite;
+}
+
+@keyframes swimAcrossComponentsRedFish {
+  0% {
+    transform: translate(1000px, 0); /* Start offscreen on the right */
+  }
+  50% {
+    transform: translate(calc(-150px), 50vh); /* Move to the middle-left vertically */
+  }
+  100% {
+    transform: translate(-1000px, 0); /* End offscreen on the left */
+  }
+}
+
+.animate-swim-across-components-red-fish {
+  animation: swimAcrossComponentsRedFish 20s linear infinite;
 }
