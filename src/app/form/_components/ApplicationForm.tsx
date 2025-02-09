@@ -27,9 +27,10 @@ export default function ApplicationForm() {
       alert("Please upload your resume before submitting.");
       return;
     }
-    await sendForm(data);
-    alert("Form submitted successfully!");
+
     reset(); // Reset form after successful submission
+    await sendForm(data);
+
   };
 
   return (

@@ -85,7 +85,6 @@ export default function TeamsComponent() {
           image="/phu.jpg"
         />
         <TeamWidget name="Krisha" role="logistics" image="/krisha.jpg" />
-        <TeamWidget name="Melissa" role="logistics" image="/melissa.jpg" />
         <TeamWidget name="Arnav" role="logistics" image="/arnav.jpg" />
         <TeamWidget name="Mahdi" role="logistics" image="/mahdi.jpg" />
         <TeamWidget name="Cole Hartman" role="logistics" image="/cole.jpg" />

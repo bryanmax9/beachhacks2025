@@ -1,5 +1,6 @@
-
 "use client";
+import { useEffect, useState } from "react";
+
 import Hero from "@/app/(landing)/_components/hero";
 import OceanWaves from "@/components/ocean-waves";
 import TracksPage from "@/app/(landing)/_components/tracks";
@@ -10,9 +11,10 @@ import TeamsComponent from "./_components/teams";
 import FAQ from "@/app/(landing)/_components/faq";
 import Navbar from "@/app/(landing)/_components/navbar";
 import Footer from "@/app/(landing)/_components/footer";
+import { redirect } from "next/navigation";
+
 
 export default function Home() {
-  // <3
   return (
     <div className={`relative`}>
       <Navbar />

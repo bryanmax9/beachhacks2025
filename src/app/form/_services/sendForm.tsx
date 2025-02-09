@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import { ApplicationFormTypes } from "../_components/ApplicationForm";
 import { createBrowser } from "@/lib/supabase/client";
 
@@ -61,4 +62,5 @@ export const sendForm = async (formData: ApplicationFormTypes) => {
   }
 
   console.log("Form submitted successfully:", data);
+  return redirect("/appstatus")
 };

@@ -5,6 +5,7 @@ import {createServer} from "@/lib/supabase/server";
 import {signup_schema, signupTypes} from "@/lib/schemas/user-signup";
 import {signin_schema, signInTypes} from "@/lib/schemas/user-signin";
 import {validateFields} from "@/lib/utils";
+import { redirect } from "next/navigation";
 
 export const signup_action = async (signup_data: signupTypes) => {
     validateFields(signup_schema, signup_data);
@@ -31,10 +32,7 @@ export const signup_action = async (signup_data: signupTypes) => {
         };
     }
 
-    return {
-        success: true,
-        message: "User has been created."
-    }
+    return redirect("/form")
 
 }
 

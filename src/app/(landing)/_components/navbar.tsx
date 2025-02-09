@@ -4,15 +4,37 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import "@/app/(landing)/_components/navbar.css"; // Import separate CSS file
+import { userHasSubmittedForm, userIsAuthenticated } from "@/(api)/authCheckServices";
+import { redirect } from "next/navigation";
 
 const Navbar = () => {
 
   const [scrollPercentage, setScrollPercentage] = useState(7.5);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isClient, setClient] = useState(false)
 
+  const [hasSubmitted, setHasSubmitted] = useState<boolean|null>(null);
+  const [userExists, setUserExists] = useState<boolean|null>(null);
+  const initialize = async () => {
+    const submitted = await userHasSubmittedForm();
+    const exists = await userIsAuthenticated();
+    setHasSubmitted(submitted);
+    setUserExists(exists);
+  }
+  useEffect(()=>{
+    initialize();
+  },[])
+
+  useEffect(()=>{
+    console.log("submitted", hasSubmitted);
+    console.log("exists", userExists);
+    if(hasSubmitted!=null && userExists!=null) {
+      // if logged in but no form, redirect to form
+      if(!hasSubmitted && userExists) {
+        return () => {redirect("/form")};
+      }
+    }
+  },[hasSubmitted,userExists])
   useEffect(() => {
-    setClient(true);
 
     const handleScroll = () => {
       const scrollY = window.scrollY;
@@ -22,7 +44,7 @@ const Navbar = () => {
 
       // Adjust movement based on screen width
       let maxPosition;
-      let stepSize;
+      let stepSize:number = 0;
 
       if (window.innerWidth > 1200) {
         maxPosition = 95;
@@ -47,7 +69,7 @@ const Navbar = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isClient]);
+  }, []);
   const handleMenuClick = (
     event: React.MouseEvent<HTMLAnchorElement>,
     targetId: string
@@ -64,7 +86,6 @@ const Navbar = () => {
     <>
       {/* Moving Image (Above Navbar) */}
 
-      { isClient && (
           <>
             {scrollPercentage > 0 && window.innerWidth > 900 && (
                 <div className="moving-image" style={{ left: `${scrollPercentage}%` }}>
@@ -72,7 +93,6 @@ const Navbar = () => {
                 </div>
             )}
           </>
-      )}
 
 
       <nav className="navbar">
@@ -102,9 +122,11 @@ const Navbar = () => {
 
         {/* Login Button */}
         <div className="login-container">
-          <Link href="/login" className="nav-login">
-            Log In
-          </Link>
+          {/* <Link href="/login" className="nav-login"> */}
+            {/* Log In */}
+          {/* </Link> */}
+          {userExists && <Link href="/appstatus" className="nav-login">Dashboard</Link>}
+          {!userExists && <Link href="/signup" className="nav-login">Sign Up</Link>}
         </div>
 
         {/* Burger Menu for Small Screens */}
