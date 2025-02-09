@@ -6,11 +6,11 @@ export default function Stats() {
   const isClient = typeof window !== 'undefined';
 
   const stats = [
-    { value: "500+", label: "Participants" },
-    { value: "48", label: "Hours" },
-    { value: "$50,000+", label: "Prizes" },
+    { value: "200+", label: "Participants" },
+    { value: "24", label: "Hours" },
+    { value: "$5k+", label: "Prizes" },
     { value: "10+", label: "Sponsors" },
-    { value: "20+", label: "Workshops" },
+    { value: "10+", label: "Workshops" },
   ];
 
   // Use a ref to store the timeout ID so we can clear it on unmount
