@@ -10,11 +10,6 @@ export default function Footer() {
   return (
     <footer className="footer">
       {/* Floating Decorations */}
-      <div className="floating-elements">
-        <img src="/green_fish.png" alt="Fish" className="floating-fish" />
-        <img src="/star_fish.png" alt="Starfish" className="floating-starfish" />
-        <img src="/jelly_fish.png" alt="Jellyfish" className="floating-jellyfish" />
-      </div>
 
       {/* Links Section */}
       <div className="footer-links">

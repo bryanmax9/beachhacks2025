@@ -16,10 +16,10 @@ export default function TeamsComponent() {
       </h2>
 
       {/* Floating Fish Decorations */}
-      <div className="md:w-32 w-24 md:h-32 h-24 absolute z-10 bottom-36 md:right-10 right-5 floating-fish">
+      <div className="md:w-32 w-24 md:h-32 h-24 absolute z-10 bottom-36 md:right-10 right-5 ryan-floating-fish">
         <Image src={star_fish} alt="star_fish" layout="fill" objectFit="fill" />
       </div>
-      <div className="md:w-32 w-24 md:h-32 h-24 absolute z-10 md:top-5 md:left-20 left-5 floating-fish">
+      <div className="md:w-32 w-24 md:h-32 h-24 absolute z-10 md:top-5 md:left-20 left-5 ryan-floating-fish">
         <Image
           src={jelly_fish}
           alt="jelly_fish"
@@ -27,7 +27,7 @@ export default function TeamsComponent() {
           objectFit="fill"
         />
       </div>
-      <div className="md:w-32 w-24 md:h-32 h-24 absolute z-10 bottom-5 md:left-5 left-2 floating-fish">
+      <div className="md:w-32 w-24 md:h-32 h-24 absolute z-10 bottom-5 md:left-5 left-2 ryan-floating-fish">
         <Image
           src={green_fish}
           alt="green_fish"
@@ -37,7 +37,7 @@ export default function TeamsComponent() {
       </div>
 
       {/* Team Grid Layout */}
-      <div className="flex flex-wrap justify-center gap-6 max-w-6xl w-full px-4">
+      <div className="flex flex-wrap justify-center gap-6 max-w-6xl w-full px-4 z-10">
         <TeamWidget name="Justine Cruz" role="ui/ux" image="/justine.jpg" />
         <TeamWidget name="Vansh Patel" role="tech, ui/ux" image="/vansh.jpg" />
         <TeamWidget name="Praz" role="tech" image="/praz.jpg" />
