@@ -1,24 +1,101 @@
+
 "use client";
 import "./stats.css";
-import { useEffect, useRef, useMemo } from "react";
+import { useEffect, useRef, useMemo, useState } from "react";
+import { createBrowserClient } from "@supabase/ssr";
 
-export default function Stats() {
-  const isClient = typeof window !== 'undefined';
+// Create the Supabase client directly in this file.
+const supabase = createBrowserClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
-  const stats = [
-    { value: "200+", label: "Participants" },
-    { value: "24", label: "Hours" },
-    { value: "$5k+", label: "Prizes" },
-    { value: "10+", label: "Sponsors" },
-    { value: "10+", label: "Workshops" },
-  ];
+// Define a type for the CountUp component props.
+interface CountUpProps {
+  target: number;
+  start: boolean;
+  duration?: number;
+  formatter?: (value: number) => string;
+}
 
-  // Use a ref to store the timeout ID so we can clear it on unmount
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+/**
+ * CountUp component:
+ * When `start` is true, this component will animate a number from 0 to `target`
+ */
+function CountUp({ target, start, duration = 2000, formatter }: CountUpProps): JSX.Element {
+  const [count, setCount] = useState<number>(0);
 
   useEffect(() => {
-    if (!isClient) return;
+    if (!start) return;
+    let startTime: number | null = null;
 
+    // The step function receives a timestamp (number).
+    const step = (timestamp: number) => {
+      if (startTime === null) startTime = timestamp;
+      const progress = timestamp - startTime;
+      const progressRatio = Math.min(progress / duration, 1);
+      setCount(Math.floor(progressRatio * target));
+      if (progress < duration) {
+        requestAnimationFrame(step);
+      }
+    };
+
+    requestAnimationFrame(step);
+  }, [start, target, duration]);
+
+  return <span>{formatter ? formatter(count) : count}</span>;
+}
+
+// Define a type for the individual stat item.
+interface StatItem {
+  value: string | number;
+  label: string;
+}
+
+export default function Stats(): JSX.Element {
+  // States to store counts from Supabase
+  const [hackerCount, setHackerCount] = useState<number | null>(null);
+  const [schoolCount, setSchoolCount] = useState<number | null>(null);
+
+  // This state will be set to true when the stats section becomes visible.
+  const [animate, setAnimate] = useState<boolean>(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // (We’re using a fallback value until the query completes.)
+  const stats: StatItem[] = [
+    { value: "10+", label: "Countries" },
+    { value: schoolCount !== null ? schoolCount : "20+", label: "Schools" },
+    { value: "$20k", label: "Prizes" },
+    { value: hackerCount !== null ? hackerCount : "200+", label: "Hackers" },
+    { value: "24", label: "Hours" },
+  ];
+
+  // Use a ref to store the timeout ID so we can clear it on unmount (for the shark animation)
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Set up an IntersectionObserver to start number animations when the stats section is in view.
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setAnimate(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  // Existing shark animation useEffect
+  useEffect(() => {
     const shark = document.getElementById("shark") as HTMLElement | null;
     const statsSection = document.querySelector(".stats-section") as HTMLElement | null;
     if (!shark || !statsSection) return;
@@ -77,17 +154,53 @@ export default function Stats() {
         clearTimeout(timerRef.current);
       }
     };
-  }, [isClient]);
+  }, []);
+
+  // Fetch hacker and school counts from Supabase
+  useEffect(() => {
+    async function fetchData() {
+      // 1. Fetch accepted hacker count from 'profiles'
+      const { count: acceptedHackersCount, error: hackerError } = await supabase
+        .from("profiles")
+        .select("id", { count: "exact", head: true })
+        .eq("acceptance_status", "ACCEPTED");
+
+      if (hackerError) {
+        console.error("Error fetching hacker count:", hackerError);
+      } else {
+        setHackerCount(acceptedHackersCount);
+      }
+
+      // 2. Fetch school entries from 'forms'
+      const { data: formsData, error: formsError } = await supabase
+        .from("forms")
+        .select("school");
+
+      if (formsError) {
+        console.error("Error fetching forms data:", formsError);
+      } else if (formsData) {
+        // Count unique schools (ignoring null/empty values)
+        const uniqueSchools = new Set(
+          formsData.map((form: any) => form.school).filter((school: any) => !!school)
+        );
+        setSchoolCount(uniqueSchools.size);
+      }
+    }
+    fetchData();
+  }, []);
 
   // Generate random animation durations for bubbles.
-  // This useMemo computes the values only once per component instance.
   const randomDurations = useMemo(
     () => stats.map(() => (4 + Math.random() * 2).toFixed(2) + "s"),
-    []
+    [stats]
   );
 
   return (
-    <div id="faq" className="space-y-6 w-full mt-48 p-4 max-w-screen-xl relative overflow-hidden stats-section">
+    <div
+      id="faq"
+      ref={containerRef}
+      className="space-y-6 w-full p-4 max-w-screen-xxl relative overflow-hidden stats-section"
+    >
       <div>
         <h2 className="stats-heading text-3xl font-bold text-center mb-12 text-gray-800">
           Event Stats
@@ -109,8 +222,10 @@ export default function Stats() {
       {/* Bubbles Container */}
       <div className="bubble-stats-container">
         {stats.map((stat, index) => {
-          // Use the memoized random duration for this bubble
           const duration = randomDurations[index];
+          const statStr = stat.value.toString();
+          // This regex matches an optional non-digit prefix, a number (with possible commas), then an optional non-digit suffix.
+          const match = statStr.match(/^(\D*)([\d,]+)(\D*)$/);
           return (
             <div key={index} className="bubble-wrapper">
               <div
@@ -118,7 +233,19 @@ export default function Stats() {
                 style={{ animationDuration: duration }}
                 suppressHydrationWarning
               >
-                <div className="stat-value">{stat.value}</div>
+                <div className="stat-value">
+                  {match ? (
+                    // If the value can be parsed, animate it.
+                    <CountUp
+                      target={parseInt(match[2].replace(/,/g, ""), 10)}
+                      start={animate}
+                      formatter={(val: number) => `${match[1]}${val}${match[3]}`}
+                    />
+                  ) : (
+                    // Otherwise, just render the value directly.
+                    stat.value
+                  )}
+                </div>
                 <div className="stat-label">{stat.label}</div>
               </div>
             </div>
@@ -128,3 +255,4 @@ export default function Stats() {
     </div>
   );
 }
+
