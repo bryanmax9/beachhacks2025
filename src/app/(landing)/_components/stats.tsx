@@ -59,7 +59,7 @@ export default function Stats(): JSX.Element {
   // Stats array for the other bubbles.
   const stats: StatItem[] = [
     { value: "10+", label: "Countries" },
-    { value: schoolCount !== null ? schoolCount : "0", label: "Schools" },
+    { value: schoolCount !== null ? schoolCount : "0", label: "Universities" },
     { value: "$5,000", label: "Prizes" },
     { value: hackerCount !== null ? hackerCount : "0", label: "Hackers" },
     { value: "24", label: "Hours" },
@@ -239,7 +239,7 @@ export default function Stats(): JSX.Element {
             );
           }
           // For Countries and Schools: always append a plus sign when the animation is done, except when the target is 0.
-          else if (stat.label === "Countries" || stat.label === "Schools") {
+          else if (stat.label === "Countries" || stat.label === "Universities") {
             const match = valStr.match(/^(\d+(?:,\d+)*)(\+?)$/);
             if (match) {
               const target = parseInt(match[1].replace(/,/g, ""), 10);
