@@ -1,5 +1,7 @@
 "use client";
-import { useForm } from "react-hook-form";
+import { useState, useEffect } from "react";
+import { useForm, Controller } from "react-hook-form";
+import Select from "react-select";
 import { sendForm } from "../_services/sendForm";
 import styles from "./ApplicationForm.module.css"; // Import CSS module
 
@@ -19,8 +21,49 @@ export default function ApplicationForm() {
     register,
     handleSubmit,
     reset,
+    control,
     formState: { errors },
-  } = useForm<ApplicationFormTypes>({ mode: "onBlur" }); // Validate on blur
+  } = useForm<ApplicationFormTypes>({ mode: "onBlur" });
+
+  const [schools, setSchools] = useState<{ label: string; value: string }[]>(
+    []
+  );
+  const [isLoading, setIsLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState(""); // Track user input
+
+  useEffect(() => {
+    async function fetchSchools() {
+      if (searchTerm.length < 3) return; // Avoid fetching for short queries
+
+      setIsLoading(true);
+      try {
+        const API_KEY = "qgPihr8fLfbr6derE4g0YxJAhc4xbkia1lQFwgeE";
+        const response = await fetch(
+          `https://api.data.gov/ed/collegescorecard/v1/schools?api_key=${API_KEY}&fields=school.name&per_page=20&school.name=${encodeURIComponent(
+            searchTerm
+          )}`
+        );
+        const data = await response.json();
+
+        if (data.results) {
+          const schoolOptions = data.results.map(
+            (school: { "school.name": string }) => ({
+              label: school["school.name"],
+              value: school["school.name"],
+            })
+          );
+          setSchools(schoolOptions);
+        }
+      } catch (error) {
+        console.error("Error fetching schools:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    const debounceFetch = setTimeout(fetchSchools, 400);
+    return () => clearTimeout(debounceFetch);
+  }, [searchTerm]);
 
   const onSubmit = async (data: ApplicationFormTypes) => {
     if (!data.resume || data.resume.length === 0) {
@@ -28,9 +71,8 @@ export default function ApplicationForm() {
       return;
     }
 
-    reset(); // Reset form after successful submission
+    reset();
     await sendForm(data);
-
   };
 
   return (
@@ -41,21 +83,99 @@ export default function ApplicationForm() {
       ))}
 
       <div className={styles.formContainer}>
-        {/* Styled Title (Matching "Our Sponsors" Style) */}
+        {/* Styled Title */}
         <div className={styles.formTitle}>
           <h2>Application Form</h2>
         </div>
 
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-          {/* School */}
+          {/* School Selection */}
           <div className={styles.formGroup}>
             <label htmlFor="school">School</label>
-            <input
-              id="school"
-              type="text"
-              {...register("school", { required: "School is required" })}
-              placeholder="CSULB"
+            <Controller
+              name="school"
+              control={control}
+              rules={{ required: "School is required" }}
+              render={({ field }) => (
+                <div style={{ position: "relative", zIndex: 9999999 }}>
+                  {/* Input Field for Users to Type Their School */}
+                  <input
+                    type="text"
+                    value={field.value || ""}
+                    onChange={(e) => {
+                      field.onChange(e.target.value);
+                      setSearchTerm(e.target.value); // ✅ Update searchTerm to fetch schools
+                    }}
+                    placeholder="Type your school"
+                    style={{
+                      width: "100%",
+                      padding: "10px",
+                      borderRadius: "8px",
+                      border: "2px solid rgba(255, 255, 255, 0.3)",
+                      backgroundColor: "rgba(255, 255, 255, 0.15)",
+                      color: "white",
+                      outline: "none",
+                    }}
+                  />
+
+                  {/* Dropdown for Selecting Schools */}
+                  <Select
+                    value={
+                      schools.find((option) => option.value === field.value) ||
+                      null
+                    }
+                    options={schools}
+                    isSearchable
+                    isLoading={isLoading}
+                    placeholder="Or type & select from the list"
+                    noOptionsMessage={() => "No schools found"}
+                    onInputChange={(value, { action }) => {
+                      if (action === "input-change") {
+                        setSearchTerm(value);
+                      }
+                    }}
+                    onChange={(selected) => field.onChange(selected?.value)}
+                    menuPortalTarget={document.body} // ✅ Fix dropdown z-index issue
+                    styles={{
+                      control: (base) => ({
+                        ...base,
+                        backgroundColor: "rgba(255, 255, 255, 0.15)",
+                        color: "white",
+                        border: "2px solid rgba(255, 255, 255, 0.3)",
+                        borderRadius: "8px",
+                        padding: "5px",
+                        zIndex: 999999,
+                        position: "relative",
+                        pointerEvents: "auto",
+                      }),
+                      menu: (base) => ({
+                        ...base,
+                        background: "rgba(0, 0, 0, 0.9)",
+                        color: "white",
+                        zIndex: 9999999, // ✅ Ensures dropdown is above everything
+                        position: "absolute",
+                      }),
+                      menuPortal: (base) => ({ ...base, zIndex: 99999999 }), // ✅ Ensures dropdown is above everything
+                      option: (base, { isFocused, isSelected }) => ({
+                        ...base,
+                        backgroundColor: isSelected
+                          ? "rgba(255, 255, 255, 0.5)"
+                          : isFocused
+                          ? "rgba(255, 255, 255, 0.3)"
+                          : "transparent",
+                        color: "white",
+                      }),
+                      placeholder: (base) => ({
+                        ...base,
+                        color: "rgba(255, 255, 255, 0.7)",
+                      }),
+                      singleValue: (base) => ({ ...base, color: "white" }),
+                    }}
+                  />
+                </div>
+              )}
             />
+
             {errors.school && (
               <span className={styles.error}>{errors.school.message}</span>
             )}
