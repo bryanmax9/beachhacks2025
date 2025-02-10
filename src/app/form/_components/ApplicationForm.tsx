@@ -14,6 +14,7 @@ export interface ApplicationFormTypes {
   age: number;
   graduation_year: number;
   resume: File[];
+  food_allergies: string;
 }
 
 export default function ApplicationForm() {
@@ -70,6 +71,8 @@ export default function ApplicationForm() {
       alert("Please upload your resume before submitting.");
       return;
     }
+
+    console.log("Submitting Data:", JSON.stringify(data, null, 2)); // ✅ Ensures all fields are logged
 
     reset();
     await sendForm(data);
@@ -294,13 +297,53 @@ export default function ApplicationForm() {
             )}
           </div>
 
+          {/* Food Allergies */}
+          <div className={styles.formGroup}>
+            <label htmlFor="food_allergies">
+              Dietary Preferences / Food Allergies
+            </label>
+            <input
+              id="food_allergies"
+              type="text"
+              placeholder="Enter dietary restrictions or food allergies"
+              {...register("food_allergies", {
+                required:
+                  "Please enter your dietary preferences or food allergies",
+                minLength: {
+                  value: 2,
+                  message: "Please enter at least 2 characters",
+                },
+                maxLength: {
+                  value: 100,
+                  message: "Too long. Please limit to 100 characters.",
+                },
+              })}
+            />
+            {errors.food_allergies && (
+              <span className={styles.error}>
+                {errors.food_allergies.message}
+              </span>
+            )}
+          </div>
+
           {/* Resume Upload */}
           <div className={styles.formGroup}>
-            <label htmlFor="resume">Resume</label>
+            <label htmlFor="resume">Resume (PDF only)</label>
             <input
               id="resume"
               type="file"
-              {...register("resume", { required: "Resume upload is required" })}
+              accept=".pdf" // ✅ Only accept .pdf files
+              {...register("resume", {
+                required: "Resume upload is required",
+                validate: (files) => {
+                  if (!files || files.length === 0)
+                    return "Resume upload is required";
+                  const file = files[0];
+                  if (file.type !== "application/pdf")
+                    return "Only PDF files are allowed";
+                  return true;
+                },
+              })}
             />
             {errors.resume && (
               <span className={styles.error}>{errors.resume.message}</span>
