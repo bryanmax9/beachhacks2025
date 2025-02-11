@@ -2,7 +2,7 @@
 import {type NextRequest, NextResponse} from 'next/server'
 import {updateSession} from "@/lib/supabase/middleware";
 import {privateRoutes} from "@/config/routes";
-
+import {createServer} from "@/lib/supabase/server";
 export async function middleware(request: NextRequest) {
 
     const path = request.nextUrl.pathname;
@@ -15,6 +15,22 @@ export async function middleware(request: NextRequest) {
     }
 
     return NextResponse.next();
+}
+
+export async function getUserRole(userId: string) {
+    const supabase = await createServer();
+    const { data, error } = await supabase
+        .from('profiles') // Replace with your table name
+        .select('is_admin') // Replace with your column name
+        .eq('id', userId)
+        .single();
+
+    if (error) {
+        console.error('Error fetching user role:', error);
+        return null;
+    }
+
+    return data?.is_admin;
 }
 
 export const config = {

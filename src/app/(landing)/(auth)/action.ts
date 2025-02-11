@@ -6,7 +6,7 @@ import {signup_schema, signupTypes} from "@/lib/schemas/user-signup";
 import {signin_schema, signInTypes} from "@/lib/schemas/user-signin";
 import {validateFields} from "@/lib/utils";
 import { redirect } from "next/navigation";
-
+import {getUserRole} from "@/middleware";
 export const signup_action = async (signup_data: signupTypes) => {
     validateFields(signup_schema, signup_data);
 
@@ -41,10 +41,11 @@ export const signin_action = async (signInData: signInTypes) => {
 
     const supabase = await createServer();
 
-    const {error} = await supabase.auth.signInWithPassword({
+    const {data ,error} = await supabase.auth.signInWithPassword({
         email: signInData.email,
         password: signInData.password,
     })
+
 
     if (error) {
         return {
@@ -52,10 +53,20 @@ export const signin_action = async (signInData: signInTypes) => {
             message: error.message
         }
     }
+    const userId = data?.user?.id;
+    if (!userId) {
+        return {
+            success: false,
+            message: "User not found."
+        }
+    }
 
+    const res  = await getUserRole(userId);
     return {
         success: true,
+        is_admin: res,
         message: "User has been signed in.",
     }
 
 }
+

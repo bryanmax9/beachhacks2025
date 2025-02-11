@@ -16,6 +16,7 @@ import styles from "@/app/(landing)/_components/faq.module.css";
 import { dynaPuff } from "@/assets/fonts";
 import { cn } from "@/lib/utils";
 
+
 interface KelpProps {
     id: number;
     height: number;
@@ -38,9 +39,15 @@ export default function LoginForm() {
 
     const handleSignIn = async (data: signInTypes) => {
         const response = await signin_action(data);
-        if (response.success) {
+        console.log("Admin response",response.is_admin);
+
+        if (response.success && !response.is_admin) {
             router.push("/application");
-        } else {
+        }else if(response.success && response.is_admin){
+            router.push("/admin");
+        }
+
+        else {
             setLoginError(response.message);
         }
     };
