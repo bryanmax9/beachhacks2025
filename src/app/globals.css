@@ -14,31 +14,6 @@ body {
   scroll-behavior: smooth;
 }
 
-/* Navbar background transparency with a blur effect */
-nav {
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-nav.bg-transparent {
-  background-color: transparent;
-}
-
-nav.bg-gray-800 {
-  background-color: rgba(31, 41, 55, 0.9); /* Tailwind's gray-800 with opacity */
-  backdrop-filter: blur(10px); /* Adds a blur effect */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-a {
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-a:hover {
-  color: #9ca3af; /* Tailwind's gray-400 */
-}
-
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -104,65 +79,35 @@ a:hover {
   }
 }
 
-/**
-For Tracks.tsx
-*/
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-30px);
-  }
-}
 
-.float-slow {
-  animation: float 6s ease-in-out infinite;
-}
-
-.bubble {
-  background: radial-gradient(circle at 30% 30%, #ffffff, #cce7ff);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(255, 255, 255, 0.5);
-  transition: transform 0.3s ease-in-out;
-}
-
-.bubble:hover {
-  transform: scale(1.1);
-}
-
-@keyframes float {
+@keyframes swimAcrossComponentsGreenFish{
   0% {
-    transform: translateY(0);
+    transform: translate(-1000px, 0);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translate(calc(100vw + 150px), 50vh);
   }
   100% {
-    transform: translateY(0);
+    transform: translate(1000px, 0);
   }
 }
 
-.animate-float {
-  animation: float 3s ease-in-out infinite;
+.animate-swim-across-components-green-fish {
+  animation: swimAcrossComponentsGreenFish 20s linear infinite;
 }
 
-
-@keyframes moveAcross {
+@keyframes swimAcrossComponentsRedFish {
   0% {
-    transform: translateX(150%);
-  }
-  49.9% {
-    transform: translateX(-150%);
+    transform: translate(1000px, 0); /* Start offscreen on the right */
   }
   50% {
-    transform: translateX(150%);
+    transform: translate(calc(-150px), 50vh); /* Move to the middle-left vertically */
   }
   100% {
-    transform: translateX(-150%);
+    transform: translate(-1000px, 0); /* End offscreen on the left */
   }
 }
 
-
-.animate-moveAcross {
-  animation: moveAcross 25s linear infinite;
+.animate-swim-across-components-red-fish {
+  animation: swimAcrossComponentsRedFish 20s linear infinite;
 }

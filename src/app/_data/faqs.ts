@@ -30,3 +30,5 @@ export const faqs = [
         answer: "Bring your laptop, charger, and any other tools you might need, like a mouse or headphones. Also bring deodorant.",
     },
 ];
+
+export default faqs;

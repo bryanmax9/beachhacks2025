@@ -1,412 +1,220 @@
 "use client";
+import React, { useState, useEffect } from "react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
+import { dynaPuff } from "@/assets/fonts";
+// Enhanced track data with more hackathon-specific information
+const tracks = [
+  {
+    track: "Education",
+    description:
+      "Transform the future of learning through technology. Focus areas include EdTech platforms, accessibility tools, and personalized learning solutions.",
+    requirements: [
+      "Must include AI/ML component",
+      "Focus on accessibility",
+      "Open-source preferred",
+    ],
+  },
+  {
+    track: "AI",
+    description:
+      "Push the boundaries of artificial intelligence and machine learning. Build solutions in NLP, computer vision, or generative AI.",
+    requirements: [
+      "Original AI/ML implementation",
+      "Real-world application",
+      "Performance metrics",
+    ],
+  },
+  {
+    track: "FinTech",
+    description:
+      "Revolutionize financial services through innovative technology. Areas include DeFi, payments, banking, and financial inclusion.",
+    requirements: [
+      "Security-first approach",
+      "Scalable architecture",
+      "Regulatory compliance",
+    ],
+  },
+  {
+    track: "Healthcare",
+    description:
+      "Create solutions that improve patient care and medical systems. Focus on telemedicine, patient monitoring, or health data analytics.",
+    requirements: [
+      "HIPAA Compliance",
+      "Medical Expert Validation",
+      "Impact Metrics",
+    ],
+  },
+  {
+    track: "Sustainability",
+    description:
+      "Build technology to combat climate change and promote environmental sustainability. Focus on clean energy, waste reduction, or carbon tracking.",
+    requirements: ["Measurable Impact", "Scalable Solution", "Open Data Usage"],
+  },
+  {
+    track: "Web3",
+    description:
+      "Develop decentralized applications and blockchain solutions. Areas include DeFi, NFTs, DAOs, or web3 infrastructure.",
+    requirements: [
+      "Smart Contract Security",
+      "Web3 Integration",
+      "Token Economics",
+    ],
+  },
+];
 
-import React, { useEffect, useRef, useState } from "react";
-import { tracks } from "@/app/_data/tracks";
-import styles from "./track.module.css";
-/**
- * A simple enum to indicate the layout mode.
- * BUBBLE => below 1000px
- * STACKED => 1000px to 1200px
- * SIDE => above 1200px
- */
-enum LayoutMode {
-    BUBBLE = "bubble",
-    STACKED = "stacked",
-    SIDE = "side",
-}
-
-// Define the props interface
-interface FishProps {
-    positionTop?: string;
-}
-
-
-/** Abbreviations for certain tracks */
-const track_abrv: Record<string, string> = {
-    Education: "EDU",
-    AI: "AI",
-    FinTech: "FIN",
-    Healthcare: "HEA",
-    Sustainability: "SUS"
-};
-
-// The shape of each Track
-interface Track {
-    track: string;
-    description: string;
-    top: string;
-    left: string;
-    width: string;
-    height: string;
-}
-
-/** Props for the Modal */
 interface ModalProps {
-    isOpen: boolean;
-    closeModal: () => void;
-    content: string | null;
-    track: string | null;
+  isOpen: boolean;
+  closeModal: () => void;
+  track: any;
 }
 
-function Modal({ isOpen, closeModal, content, track }: ModalProps) {
-    if (!isOpen) return null;
+function Modal({ isOpen, closeModal, track }: ModalProps) {
+  if (!isOpen || !track) return null;
 
-    return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
-            {/* Dark overlay */}
-            <div
-                className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"
-                onClick={closeModal}
-            />
-            {/* Modal Box */}
-            <div
-                className="relative bg-white p-6 rounded-2xl shadow-xl max-w-md w-full
-                   transform transition-all duration-300 ease-in-out
-                   flex flex-col items-center justify-center"
-                style={{
-                    opacity: isOpen ? 1 : 0,
-                    scale: isOpen ? 1 : 0.95,
-                }}
-            >
-                <h2 className="text-2xl font-bold mb-4 text-black text-center">
-                    {track}
-                </h2>
-                <p className="text-black leading-relaxed text-center">{content}</p>
-                <button
-                    onClick={closeModal}
-                    className="mt-6 px-6 py-2 bg-blue-600 text-white rounded-full
-                     hover:bg-blue-700 transition-colors duration-200 w-full text-center"
-                >
-                    Close Window
-                </button>
-            </div>
-        </div>
-    );
-}
+  return (
+    <div
+      id="track"
+      className={cn(
+        "fixed inset-0 z-50 flex items-center justify-center",
+        dynaPuff.className
+      )}
+    >
+      {/* Blurred Overlay (lowest z-index) */}
+      <div
+        className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-10"
+        onClick={closeModal}
+      />
 
-function Fish({positionTop} : FishProps) {
-    return (
-        <div
-            className={styles.fishContainer}
-            // This absolute container has a low z-index or none, so submarines appear on top
-            style={{
-                position:  "absolute",
-                top:  positionTop ||"50%",
-                left: "-100px",   // start offscreen
-                transform: "translateY(-50%)",
-                pointerEvents: "none",
-            }}
-        >
-            <img
-                src="/fish.png"
-                alt="fish"
-                className={styles.fish} // the actual animation is in track.module.css
-            />
-        </div>
-    );
-}
+      {/* Jellyfish Image (middle z-index) */}
+      <img
+        src="/jellyfish.png"
+        alt="jellyfish"
+        className={`absolute top-[240px] transform -translate-y-1/2 md:w-56 lg:w-64 z-20`}
+      />
 
+      <div className="relative bg-white bg-opacity-100 p-8 rounded-xl shadow-xl max-w-2xl w-full mx-4 z-30 overflow-visible">
+        <h2 className="text-3xl font-bold mb-4 text-blue-900 text-center">
+          {track.track}
+        </h2>
+        <p className="text-lg mb-6 text-gray-700">{track.description}</p>
 
-/**
- * A bubble for the "mobile" layout.
- * Clicking it opens the same modal as the submarine markers do.
- */
-function Bubble({
-                    track,
-                    onClick,
-                }: {
-    track: Track;
-    onClick: (track: Track) => void;
-}) {
-    return (
-        <div
-            onClick={() => onClick(track)}
-            className="w-24 h-24 rounded-full flex items-center justify-center
-                 border-2 border-gray-300 cursor-pointer m-2 bubble"
-        >
-      <span className="text-black font-bold p-2 text-center break-words">
-        {track_abrv[track.track] || track.track}
-      </span>
-        </div>
-    );
-}
-
-/**
- * Submarine: displays the submarine image and markers.
- * The actual "zoom" is controlled at the SCENE level, not here.
- */
-function Submarine({
-                       tracks,
-                       submarineIndex,
-                       onMarkerClick,
-                   }: {
-    tracks: Track[];
-    submarineIndex: number;
-    onMarkerClick: (track: Track, markerIndex: number, subIndex: number) => void;
-}) {
-    return (
-        <div className="relative inline-block pointer-events-none">
-            {/* Submarine image */}
-            <img
-                src="/submarine.png"
-                alt={`Submarine ${submarineIndex + 1}`}
-                className="w-full h-auto pointer-events-none"
-            />
-            {/* Markers */}
-            {tracks.map((track, i) => (
-                <div
-                    key={i}
-                    className="absolute cursor-pointer pointer-events-auto"
-                    style={{
-                        top: track.top,
-                        left: track.left,
-                        width: track.width,
-                        height: track.height,
-                    }}
-                    onClick={() => onMarkerClick(track, i, submarineIndex)}
-                >
-                    <div
-                        className="w-full h-full border-2 border-gray-300 bg-white/80
-                       flex items-center justify-center rounded-full"
-                    >
-            <span className="text-black font-bold px-2 py-1 text-center break-words">
-              {track_abrv[track.track] || track.track}
-            </span>
-                    </div>
-                </div>
+        <div className="mb-6">
+          <h3 className="text-xl font-semibold mb-2 text-blue-800">
+            Requirements
+          </h3>
+          <ul className="list-disc pl-5 text-gray-700">
+            {track.requirements.map((req: string, index: number) => (
+              <li key={index} className="mb-1">
+                {req}
+              </li>
             ))}
+          </ul>
         </div>
-    );
+
+        <button
+          onClick={closeModal}
+          className="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-lg font-semibold"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  );
 }
 
-/**
- * Main page: adjusts layout based on screen width:
- * - <1000px => bubble layout (no zoom)
- * - 1000px-1200px => stacked submarines (zoom)
- * - >1200px => side-by-side submarines (zoom)
- */
+function JellyFish({ track, onClick }: { track: any; onClick: () => void }) {
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setOffset({
+        x: Math.sin(Date.now() / 2000) * 20,
+        y: Math.cos(Date.now() / 2000) * 20,
+      });
+    }, 50);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div
+      onClick={onClick}
+      className="group relative flex flex-col items-center cursor-pointer transition-transform hover:scale-110"
+      style={{
+        transform: `translate(${offset.x}px, ${offset.y}px)`,
+        transition: "transform 2s ease-out",
+      }}
+    >
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div className="relative w-40 h-40">
+              <img
+                src="/jellyfish.png"
+                alt={track.track}
+                className="w-full h-full object-contain transition-opacity group-hover:opacity-80"
+              />
+            </div>
+          </TooltipTrigger>
+          <TooltipContent
+            side="top"
+            className="max-w-md p-4 bg-white/90 backdrop-blur-sm rounded-xl shadow-xl"
+          >
+            <p className="text-sm text-gray-700">{track.description}</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+      <span className="mt-4 px-4 py-2 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border-2 border-blue-200 text-blue-900 font-bold text-lg transition-colors group-hover:bg-blue-50">
+        {track.track}
+      </span>
+    </div>
+  );
+}
+
 export default function TracksPage() {
-    // Decide layout based on width
-    const [layoutMode, setLayoutMode] = useState<LayoutMode>(LayoutMode.SIDE);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedTrack, setSelectedTrack] = useState(null);
+  const [layout, setLayout] = useState("grid");
 
-    useEffect(() => {
-        function handleResize() {
-            const w = window.innerWidth;
-            if (w < 1000) {
-                setLayoutMode(LayoutMode.BUBBLE);
-            } else if (w < 1200) {
-                setLayoutMode(LayoutMode.STACKED);
-            } else {
-                setLayoutMode(LayoutMode.SIDE);
-            }
-        }
-        handleResize();
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
-    }, []);
-
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [modalTrack, setModalTrack] = useState<string | null>(null);
-    const [modalDescription, setModalDescription] = useState<string | null>(null);
-
-    const sceneRef = useRef<HTMLDivElement>(null);
-    const [sceneScale, setSceneScale] = useState(1);
-    const [sceneOrigin, setSceneOrigin] = useState("50% 50%");
-
-    const [sceneWidth, setSceneWidth] = useState(0);
-    const [sceneHeight, setSceneHeight] = useState(0);
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            if (sceneRef.current) {
-                const rect = sceneRef.current.getBoundingClientRect();
-                setSceneWidth(rect.width);
-                setSceneHeight(rect.height);
-            }
-        }, 500);
-        return () => clearTimeout(timer);
-    }, [layoutMode]);
-
-    // Opens the modal
-    const openModal = (trackName: string, desc: string) => {
-        setModalTrack(trackName);
-        setModalDescription(desc);
-        setIsModalOpen(true);
+  useEffect(() => {
+    const handleResize = () => {
+      setLayout(window.innerWidth < 768 ? "stack" : "grid");
     };
-    const closeModal = () => {
-        setIsModalOpen(false);
-        setSceneScale(1);
-    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-    // Utility: parse "30%" => numeric px within containerWidth
-    function parseOffset(value: string, containerSize: number) {
-        if (value.endsWith("%")) {
-            const pct = parseFloat(value) / 100;
-            return pct * containerSize;
-        } else if (value.endsWith("px")) {
-            return parseFloat(value);
-        }
-        return 0;
-    }
+  const openModal = (track: any) => {
+    setSelectedTrack(track);
+    setIsModalOpen(true);
+  };
 
-    // Marker or bubble click logic
-    const handleMarkerClick = (
-        track: { track: string; description: string; top: string; left: string },
-        markerIndex: number,
-        subIndex: number
-    ) => {
-        // If we are in bubble layout, just open the modal (no zoom).
-        if (layoutMode === LayoutMode.BUBBLE) {
-            openModal(track.track, track.description);
-            return;
-        }
-
-        const subId = `sub-${subIndex}`;
-        const subEl = document.getElementById(subId);
-        if (!subEl) {
-            // fallback: just open modal
-            openModal(track.track, track.description);
-            return;
-        }
-        const subRect = subEl.getBoundingClientRect();
-
-        // Convert track's top/left to px within sub's container
-        const markerLocalX = parseOffset(track.left, subRect.width);
-        const markerLocalY = parseOffset(track.top, subRect.height);
-
-        // Marker absolute position on the screen
-        const markerSceneX = subRect.x + markerLocalX;
-        const markerSceneY = subRect.y + markerLocalY;
-
-        // Convert to scene-wide percentages
-        if (sceneWidth > 0 && sceneHeight > 0 && sceneRef.current) {
-            // Get the bounding rect of the scene container
-            const sceneRect = sceneRef.current.getBoundingClientRect();
-
-            // Calculate percentages relative to the scene container using bounding rect positions
-            const percentX = ((markerSceneX - sceneRect.left) / sceneRect.width) * 100;
-            const percentY = ((markerSceneY - sceneRect.top) / sceneRect.height) * 100;
-
-            setSceneOrigin(`${percentX}% ${percentY}%`);
-            setSceneScale(5); // or your desired scale
-        }
-
-        // Open modal after short delay
-        setTimeout(() => {
-            openModal(track.track, track.description);
-        }, 600);
-    };
-
-    return (
-        <div className="relative w-full h-screen bg-gradient-to-b from-blue-300 to-blue-900 overflow-hidden">
-
-            <Fish />
-            {layoutMode === LayoutMode.BUBBLE ? (
-                // BUBBLE layout
-                <div className="flex flex-col items-center justify-center h-full p-4">
-                    <div className={styles.animateMoveAcross + " absolute top-0 left-1/4 transform -translate-x-1/2 "} style={{ pointerEvents: 'none' }}>
-                        <img src="/submarine.png" />
-                    </div>
-                    <h2 className="text-white text-xl mb-4">Tracks</h2>
-                    <div className="flex flex-wrap items-center justify-center gap-4">
-                        {tracks.map((t) => (
-                            <Bubble
-                                key={t.track}
-                                track={t}
-                                onClick={(track) => openModal(track.track, track.description)}
-                            />
-                        ))}
-                    </div>
-                </div>
-            ) : (
-                <div
-                    ref={sceneRef}
-                    className="relative w-full h-full"
-                    style={{
-                        transformOrigin: sceneOrigin,
-                        transform: `scale(${sceneScale})`,
-                        transition: "transform 0.6s ease-in-out",
-                    }}
-                >
-                    {layoutMode === LayoutMode.STACKED ? (
-                        // 1000px <= w < 1200px => stacked submarines
-                        <div className={styles.floatSlow +" relative w-full h-full"}>
-                            <div
-                                id="sub-0"
-                                style={{
-                                    position: "absolute",
-                                    top: 0,
-                                    left: 200,
-                                    width: "60vw",
-                                }}
-                            >
-                                <Submarine
-                                    tracks={tracks.slice(0, 3)}
-                                    submarineIndex={0}
-                                    onMarkerClick={handleMarkerClick}
-                                />
-                            </div>
-                            <div
-                                id="sub-1"
-                                style={{
-                                    position: "absolute",
-                                    top: 400,
-                                    left: 200,
-                                    width: "60vw",
-                                }}
-                            >
-                                <Submarine
-                                    tracks={tracks.slice(3, 5)}
-                                    submarineIndex={1}
-                                    onMarkerClick={handleMarkerClick}
-                                />
-                            </div>
-                        </div>
-                    ) : (
-                        // layoutMode === LayoutMode.SIDE => side-by-side
-                        <div className={styles.floatSlow +" relative w-full h-full"}>
-                            <div
-                                style={{position: "absolute", top: 20, left: 0, width: "20vw"}}
-                            >
-                                <img src={`groupoffish.png`}/>
-                            </div>
-                            <div
-                                style={{position: "absolute", top: 20, left: 1200, width: "20vw", transform: "rotate(180deg)"}}
-                            >
-                                <img src={`groupoffish.png`}/>
-                            </div>
-                            <div
-                                id="sub-0"
-                                style={{ position: "absolute", top: 0, left: 150, width: "49vw" }}
-                            >
-                                <Submarine
-                                    tracks={tracks.slice(0, 3)}
-                                    submarineIndex={0}
-                                    onMarkerClick={handleMarkerClick}
-                                />
-                            </div>
-                            <div
-                                id="sub-1"
-                                style={{ position: "absolute", top: 200, left: 800, width: "50vw" }}
-                            >
-                                <Submarine
-                                    tracks={tracks.slice(3, 5)}
-                                    submarineIndex={1}
-                                    onMarkerClick={handleMarkerClick}
-                                />
-                            </div>
-                        </div>
-                    )}
-                </div>
-            )}
-            <Fish positionTop={"90%"}/>
-            {/* Shared modal */}
-            <Modal
-                isOpen={isModalOpen}
-                closeModal={closeModal}
-                content={modalDescription}
-                track={modalTrack}
-            />
-        </div>
-    );
+  return (
+    <div className="relative min-h-screen w-full py-12">
+      <div
+        className={`container mx-auto px-4 ${
+          layout === "grid"
+            ? "grid grid-cols-2 lg:grid-cols-3 gap-16"
+            : "flex flex-col gap-16"
+        }`}
+      >
+        {tracks.map((track, index) => (
+          <div key={index} className="flex justify-center">
+            <JellyFish track={track} onClick={() => openModal(track)} />
+          </div>
+        ))}
+      </div>
+      <Modal
+        isOpen={isModalOpen}
+        closeModal={() => setIsModalOpen(false)}
+        track={selectedTrack}
+      />
+    </div>
+  );
 }

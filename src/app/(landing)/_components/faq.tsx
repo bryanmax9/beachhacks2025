@@ -1,7 +1,9 @@
 "use client";
-
-import { useState } from "react";
-import { faqs } from "@/app/_data/faqs";
+import {cn} from "@/lib/utils";
+import {useState} from "react";
+import {faqs} from "../../_data/faqs";
+import styles from "../_components/faq.module.css"
+import {dynaPuff} from "@/assets/fonts";
 
 export default function FAQ() {
     const [openIndexes, setOpenIndexes] = useState<number[]>([]);
@@ -15,19 +17,29 @@ export default function FAQ() {
     };
 
     return (
-        <div className="min-h-screen w-full bg-gradient-to-b from-blue-300 to-blue-900 flex justify-center py-16 relative">
-            {/* Floating Bubble with Crab */}
-            <div className="absolute left-1/4 transform -translate-x-1/2 animate-float">
-                <div className="w-32 h-32 bg-white/40 rounded-full flex items-center justify-center shadow-lg relative">
-                    <img src="/crab.png" className="h-20 w-auto object-contain absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2" alt="Submarine"/>
-                </div>
+        <div className={cn(`min-h-screen w-full flex justify-center py-16 relative`, dynaPuff.className)}>
+            <div className="absolute left-0 top-1/2 transform -translate-y-1/3 -translate-x-1/4 -z-20 rotate-45">
+                <img
+                    src="/coral1.png"
+                    className={`h-48 w-auto object-contain ${styles.animateCoralSwayLeft}`}
+                    alt="coral"
+                />
             </div>
-            <div className="absolute left-3/4 transform -translate-x-1/2 animate-float">
-                <div className="w-32 h-32 bg-white/40 rounded-full flex items-center justify-center shadow-lg relative">
-                    <img src="/crab.png" className="h-20 w-auto object-contain absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2" alt="Submarine"/>
-                </div>
+            <div className="absolute right-10 top-1/3 transform translate-x-1/2 -rotate-45 -z-20">
+                <img
+                    src="/coral1.png"
+                    className={`h-60 w-auto object-contain ${styles.animateCoralSwayRight}`}
+                    alt="coral"
+                />
             </div>
 
+            <div className="absolute right-10 top-2/3 transform translate-x-1/2 -rotate-45 -z-20">
+                <img
+                    src="/coral1.png"
+                    className={`h-60 w-auto object-contain ${styles.animateCoralSwayRight}`}
+                    alt="coral"
+                />
+            </div>
             {/* Content Container */}
             <div className="space-y-4 w-full sm:max-w-screen-lg mx-auto p-4 mt-24">
                 {/* Title */}

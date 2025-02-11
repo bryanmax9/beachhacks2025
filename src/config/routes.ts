@@ -1,3 +1,3 @@
 
 export const publicRoutes = ["/", "/signup", "/login"];
-export const privateRoutes = ["/application", "/qr"];
+export const privateRoutes = ["/application", "/qr","/form","/appstatus"];

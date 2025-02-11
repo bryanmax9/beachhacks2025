@@ -49,7 +49,7 @@
 
 .content-container {
   position: absolute; /* Allows precise placement within the parent container */
-  top: 50%; /* Center vertically */
+  top: 60%; /* Center vertically */
   left: 50%; /* Center horizontally */
   transform: translate(-50%, -50%); /* Adjust for exact centering */
   z-index: 30; /* Ensure it is above other elements */
@@ -432,3 +432,99 @@
   }
 }
 
+/* Base Palm Tree Styles */
+.palm-tree {
+  position: absolute;
+  transform: translateY(-50%);
+  z-index: 20;
+}
+
+.palm-tree img {
+  width: 500px;
+  height: 630px;
+}
+
+/* Palm Tree 1 (Original Position) */
+.palm-tree-1 {
+  top: 30%;
+  left: 0;
+}
+
+/* Palm Tree 2 (Lower Position) */
+.palm-tree-2 {
+  top: 65%;
+  left: 5%;
+}
+
+/* Responsive Design */
+@media (max-width: 1199px) {
+  .palm-tree img {
+    width: 500px;
+    height: 630px;
+  }
+
+  .palm-tree-1 {
+    top: 35%;
+  }
+}
+
+@media (max-width: 867px) {
+  .palm-tree img {
+    width: 300px;
+    height: 430px;
+  }
+
+  .palm-tree-1 {
+    top: 45%;
+  }
+
+  .palm-tree-2 {
+    top: 75%;
+
+    img {
+      width: 400px;
+      height: 530px;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .palm-tree img {
+    width: 300px;
+    height: 430px;
+  }
+
+  .palm-tree-1 {
+    top: 60%;
+  }
+
+  .palm-tree-2 {
+    top: 75%;
+
+    img {
+      width: 400px;
+      height: 530px;
+    }
+  }
+}
+
+@media (max-width: 497px) {
+  .palm-tree img {
+    width: 300px;
+    height: 430px;
+  }
+
+  .palm-tree-1 {
+    top: 50%;
+    left: -25%;
+  }
+
+  .palm-tree-2 {
+    top: 73%;
+    left: -10%;
+    img {
+      width: 300px;
+      height: 430px;
+    }
+  }
+}
