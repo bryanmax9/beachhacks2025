@@ -124,6 +124,22 @@
 
 /* Glassmorphic form container */
 .formContainer {
+  position: relative;
+  z-index: 99999 !important; /* ✅ Ensures highest priority */
+  pointer-events: auto; /* ✅ Ensures input is clickable */
+}
+
+.formGroup {
+  position: relative;
+  z-index: 99999999 !important; /* ✅ Ensures it is above everything */
+}
+
+.Select__menu {
+  z-index: 999999999 !important; /* ✅ Dropdown appears above everything */
+  position: absolute;
+}
+
+.formContainer {
   position: relative; /* Ensure form stays above background */
   z-index: 9999 !important; /* Higher than background and bubbles */
   display: flex;

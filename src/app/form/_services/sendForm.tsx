@@ -53,7 +53,8 @@ export const sendForm = async (formData: ApplicationFormTypes) => {
     have_team: formData.have_team === "yes",
     age: formData.age,
     graduation_year: formData.graduation_year,
-    resume_path: resumeUrl, // Store resume URL instead of "testing"
+    resume_path: resumeUrl, // Store resume URL
+    food_allergies: formData.food_allergies || "None", // Ensure this field is always included
   });
 
   if (error) {
@@ -62,5 +63,5 @@ export const sendForm = async (formData: ApplicationFormTypes) => {
   }
 
   console.log("Form submitted successfully:", data);
-  return redirect("/appstatus")
+  return redirect("/appstatus");
 };
