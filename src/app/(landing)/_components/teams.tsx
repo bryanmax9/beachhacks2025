@@ -60,16 +60,6 @@ export default function TeamsComponent() {
         <TeamWidget name="Krrish Kohli" role="sponsorship" image="/krish.jpg" />
         <TeamWidget name="Kiet Nguyen" role="sponsorship" image="/kiet.jpg" />
         <TeamWidget
-          name="Aditya Thakkar"
-          role="sponsorship"
-          image="/aditya.jpg"
-        />
-        <TeamWidget
-          name="Preston Huynh"
-          role="sponsorship"
-          image="/preston.jpg"
-        />
-        <TeamWidget
           name="Tiago Borges"
           role="sponsorship, logistics"
           image="/tiago.png"
@@ -86,9 +76,6 @@ export default function TeamsComponent() {
         />
         <TeamWidget name="Krisha" role="logistics" image="/krisha.jpg" />
         <TeamWidget name="Arnav" role="logistics" image="/arnav.jpg" />
-        <TeamWidget name="Mahdi" role="logistics" image="/mahdi.jpg" />
-        <TeamWidget name="Cole Hartman" role="logistics" image="/cole.jpg" />
-        <TeamWidget name="Nathan Mai" role="logistics" image="/mai.png" />
       </div>
     </div>
   );

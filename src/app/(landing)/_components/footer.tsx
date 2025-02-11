@@ -2,8 +2,8 @@ import "@/app/(landing)/_components/footer.css"; // Ensure CSS is imported
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faInstagram,
-  faTwitter,
-  faFacebook,
+  faLinkedin,
+  faTiktok,
 } from "@fortawesome/free-brands-svg-icons";
 
 export default function Footer() {
@@ -19,21 +19,21 @@ export default function Footer() {
       {/* Social Media Icons */}
       <div className="social-icons">
         <a
-          href="https://instagram.com"
+          href="https://www.instagram.com/beachhackscsulb/"
           target="_blank"
           rel="noopener noreferrer"
         >
           <FontAwesomeIcon icon={faInstagram} className="social-icon" />
         </a>
-        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-          <FontAwesomeIcon icon={faTwitter} className="social-icon" />
+        <a href="https://www.tiktok.com/@beachhackscsulb" target="_blank" rel="noopener noreferrer">
+          <FontAwesomeIcon icon={faTiktok} className="social-icon" />
         </a>
         <a
-          href="https://facebook.com"
+          href="https://www.linkedin.com/company/long-beach-hackathon/"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <FontAwesomeIcon icon={faFacebook} className="social-icon" />
+          <FontAwesomeIcon icon={faLinkedin} className="social-icon" />
         </a>
       </div>
 

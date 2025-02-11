@@ -23,12 +23,12 @@ const Sponsors = () => {
 
   const goldSubmarineAnimation = {
     animate: {
-      x: ["100vw", "-100vw"],
+      x: ["150vw", "-100vw"],
       y: [0, -10, 0],
     },
     transition: {
       x: {
-        duration: 13,
+        duration: 22, 
         ease: "linear",
         repeat: Number.POSITIVE_INFINITY,
       },
@@ -47,7 +47,7 @@ const Sponsors = () => {
     },
     transition: {
       x: {
-        duration: 18,
+        duration: 24, 
         ease: "linear",
         repeat: Number.POSITIVE_INFINITY,
       },
@@ -65,7 +65,7 @@ const Sponsors = () => {
     },
     transition: {
       x: {
-        duration: 23,
+        duration: 26,
         ease: "linear",
         repeat: Number.POSITIVE_INFINITY,
       },
@@ -78,9 +78,8 @@ const Sponsors = () => {
   };
 
   const bubbleVariants = {
-    initial: { y: 0, x: 0, opacity: 0, scale: 0 },
+    initial: { y: 0, opacity: 0, scale: 0 },
     animate: {
-      x: (i) => 25 + i * 10,
       y: -100,
       opacity: [0, 1, 0],
       scale: [0, 1, 1.5],
@@ -106,6 +105,7 @@ const Sponsors = () => {
           alt={alt}
           className="w-full h-full object-contain transition-all duration-300 group-hover:scale-110"
           style={customStyle}
+          draggable="false"
         />
       </motion.div>
     );
@@ -115,42 +115,46 @@ const Sponsors = () => {
     if (!isClient) return null;
 
     return (
-      <motion.div
-        className="bubble-container absolute pointer-events-none"
-        style={{
-          top: top,
-          right: right,
-          transform: "translate(0, -50%)",
-          display: "flex",
-          gap: "0.5rem",
-          position: "absolute",
-        }}
-      >
-        {[...Array(15)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full"
-            variants={bubbleVariants}
-            custom={i}
-            initial="initial"
-            animate="animate"
-            transition={{
-              duration: 3,
-              ease: "easeOut",
-              repeat: Number.POSITIVE_INFINITY,
-              repeatDelay: Math.random() * 2,
-              delay: i * 0.2,
-            }}
-            style={{
-              width: `${10 + Math.random() * 15}px`,
-              height: `${10 + Math.random() * 15}px`,
-              left: `${Math.random() * 50}px`,
-              background: `radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(173, 216, 230, 0.4))`,
-              boxShadow: `0 0 5px rgba(255, 255, 255, 0.5), inset 0 0 5px rgba(255, 255, 255, 0.5)`,
-            }}
-          />
-        ))}
-      </motion.div>
+      <div className="absolute" style={{ top, right, zIndex: 1 }}>
+        <motion.div
+          className="relative"
+          style={{
+            width: "100px",
+            height: "200px",
+          }}
+        >
+          {[...Array(15)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute rounded-full"
+              variants={bubbleVariants}
+              custom={i}
+              initial="initial"
+              animate="animate"
+              transition={{
+                duration: 3,
+                ease: "easeOut",
+                repeat: Number.POSITIVE_INFINITY,
+                repeatDelay: Math.random() * 2,
+                delay: i * 0.2,
+              }}
+              style={{
+                width: `${Math.max(
+                  6,
+                  Math.min(10 + Math.random() * 15, 15)
+                )}px`,
+                height: `${Math.max(
+                  6,
+                  Math.min(10 + Math.random() * 15, 15)
+                )}px`,
+                left: `${i * 5 + Math.random() * 5}px`, // More controlled horizontal spread
+                background: `radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(173, 216, 230, 0.4))`,
+                boxShadow: `0 0 5px rgba(255, 255, 255, 0.5), inset 0 0 5px rgba(255, 255, 255, 0.5)`,
+              }}
+            />
+          ))}
+        </motion.div>
+      </div>
     );
   };
 
@@ -161,7 +165,7 @@ const Sponsors = () => {
     >
       <div
         className={cn(
-          "sponsors-header text-center xxxs:text-1.5xl xxs:text-2xl xs:text-2.5xl sm:text-3xl md:text-3.5xl lg:text-4xl xl:text-4.5xl 2xl:text-5xl font-bold drop-shadow-md",
+          "sponsors-header text-center sm:text-3xl md:text-3.5xl lg:text-4xl xl:text-4.5xl 2xl:text-5xl font-bold drop-shadow-md",
           dynaPuff.className
         )}
       >
@@ -170,93 +174,138 @@ const Sponsors = () => {
         </div>
       </div>
 
-      <div className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative md:h-[80vh] lg:h-[90vh] w-full h-full mb-24">
+      <div className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative h-[90vh] w-full mb-24">
         <motion.div
           className="submarine-container relative flex items-center w-full h-full"
           {...goldSubmarineAnimation}
         >
           <div className="relative w-[961px] min-w-[360px]">
-            <img src="/gold-submarine.svg" alt="Submarine" className="w-full" />
-            <div className="sponsors absolute top-[67%] left-[43%] -translate-x-1/2 flex justify-around items-center w-[40%] gap-4">
-              <a href="https://google.com/" target="_blank">
-                <SponsorLogo
-                  src="https://loodibee.com/wp-content/uploads/Google-Logo.png"
-                  alt="Sponsor-1-Google"
-                  borderColor="#705A00"
-                  sponsorClass={goldSponsorClass}
+            <div className="relative">
+              <BubbleTrail top="68%" right="-5%" />
+              <img
+                src="/gold-submarine.svg"
+                alt="Submarine"
+                className="w-full z-[5] relative"
+                draggable="false"
+              />
+              <div className="sponsors absolute top-[67%] left-[43%] -translate-x-1/2 flex justify-around items-center w-[40%] gap-4 z-[5]">
+                <a href="https://google.com/" target="_blank">
+                  <SponsorLogo
+                    src="https://loodibee.com/wp-content/uploads/Google-Logo.png"
+                    alt="Sponsor-1-Google"
+                    borderColor="#705A00"
+                    sponsorClass={goldSponsorClass}
+                  />
+                </a>
+                <a href="https://dain.org/" target="_blank">
+                  <SponsorLogo
+                    src="/dainai.png"
+                    alt="Sponsor-2-DainAI"
+                    borderColor="#705A00"
+                    customStyle={{ transform: "scale(2)" }}
+                    sponsorClass={goldSponsorClass}
+                  />
+                </a>
+              </div>
+
+              <div className="absolute w-[80%] -right-[90%] top-[13%] z-[2]">
+                <img
+                  src="/chain.png"
+                  alt="Connecting Chain"
+                  className="absolute -left-[17%] top-[70%] w-[25%] h-auto opacity-90 transform scale-y-[-1] z-[2]"
+                  draggable="false"
                 />
-              </a>
-              <a href="https://dain.org/" target="_blank">
-                <SponsorLogo
-                  src="/dainai.png"
-                  alt="Sponsor-2-DainAI"
-                  borderColor="#705A00"
-                  customStyle={{ transform: "scale(2)" }}
-                  sponsorClass={goldSponsorClass}
+                <BubbleTrail top="68%" right="-6%" />
+                <img
+                  src="/small-gold-sub.svg"
+                  alt="Small Gold Submarine"
+                  className="w-full relative z-[3]"
+                  draggable="false"
                 />
-              </a>
+                <div className="sponsors absolute top-[64%] left-[44%] -translate-x-1/2 flex justify-around items-center w-[30%] z-[4]">
+                  <a href="https://www.asicsulb.org/corporate/" target="_blank">
+                    <SponsorLogo
+                      src="/asi-logo.png"
+                      alt="Sponsor-ASI"
+                      borderColor="#705A00"
+                      sponsorClass={goldSponsorClass}
+                    />
+                  </a>
+                </div>
+              </div>
             </div>
-            <BubbleTrail top="18.5em" right="2.5em" />
           </div>
         </motion.div>
       </div>
-      <div className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative h-[40vh] md:h-[50vh] lg:h-[60vh] w-full h-full mb-16">
+
+      {/* Silver submarine section */}
+      <div className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative h-[70vh] w-full mb-24">
         <motion.div
           className="submarine-container relative flex items-center w-full h-full"
           {...silverSubmarineAnimation}
         >
           <div className="relative w-[801px] min-w-[360px]">
-            <img
-              src="/silver-submarine.svg"
-              alt="Submarine"
-              className="w-full"
-            />
-
-            <div className="sponsors absolute top-[67%] left-[44%] -translate-x-1/2 flex justify-around items-center w-[30%]">
-              <a href="https://www.codeandcoffee.dev/" target="_blank">
-                <SponsorLogo
-                  src="/code-and-coffee.svg"
-                  alt="Sponsor-3-code-and-coffee"
-                  borderColor="#777777"
-                  customStyle={{ transform: "scale(0.87)" }}
-                  sponsorClass={silverSponsorClass}
-                />
-              </a>
+            <div className="relative">
+              <BubbleTrail top="68%" right="-5%" />
+              <img
+                src="/silver-submarine.svg"
+                alt="Submarine"
+                className="w-full z-[2] relative"
+                draggable="false"
+              />
+              <div className="sponsors absolute top-[67%] left-[44%] -translate-x-1/2 flex justify-around items-center w-[30%] z-[3]">
+                <a href="https://www.codeandcoffee.dev/" target="_blank">
+                  <SponsorLogo
+                    src="/code-and-coffee.svg"
+                    alt="Sponsor-3-code-and-coffee"
+                    borderColor="#777777"
+                    customStyle={{ transform: "scale(0.87)" }}
+                    sponsorClass={silverSponsorClass}
+                  />
+                </a>
+              </div>
             </div>
-            <BubbleTrail top="15.5em" right="3.23em" />
           </div>
         </motion.div>
       </div>
 
-      <div className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative h-[40vh] md:h-[50vh] lg:h-[60vh] w-full h-[290px] mb-8">
+      {/* Blue submarine section */}
+      <div className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative h-[70vh] w-full mb-16">
         <motion.div
           className="submarine-container relative flex items-center w-full h-full"
           {...blueSubmarineAnimation}
         >
           <div className="relative w-[744px] min-w-[360px]">
-            <img src="/blue-submarine.svg" alt="Submarine" className="w-full" />
-            <div className="sponsors absolute top-[65%] left-[42%] -translate-x-1/2 flex justify-around items-center w-[40%] gap-4">
-              <a
-                href="https://balsamiq.com/?gad_source=1&gclid=CjwKCAiA74G9BhAEEiwA8kNfpVWbLV0lGKPMG9zPEz4gXWk22PcAEhz-Q7A3fwhNBavZ_eBRoNHfMhoClUEQAvD_BwE"
-                target="_blank"
-              >
-                <SponsorLogo
-                  src="/balsamiq-1690452164916-2x.png"
-                  alt="Sponsor-4-balsamiq"
-                  borderColor="#5D7FA3"
-                  sponsorClass={blueSponsorClass}
-                />
-              </a>
-              <a href="https://www.interviewcake.com/" target="_blank">
-                <SponsorLogo
-                  src="/cake_logo_blue_gray.svg"
-                  alt="Sponsor-5-interview-cake"
-                  borderColor="#5D7FA3"
-                  sponsorClass={blueSponsorClass}
-                />
-              </a>
+            <div className="relative">
+              <BubbleTrail top="68%" right="-5%" />
+              <img
+                src="/blue-submarine.svg"
+                alt="Submarine"
+                className="w-full z-[2] relative"
+                draggable="false"
+              />
+              <div className="sponsors absolute top-[65%] left-[42%] -translate-x-1/2 flex justify-around items-center w-[40%] gap-4 z-[3]">
+                <a
+                  href="https://balsamiq.com/?gad_source=1&gclid=CjwKCAiA74G9BhAEEiwA8kNfpVWbLV0lGKPMG9zPEz4gXWk22PcAEhz-Q7A3fwhNBavZ_eBRoNHfMhoClUEQAvD_BwE"
+                  target="_blank"
+                >
+                  <SponsorLogo
+                    src="/balsamiq-1690452164916-2x.png"
+                    alt="Sponsor-4-balsamiq"
+                    borderColor="#5D7FA3"
+                    sponsorClass={blueSponsorClass}
+                  />
+                </a>
+                <a href="https://www.interviewcake.com/" target="_blank">
+                  <SponsorLogo
+                    src="/cake_logo_blue_gray.svg"
+                    alt="Sponsor-5-interview-cake"
+                    borderColor="#5D7FA3"
+                    sponsorClass={blueSponsorClass}
+                  />
+                </a>
+              </div>
             </div>
-            <BubbleTrail top="14.5em" right="3em" />
           </div>
         </motion.div>
       </div>

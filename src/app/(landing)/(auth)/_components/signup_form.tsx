@@ -66,7 +66,7 @@ export default function SignUpForm() {
                     <button
                         type="button"
                         onClick={() => setValue("role", "HACKER")}
-                        className={`px-4 py-2 rounded-md text-sm font-semibold ${
+                        className={`px-4 py-2 rounded-md text-sm font-semibold border-2 ${
                             watch("role") === "HACKER" ? "bg-indigo-600 text-white" : "bg-white text-black"
                         }`}
                     >
@@ -75,7 +75,7 @@ export default function SignUpForm() {
                     <button
                         type="button"
                         onClick={() => setValue("role", "JUDGE")}
-                        className={`px-4 py-2 rounded-md text-sm font-semibold ${
+                        className={`px-4 py-2 rounded-md text-sm font-semibold border-2 ${
                             watch("role") === "JUDGE" ? "bg-indigo-600 text-white" : "bg-white text-black"
                         }`}
                     >
@@ -84,7 +84,7 @@ export default function SignUpForm() {
                     <button
                         type="button"
                         onClick={() => setValue("role", "VOLUNTEER")}
-                        className={`px-4 py-2 rounded-md text-sm font-semibold ${
+                        className={`px-4 py-2 rounded-md text-sm font-semibold border-2 ${
                             watch("role") === "VOLUNTEER" ? "bg-indigo-600 text-white" : "bg-white text-black"
                         }`}
                     >
@@ -93,7 +93,7 @@ export default function SignUpForm() {
                     <button
                         type="button"
                         onClick={() => setValue("role", "MENTOR")}
-                        className={`px-4 py-2 rounded-md text-sm font-semibold ${
+                        className={`px-4 py-2 rounded-md text-sm font-semibold border-2 ${
                             watch("role") === "MENTOR" ? "bg-indigo-600 text-white" : "bg-white text-black"
                         }`}
                     >
@@ -102,7 +102,7 @@ export default function SignUpForm() {
                     <button
                         type="button"
                         onClick={() => setValue("role", "SPONSOR")}
-                        className={`px-4 py-2 rounded-md text-sm font-semibold ${
+                        className={`px-4 py-2 rounded-md text-sm font-semibold border-2 ${
                             watch("role") === "SPONSOR" ? "bg-indigo-600 text-white" : "bg-white text-black"
                         }`}
                     >
