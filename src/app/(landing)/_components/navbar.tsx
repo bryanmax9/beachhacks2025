@@ -4,38 +4,41 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import "@/app/(landing)/_components/navbar.css"; // Import separate CSS file
-import { userHasSubmittedForm, userIsAuthenticated } from "@/(api)/authCheckServices";
+import {
+  userHasSubmittedForm,
+  userIsAuthenticated,
+} from "@/(api)/authCheckServices";
 import { redirect } from "next/navigation";
 
 const Navbar = () => {
-
   const [scrollPercentage, setScrollPercentage] = useState(7.5);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const [hasSubmitted, setHasSubmitted] = useState<boolean|null>(null);
-  const [userExists, setUserExists] = useState<boolean|null>(null);
+  const [hasSubmitted, setHasSubmitted] = useState<boolean | null>(null);
+  const [userExists, setUserExists] = useState<boolean | null>(null);
   const initialize = async () => {
     const submitted = await userHasSubmittedForm();
     const exists = await userIsAuthenticated();
     setHasSubmitted(submitted);
     setUserExists(exists);
-  }
-  useEffect(()=>{
+  };
+  useEffect(() => {
     initialize();
-  },[])
+  }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log("submitted", hasSubmitted);
     console.log("exists", userExists);
-    if(hasSubmitted!=null && userExists!=null) {
+    if (hasSubmitted != null && userExists != null) {
       // if logged in but no form, redirect to form
-      if(!hasSubmitted && userExists) {
-        return () => {redirect("/form")};
+      if (!hasSubmitted && userExists) {
+        return () => {
+          redirect("/form");
+        };
       }
     }
-  },[hasSubmitted,userExists])
+  }, [hasSubmitted, userExists]);
   useEffect(() => {
-
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const maxScroll =
@@ -44,7 +47,7 @@ const Navbar = () => {
 
       // Adjust movement based on screen width
       let maxPosition;
-      let stepSize:number = 0;
+      let stepSize: number = 0;
 
       if (window.innerWidth > 1200) {
         maxPosition = 95;
@@ -86,14 +89,21 @@ const Navbar = () => {
     <>
       {/* Moving Image (Above Navbar) */}
 
-          <>
-            {scrollPercentage > 0 && window.innerWidth > 900 && (
-                <div className="moving-image" style={{ left: `${scrollPercentage}%` }}>
-                  <Image src="/crab.png" alt="Moving Image" width={120} height={120} />
-                </div>
-            )}
-          </>
-
+      <>
+        {scrollPercentage > 0 && window.innerWidth > 900 && (
+          <div
+            className="moving-image"
+            style={{ left: `${scrollPercentage}%` }}
+          >
+            <Image
+              src="/crab.png"
+              alt="Moving Image"
+              width={120}
+              height={120}
+            />
+          </div>
+        )}
+      </>
 
       <nav className="navbar">
         {/* Left Section: Logo */}
@@ -110,7 +120,7 @@ const Navbar = () => {
             <Link href="#sponsors">Sponsors</Link>
           </li>
           <li>
-            <Link href="#prizes">Prizes</Link>
+            <Link href="#prices">Prizes</Link>
           </li>
           <li>
             <Link href="#faq">FAQ</Link>
@@ -123,10 +133,18 @@ const Navbar = () => {
         {/* Login Button */}
         <div className="login-container">
           {/* <Link href="/login" className="nav-login"> */}
-            {/* Log In */}
+          {/* Log In */}
           {/* </Link> */}
-          {userExists && <Link href="/appstatus" className="nav-login">Dashboard</Link>}
-          {!userExists && <Link href="/signup" className="nav-login">Sign Up</Link>}
+          {userExists && (
+            <Link href="/appstatus" className="nav-login">
+              Dashboard
+            </Link>
+          )}
+          {!userExists && (
+            <Link href="/signup" className="nav-login">
+              Sign Up
+            </Link>
+          )}
         </div>
 
         {/* Burger Menu for Small Screens */}
