@@ -13,13 +13,13 @@ const Sponsors = () => {
   }, []);
 
   const goldSponsorClass =
-    "sm:w-[7vh] sm:h-[7vh] md:w-[9vh] md:h-[9vh] lg:w-[11vh] lg:h-[11vh] xl:w-[13vh] xl:h-[13vh] 2xl:w-[15vh] 2xl:h-[15vh] rounded-full overflow-hidden flex items-center justify-center bg-white sm:border-[0.4rem] lg:border-[0.45rem] xl:border-[0.65rem]";
+    "xs:w-[7vh] xs:h-[7vh] sm:w-[8vh] sm:h-[8vh] md:w-[9vh] md:h-[9vh] lg:w-[11vh] lg:h-[11vh] xl:w-[13vh] xl:h-[13vh] 1.5xl:w-[14vh] 1.5xl:h-[14vh] 2xl:w-[15vh] 2xl:h-[15vh] rounded-full overflow-hidden flex items-center justify-center bg-white xs:border-[0.4rem] lg:border-[0.45rem] xl:border-[0.65rem]";
 
-  const silverSponsorClass =
-    "sm:w-[5vh] sm:h-[5vh] md:w-[7vh] md:h-[7vh] lg:w-[9vh] lg:h-[9vh] xl:w-[11vh] xl:h-[11vh] 2xl:w-[13vh] 2xl:h-[13vh] rounded-full overflow-hidden flex items-center justify-center bg-white sm:border-[0.4rem] lg:border-[0.45rem] xl:border-[0.65rem]";
+  const smallGoldSponsorClass =
+    "xs:w-[6vh] xs:h-[6vh] sm:w-[7vh] sm:h-[7vh] md:w-[7vh] md:h-[7vh] lg:w-[9vh] lg:h-[9vh] xl:w-[11vh] xl:h-[11vh] 1.5xl:w-[13vh] 1.5xl:h-[13vh] 2xl:w-[15vh] 2xl:h-[15vh] rounded-full overflow-hidden flex items-center justify-center bg-white xs:border-[0.4rem] lg:border-[0.45rem] xl:border-[0.65rem]";
 
-  const blueSponsorClass =
-    "sm:w-[5vh] sm:h-[5vh] md:w-[7vh] md:h-[7vh] lg:w-[9vh] lg:h-[9vh] xl:w-[11vh] xl:h-[11vh] 2xl:w-[13vh] 2xl:h-[13vh] rounded-full overflow-hidden flex items-center justify-center bg-white sm:border-[0.4rem] lg:border-[0.45rem] xl:border-[0.65rem]";
+  const genericSponsorClass =
+    "xs:w-[7vh] xs:h-[7vh] sm:w-[8vh] sm:h-[8vh] md:w-[9vh] md:h-[9vh] lg:w-[11vh] lg:h-[11vh] xl:w-[12vh] xl:h-[12vh] 1.5xl:w-[13vh] 1.5xl:h-[13vh] 2xl:w-[13vh] 2xl:h-[13vh] rounded-full overflow-hidden flex items-center justify-center bg-white xs:border-[0.4rem] lg:border-[0.45rem] xl:border-[0.65rem]";
 
   const goldSubmarineAnimation = {
     animate: {
@@ -28,7 +28,7 @@ const Sponsors = () => {
     },
     transition: {
       x: {
-        duration: 22, 
+        duration: 22,
         ease: "linear",
         repeat: Number.POSITIVE_INFINITY,
       },
@@ -47,7 +47,7 @@ const Sponsors = () => {
     },
     transition: {
       x: {
-        duration: 24, 
+        duration: 24,
         ease: "linear",
         repeat: Number.POSITIVE_INFINITY,
       },
@@ -228,7 +228,7 @@ const Sponsors = () => {
                       src="/asi-logo.png"
                       alt="Sponsor-ASI"
                       borderColor="#705A00"
-                      sponsorClass={goldSponsorClass}
+                      sponsorClass={smallGoldSponsorClass}
                     />
                   </a>
                 </div>
@@ -260,7 +260,7 @@ const Sponsors = () => {
                     alt="Sponsor-3-code-and-coffee"
                     borderColor="#777777"
                     customStyle={{ transform: "scale(0.87)" }}
-                    sponsorClass={silverSponsorClass}
+                    sponsorClass={genericSponsorClass}
                   />
                 </a>
               </div>
@@ -293,7 +293,7 @@ const Sponsors = () => {
                     src="/balsamiq-1690452164916-2x.png"
                     alt="Sponsor-4-balsamiq"
                     borderColor="#5D7FA3"
-                    sponsorClass={blueSponsorClass}
+                    sponsorClass={genericSponsorClass}
                   />
                 </a>
                 <a href="https://www.interviewcake.com/" target="_blank">
@@ -301,7 +301,7 @@ const Sponsors = () => {
                     src="/cake_logo_blue_gray.svg"
                     alt="Sponsor-5-interview-cake"
                     borderColor="#5D7FA3"
-                    sponsorClass={blueSponsorClass}
+                    sponsorClass={genericSponsorClass}
                   />
                 </a>
               </div>
