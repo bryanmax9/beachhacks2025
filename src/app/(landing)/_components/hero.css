@@ -475,7 +475,7 @@
   }
 
   .palm-tree-1 {
-    top: 45%;
+    top: 40%;
   }
 
   .palm-tree-2 {
@@ -485,6 +485,12 @@
       width: 400px;
       height: 530px;
     }
+  }
+}
+
+@media (max-width: 809px) {
+  .palm-tree-1 {
+    top: 50%;
   }
 }
 
@@ -515,12 +521,33 @@
   }
 
   .palm-tree-1 {
-    top: 50%;
+    top: 55%;
     left: -25%;
   }
 
   .palm-tree-2 {
     top: 73%;
+    left: -10%;
+    img {
+      width: 300px;
+      height: 430px;
+    }
+  }
+}
+
+@media (max-width: 375px) {
+  .palm-tree img {
+    width: 300px;
+    height: 430px;
+  }
+
+  .palm-tree-1 {
+    top: 55%;
+    left: -30%;
+  }
+
+  .palm-tree-2 {
+    top: 70%;
     left: -10%;
     img {
       width: 300px;
