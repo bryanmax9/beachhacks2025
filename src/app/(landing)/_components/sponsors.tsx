@@ -239,7 +239,7 @@ const Sponsors = () => {
       </div>
 
       {/* Silver submarine section */}
-      <div className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative h-[70vh] w-full mb-24">
+      <div className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative h-[75vh] w-full mb-24">
         <motion.div
           className="submarine-container relative flex items-center w-full h-full"
           {...silverSubmarineAnimation}
@@ -253,13 +253,21 @@ const Sponsors = () => {
                 className="w-full z-[2] relative"
                 draggable="false"
               />
-              <div className="sponsors absolute top-[67%] left-[44%] -translate-x-1/2 flex justify-around items-center w-[30%] z-[3]">
+              <div className="sponsors absolute top-[67%] left-[44%] -translate-x-1/2 flex justify-around items-center w-[30%] gap-4 z-[3]">
                 <a href="https://www.codeandcoffee.dev/" target="_blank">
                   <SponsorLogo
                     src="/code-and-coffee.svg"
                     alt="Sponsor-3-code-and-coffee"
                     borderColor="#777777"
                     customStyle={{ transform: "scale(0.87)" }}
+                    sponsorClass={genericSponsorClass}
+                  />
+                </a>
+                <a href="https://www.codepath.org/" target="_blank">
+                  <SponsorLogo
+                    src="/code_path_logo.png"
+                    alt="Sponsor-4-codepath"
+                    borderColor="#777777"
                     sponsorClass={genericSponsorClass}
                   />
                 </a>
@@ -270,7 +278,7 @@ const Sponsors = () => {
       </div>
 
       {/* Blue submarine section */}
-      <div className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative h-[70vh] w-full mb-16">
+      <div className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative h-[75vh] w-full mb-16">
         <motion.div
           className="submarine-container relative flex items-center w-full h-full"
           {...blueSubmarineAnimation}
@@ -284,14 +292,14 @@ const Sponsors = () => {
                 className="w-full z-[2] relative"
                 draggable="false"
               />
-              <div className="sponsors absolute top-[65%] left-[42%] -translate-x-1/2 flex justify-around items-center w-[40%] gap-4 z-[3]">
+              <div className="sponsors absolute top-[65%] left-[42%] -translate-x-1/2 flex justify-around items-center w-[40%] gap-4.5 z-[3]">
                 <a
                   href="https://balsamiq.com/?gad_source=1&gclid=CjwKCAiA74G9BhAEEiwA8kNfpVWbLV0lGKPMG9zPEz4gXWk22PcAEhz-Q7A3fwhNBavZ_eBRoNHfMhoClUEQAvD_BwE"
                   target="_blank"
                 >
                   <SponsorLogo
                     src="/balsamiq-1690452164916-2x.png"
-                    alt="Sponsor-4-balsamiq"
+                    alt="Sponsor-5-balsamiq"
                     borderColor="#5D7FA3"
                     sponsorClass={genericSponsorClass}
                   />
@@ -299,7 +307,7 @@ const Sponsors = () => {
                 <a href="https://www.interviewcake.com/" target="_blank">
                   <SponsorLogo
                     src="/cake_logo_blue_gray.svg"
-                    alt="Sponsor-5-interview-cake"
+                    alt="Sponsor-6-interview-cake"
                     borderColor="#5D7FA3"
                     sponsorClass={genericSponsorClass}
                   />
