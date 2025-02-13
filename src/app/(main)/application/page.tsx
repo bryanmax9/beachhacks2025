@@ -1,11 +1,9 @@
+import ApplicationForm from "../../form/_components/ApplicationForm";
 
-export default async function ApplicationPage(){
-
-
-    return (
-        <div className={""}>
-            <h1>Application Page</h1>
-        </div>
-    )
-
+export default async function ApplicationPage() {
+  return (
+    <div>
+      <ApplicationForm />
+    </div>
+  );
 }

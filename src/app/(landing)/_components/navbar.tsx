@@ -3,41 +3,42 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import "@/app/(landing)/_components/navbar.css"; // Import separate CSS file
-import {
-  userHasSubmittedForm,
-  userIsAuthenticated,
-} from "@/(api)/authCheckServices";
-import { redirect } from "next/navigation";
+import "@/app/(landing)/_components/navbar.css";
+import { createBrowser } from "@/lib/supabase/client";
 
 const Navbar = () => {
   const [scrollPercentage, setScrollPercentage] = useState(7.5);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [userExists, setUserExists] = useState<boolean>(false);
 
-  const [hasSubmitted, setHasSubmitted] = useState<boolean | null>(null);
-  const [userExists, setUserExists] = useState<boolean | null>(null);
-  const initialize = async () => {
-    const submitted = await userHasSubmittedForm();
-    const exists = await userIsAuthenticated();
-    setHasSubmitted(submitted);
-    setUserExists(exists);
-  };
+  // Check auth state on mount and subscribe to changes
   useEffect(() => {
-    initialize();
+    const supabase = createBrowser();
+
+    // Initial check: call getUser to update the state
+    async function checkAuth() {
+      const { data, error } = await supabase.auth.getUser();
+      // If there's a user, mark as authenticated; otherwise, not.
+      setUserExists(!!data?.user);
+    }
+    checkAuth();
+
+    // Listen for auth state changes
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        if (event === "SIGNED_OUT" || !session?.user) {
+          setUserExists(false);
+        } else if (event === "SIGNED_IN" && session?.user) {
+          setUserExists(true);
+        }
+      }
+    );
+
+    return () => {
+      authListener?.subscription?.unsubscribe();
+    };
   }, []);
 
-  useEffect(() => {
-    console.log("submitted", hasSubmitted);
-    console.log("exists", userExists);
-    if (hasSubmitted != null && userExists != null) {
-      // if logged in but no form, redirect to form
-      if (!hasSubmitted && userExists) {
-        return () => {
-          redirect("/form");
-        };
-      }
-    }
-  }, [hasSubmitted, userExists]);
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
@@ -45,8 +46,7 @@ const Navbar = () => {
         document.documentElement.scrollHeight - window.innerHeight;
       const percentage = (scrollY / maxScroll) * 100;
 
-      // Adjust movement based on screen width
-      let maxPosition;
+      let maxPosition: number;
       let stepSize: number = 0;
 
       if (window.innerWidth > 1200) {
@@ -59,20 +59,17 @@ const Navbar = () => {
         maxPosition = 75;
         stepSize = 0.4;
       } else {
-        maxPosition = 0; // Hide crab on very small screens
+        maxPosition = 0;
       }
 
-      // Set new position
-      const newPosition = Math.min(
-        Math.max(7.5, percentage * stepSize),
-        maxPosition
-      );
+      const newPosition = Math.min(Math.max(7.5, percentage * stepSize), maxPosition);
       setScrollPercentage(newPosition);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
   const handleMenuClick = (
     event: React.MouseEvent<HTMLAnchorElement>,
     targetId: string
@@ -82,28 +79,17 @@ const Navbar = () => {
     if (target) {
       target.scrollIntoView({ behavior: "smooth" });
     }
-    setIsMenuOpen(false); // Close menu after clicking
+    setIsMenuOpen(false);
   };
 
   return (
     <>
       {/* Moving Image (Above Navbar) */}
-
-      <>
-        {scrollPercentage > 0 && window.innerWidth > 900 && (
-          <div
-            className="moving-image"
-            style={{ left: `${scrollPercentage}%` }}
-          >
-            <Image
-              src="/crab.png"
-              alt="Moving Image"
-              width={120}
-              height={120}
-            />
-          </div>
-        )}
-      </>
+      {scrollPercentage > 0 && window.innerWidth > 900 && (
+        <div className="moving-image" style={{ left: `${scrollPercentage}%` }}>
+          <Image src="/crab.png" alt="Moving Image" width={120} height={120} />
+        </div>
+      )}
 
       <nav className="navbar">
         {/* Left Section: Logo */}
@@ -130,19 +116,15 @@ const Navbar = () => {
           </li>
         </ul>
 
-        {/* Login Button */}
+        {/* Login Button: shows Dashboard if authenticated; otherwise Sign In */}
         <div className="login-container">
-          {/* <Link href="/login" className="nav-login"> */}
-          {/* Log In */}
-          {/* </Link> */}
-          {userExists && (
+          {userExists ? (
             <Link href="/appstatus" className="nav-login">
               Dashboard
             </Link>
-          )}
-          {!userExists && (
-            <Link href="/signup" className="nav-login">
-              Sign Up
+          ) : (
+            <Link href="/login" className="nav-login">
+              Sign In
             </Link>
           )}
         </div>
@@ -160,10 +142,7 @@ const Navbar = () => {
             </button>
             <ul>
               <li>
-                <a
-                  href="#tracks"
-                  onClick={(e) => handleMenuClick(e, "#tracks")}
-                >
+                <a href="#tracks" onClick={(e) => handleMenuClick(e, "#tracks")}>
                   Tracks
                 </a>
               </li>

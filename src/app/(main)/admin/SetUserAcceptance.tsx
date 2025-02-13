@@ -11,6 +11,7 @@ export default function SetUserAcceptance() {
   const [selectedProfile, setSelectedProfile] = useState(null);
   const supabase = createBrowser();
 
+  // Fetch profiles on mount
   useEffect(() => {
     async function fetchProfiles() {
       const { data, error } = await supabase
@@ -32,11 +33,30 @@ export default function SetUserAcceptance() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!selectedProfile) return;
-    await updateUserAcceptanceStatus(
-      selectedProfile.id,
-      selectedProfile.acceptance_status || "Pending"
-    );
-    console.log(selectedProfile.id, selectedProfile.acceptance_status);
+    const newStatus = selectedProfile.acceptance_status || "Pending";
+
+    try {
+      // Update the status in the database
+      await updateUserAcceptanceStatus(selectedProfile.id, newStatus);
+
+      // Smoothly update local profiles state so the changes show immediately
+      setProfiles((prevProfiles) =>
+        prevProfiles.map((profile) =>
+          profile.id === selectedProfile.id
+            ? { ...profile, acceptance_status: newStatus }
+            : profile
+        )
+      );
+
+      // Also update selectedProfile state
+      setSelectedProfile((prev) =>
+        prev ? { ...prev, acceptance_status: newStatus } : prev
+      );
+    } catch (error) {
+      console.error("Error updating status:", error);
+      // Optional: if update fails, force a full reload
+      window.location.reload();
+    }
   };
 
   return (
