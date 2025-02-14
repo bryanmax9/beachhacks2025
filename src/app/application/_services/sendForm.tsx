@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { ApplicationFormTypes } from "../_components/ApplicationForm";
+import { ApplicationFormTypes } from "@/app/application/_components/ApplicationForm";
 import { createBrowser } from "@/lib/supabase/client";
 
 export const uploadResume = async (resume: File, userId: string) => {
