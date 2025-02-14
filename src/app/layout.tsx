@@ -28,6 +28,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         />
       </head>
 
+
       <body className={cn("antialiased", inter.className)}>
         <main>{children}</main>
       </body>

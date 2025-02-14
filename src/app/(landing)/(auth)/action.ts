@@ -8,7 +8,7 @@ import {validateFields} from "@/lib/utils";
 import { redirect } from "next/navigation";
 
 export const signup_action = async (signup_data: signupTypes, origin: string) => {
-    // validateFields(signup_schema, signup_data);
+    validateFields(signup_schema, signup_data);
 
     const supabase = await createServer();
 
@@ -16,7 +16,7 @@ export const signup_action = async (signup_data: signupTypes, origin: string) =>
         email: signup_data.email,
         password: signup_data.password,
         options: {
-            emailRedirectTo: `${origin}/application`,
+            // emailRedirectTo: `${origin}/application`,
             data: {
                 first_name: signup_data.firstName,
                 last_name: signup_data.lastName,

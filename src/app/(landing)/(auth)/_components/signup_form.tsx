@@ -2,16 +2,19 @@
 'use client';
 
 import { useForm } from "react-hook-form";
-import { signupTypes } from "@/lib/schemas/user-signup";
+import {signup_schema, signupTypes} from "@/lib/schemas/user-signup";
 import { signup_action } from "@/app/(landing)/(auth)/action";
 import { useState, useTransition } from "react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useRouter } from 'next/navigation';
+import {zodResolver} from "@hookform/resolvers/zod";
 
 export default function SignUpForm() {
-
     const [isPending, startTransition] = useTransition();
-    const [showEmailAlert, setShowEmailAlert] = useState(false);
+    const [step, setStep] = useState<'signup' | 'success' | 'otp'>('signup');
     const [error, setError] = useState<string | null>(null);
+    const [otp, setOtp] = useState(['', '', '', '', '', '']);
+    const router = useRouter();
 
     const {
         register,
@@ -20,7 +23,9 @@ export default function SignUpForm() {
         setValue,
         reset,
         watch
-    } = useForm<signupTypes>();
+    } = useForm<signupTypes>({
+        resolver: zodResolver(signup_schema)
+    });
 
     const handle_signup = (data: signupTypes) => {
         setError(null);
@@ -28,7 +33,8 @@ export default function SignUpForm() {
             const {success, message} = await signup_action(data, location.origin);
             console.log(message);
             if (success) {
-                setShowEmailAlert(true);
+                setStep('success');
+                setTimeout(() => setStep('otp'), 2000); // Show success for 2 seconds then show OTP input
                 reset();
             } else {
                 setError(message as string);
@@ -36,17 +42,104 @@ export default function SignUpForm() {
         });
     };
 
+    const handleOtpChange = (element: HTMLInputElement, index: number) => {
+        if (isNaN(Number(element.value))) return false;
+
+        const newOtp = [...otp];
+        newOtp[index] = element.value;
+        setOtp(newOtp);
+
+        // Focus next input
+        if (element.value !== '') {
+            const nextElement = element.nextElementSibling as HTMLInputElement;
+            if (nextElement) {
+                nextElement.focus();
+            }
+        }
+    };
+
+    const handleOtpBackspace = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
+        if (e.key === 'Backspace') {
+            const newOtp = [...otp];
+            if (!newOtp[index]) {
+                const prevElement = e.currentTarget.previousElementSibling as HTMLInputElement;
+                if (prevElement) {
+                    prevElement.focus();
+                    newOtp[index - 1] = '';
+                }
+            } else {
+                newOtp[index] = '';
+            }
+            setOtp(newOtp);
+        }
+    };
+
+    const handleVerifyOtp = () => {
+        const otpString = otp.join('');
+        if (otpString.length !== 6) {
+            setError('Please enter all 6 digits');
+            return;
+        }
+
+        // Redirect to callback with the OTP code
+        router.push(`/auth/callback?code=${otpString}&type=email`);
+    };
+
+    if (step === 'success') {
+        return (
+            <Alert className="bg-green-50 border-green-200">
+                <AlertTitle className="text-green-800">Check your email!</AlertTitle>
+                <AlertDescription className="text-green-700">
+                    {"We've sent you a verification code. Please check your inbox."}
+                </AlertDescription>
+            </Alert>
+        );
+    }
+
+    if (step === 'otp') {
+        return (
+            <div className="space-y-6">
+                <div className="text-center">
+                    <h2 className="text-2xl font-bold mb-2">Enter Verification Code</h2>
+                    <p className="text-gray-600">
+                        Enter the 6-digit code sent to your email
+                    </p>
+                </div>
+
+                {error && (
+                    <Alert variant="destructive">
+                        <AlertTitle>Error</AlertTitle>
+                        <AlertDescription>{error}</AlertDescription>
+                    </Alert>
+                )}
+
+                <div className="flex justify-center gap-2">
+                    {otp.map((digit, index) => (
+                        <input
+                            key={index}
+                            type="text"
+                            maxLength={1}
+                            value={digit}
+                            onChange={(e) => handleOtpChange(e.target, index)}
+                            onKeyDown={(e) => handleOtpBackspace(e, index)}
+                            className="w-12 h-12 text-center text-xl font-semibold border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:ring-indigo-500"
+                        />
+                    ))}
+                </div>
+
+                <button
+                    onClick={handleVerifyOtp}
+                    disabled={isPending}
+                    className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-semibold text-white bg-black hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                    {isPending ? "Verifying..." : "Verify Code"}
+                </button>
+            </div>
+        );
+    }
+
     return (
         <div className="space-y-6">
-            {showEmailAlert && (
-                <Alert className="bg-green-50 border-green-200">
-                    <AlertTitle className="text-green-800">Check your email!</AlertTitle>
-                    <AlertDescription className="text-green-700">
-                        {"We've sent you a confirmation email. Please check your inbox and follow the link to verify your account."}
-                    </AlertDescription>
-                </Alert>
-            )}
-
             {error && (
                 <Alert variant="destructive">
                     <AlertTitle>Error</AlertTitle>
