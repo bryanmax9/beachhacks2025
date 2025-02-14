@@ -16,6 +16,7 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
+
       <head>
         <link
           href="https://fonts.googleapis.com/css2?family=Happy+Monkey&display=swap"
