@@ -27,6 +27,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           rel="stylesheet"
         />
       </head>
+
       <body className={cn("antialiased", inter.className)}>
         <main>{children}</main>
       </body>
