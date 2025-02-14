@@ -15,7 +15,7 @@ import OceanWavesNoSand from "../../../../components/ocean-waves-no-sand";
 import styles from "@/app/(landing)/_components/faq.module.css";
 import { dynaPuff } from "@/assets/fonts";
 import { cn } from "@/lib/utils";
-
+import {adminRoutes} from "@/config/routes";
 
 interface KelpProps {
     id: number;
@@ -44,7 +44,7 @@ export default function LoginForm() {
         if (response.success && !response.is_admin) {
             router.push("/application");
         }else if(response.success && response.is_admin){
-            router.push("/admin");
+            router.push("/");
         }
 
         else {
