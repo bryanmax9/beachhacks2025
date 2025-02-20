@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { GUI } from "dat.gui";
 
 interface BubbleProps {
   size: number;
@@ -57,13 +56,21 @@ interface OceanWavesProps {
 const FishTank: React.FC = () => {
   useEffect(() => {
     let myoptions: any, gui: any;
+    let GUI: any; // will be dynamically imported
     const fishes = ["🐟 🐠 🐡", "🐡", "🐠", "🐟", "🐟 🐠 🦑 🐙"];
     const tank = document.getElementById("tank");
     let WINDOW_MIN: number;
     const MIN_THRESHOLD = 650;
     let timeouts: number[] = [];
 
-    // Helper functions
+    // Dynamically import dat.gui so it runs only on the client.
+    import("dat.gui").then((module) => {
+      GUI = module.GUI;
+      generateControls();
+      initializeTank();
+    });
+
+    // Helper functions (unchanged)
     function clearTimeouts() {
       for (let i = 0; i < timeouts.length; i++) {
         window.clearTimeout(timeouts[i]);
@@ -129,11 +136,7 @@ const FishTank: React.FC = () => {
       if (!tank) return;
       WINDOW_MIN = Math.min(tank.clientHeight, tank.clientWidth);
       generateFishTank();
-      if (WINDOW_MIN <= MIN_THRESHOLD) {
-        gui.close();
-      } else {
-        gui.close();
-      }
+      gui.close();
     }
 
     function generateFishTank() {
@@ -150,7 +153,6 @@ const FishTank: React.FC = () => {
           numFish = getRandomInt(1, Number(myoptions.MaxPerSchool));
         }
         let hueShift = myoptions.ColorChanging ? getRandomInt(0, 360) : 0;
-
         let school = generateSchool(numFish, species, hueShift);
         tank.appendChild(school);
         loop(school);
@@ -372,8 +374,8 @@ const FishTank: React.FC = () => {
     }
 
     if (tank) {
-      generateControls();
-      initializeTank();
+      // generateControls() and initializeTank() are now called
+      // after dat.gui is dynamically imported.
     }
 
     const resizeHandler = () => {
