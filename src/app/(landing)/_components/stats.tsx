@@ -57,8 +57,8 @@ export default function Stats(): JSX.Element {
   // Stats array for the other bubbles.
   const stats: StatItem[] = [
     { value: "10+", label: "Countries" },
-    { value: "20+", label: "Universities" },
-    { value: "$5,000", label: "Prizes" },
+    { value: "10+", label: "Universities" },
+    { value: "$4,000", label: "Prizes" },
     { value: "200", label: "Hackers" },
     { value: "24", label: "Hours" },
   ];
