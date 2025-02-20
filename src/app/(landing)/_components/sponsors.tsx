@@ -28,7 +28,7 @@ const Sponsors = () => {
     },
     transition: {
       x: {
-        duration: 22,
+        duration: 13,
         ease: "linear",
         repeat: Number.POSITIVE_INFINITY,
       },
@@ -47,7 +47,7 @@ const Sponsors = () => {
     },
     transition: {
       x: {
-        duration: 24,
+        duration: 14,
         ease: "linear",
         repeat: Number.POSITIVE_INFINITY,
       },
@@ -65,7 +65,7 @@ const Sponsors = () => {
     },
     transition: {
       x: {
-        duration: 26,
+        duration: 15,
         ease: "linear",
         repeat: Number.POSITIVE_INFINITY,
       },
@@ -253,7 +253,7 @@ const Sponsors = () => {
                 className="w-full z-[2] relative"
                 draggable="false"
               />
-              <div className="sponsors absolute top-[67%] left-[44%] -translate-x-1/2 flex justify-around items-center w-[30%] gap-4 z-[3]">
+              <div className="sponsors absolute top-[67%] left-[43%] -translate-x-1/2 flex justify-around items-center w-[47%] gap-4 z-[3]">
                 <a href="https://www.codeandcoffee.dev/" target="_blank">
                   <SponsorLogo
                     src="/code-and-coffee.svg"
@@ -268,6 +268,15 @@ const Sponsors = () => {
                     src="/code_path_logo.png"
                     alt="Sponsor-4-codepath"
                     borderColor="#777777"
+                    sponsorClass={genericSponsorClass}
+                  />
+                </a>
+                <a href="https://www.patientsafetytech.com/" target="_blank">
+                  <SponsorLogo
+                    src="/PSTC-Logo.png"
+                    alt="Sponsor-5-pstc"
+                    borderColor="#777777"
+                    customStyle={{ transform: "scale(1.25)" }}
                     sponsorClass={genericSponsorClass}
                   />
                 </a>
@@ -292,23 +301,33 @@ const Sponsors = () => {
                 className="w-full z-[2] relative"
                 draggable="false"
               />
-              <div className="sponsors absolute top-[65%] left-[42%] -translate-x-1/2 flex justify-around items-center w-[40%] gap-4.5 z-[3]">
+              <div className="sponsors absolute top-[65%] left-[40%] -translate-x-1/2 flex justify-around items-center w-[49%] gap-4.5 z-[3]">
                 <a
                   href="https://balsamiq.com/?gad_source=1&gclid=CjwKCAiA74G9BhAEEiwA8kNfpVWbLV0lGKPMG9zPEz4gXWk22PcAEhz-Q7A3fwhNBavZ_eBRoNHfMhoClUEQAvD_BwE"
                   target="_blank"
                 >
                   <SponsorLogo
                     src="/balsamiq-1690452164916-2x.png"
-                    alt="Sponsor-5-balsamiq"
+                    alt="Sponsor-6-balsamiq"
                     borderColor="#5D7FA3"
+                    customStyle={{ transform: "scale(1.2)" }}
                     sponsorClass={genericSponsorClass}
                   />
                 </a>
                 <a href="https://www.interviewcake.com/" target="_blank">
                   <SponsorLogo
                     src="/cake_logo_blue_gray.svg"
-                    alt="Sponsor-6-interview-cake"
+                    alt="Sponsor-7-interview-cake"
                     borderColor="#5D7FA3"
+                    sponsorClass={genericSponsorClass}
+                  />
+                </a>
+                <a href="https://github.com/" target="_blank">
+                  <SponsorLogo
+                    src="/github-logo.png"
+                    alt="Sponsor-8-github"
+                    borderColor="#5D7FA3"
+                    customStyle={{ transform: "scale(0.87)" }}
                     sponsorClass={genericSponsorClass}
                   />
                 </a>
