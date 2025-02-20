@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import {
   Tooltip,
@@ -11,7 +11,6 @@ import { cn } from "@/lib/utils";
 import { dynaPuff } from "@/assets/fonts";
 import "./track.module.css";
 
-// Enhanced track data with more hackathon-specific information
 const tracks = [
   {
     track: "Education",
@@ -78,7 +77,6 @@ interface ModalProps {
 }
 
 function Modal({ isOpen, closeModal, track }: ModalProps) {
-  // Prevent scrolling when modal is open
   useEffect(() => {
     if (!isOpen) return;
     const originalHtmlOverflow = document.documentElement.style.overflow;
@@ -101,19 +99,15 @@ function Modal({ isOpen, closeModal, track }: ModalProps) {
         dynaPuff.className
       )}
     >
-      {/* Blurred Overlay */}
       <div
         className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-10"
         onClick={closeModal}
       />
-
-      {/* Jellyfish Image */}
       <img
         src="/jellyfish.png"
         alt="jellyfish"
         className="absolute top-[240px] transform -translate-y-1/2 md:w-56 lg:w-64 z-20"
       />
-
       <div className="relative bg-white p-8 rounded-xl shadow-xl max-w-2xl w-full mx-4 z-30 overflow-visible">
         <h2 className="text-3xl font-bold mb-4 text-blue-900 text-center">
           {track.track}
@@ -145,12 +139,15 @@ function Modal({ isOpen, closeModal, track }: ModalProps) {
 
 function JellyFish({ track, onClick }: { track: any; onClick: () => void }) {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
+  // Create a random phase offset for this jellyfish instance.
+  const phase = useRef(Math.random() * 2 * Math.PI);
 
   useEffect(() => {
     const interval = setInterval(() => {
+      const time = Date.now() / 2000;
       setOffset({
-        x: Math.sin(Date.now() / 2000) * 20,
-        y: Math.cos(Date.now() / 2000) * 20,
+        x: Math.sin(time + phase.current) * 5,
+        y: Math.cos(time + phase.current) * 5,
       });
     }, 50);
     return () => clearInterval(interval);
@@ -216,8 +213,7 @@ export default function TracksPage() {
 
   return (
     <div className={`relative min-h-screen w-full py-12 ${dynaPuff.className}`}>
-      {/* Title (can be added here if desired) */}
-      <h2 className="tracks-heading text-4xl font-bold text-center mb-12 text-gray-800">
+      <h2 className="tracks-heading text-5xl font-bold text-center mb-12 text-gray-800">
         Tracks
       </h2>
       <div

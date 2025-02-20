@@ -23,7 +23,7 @@ const Sponsors = () => {
 
   const goldSubmarineAnimation = {
     animate: {
-      x: ["150vw", "-100vw"],
+      x: ["100vw", "-190vw"],
       y: [0, -10, 0],
     },
     transition: {
@@ -169,9 +169,9 @@ const Sponsors = () => {
           dynaPuff.className
         )}
       >
-        <div className="inline-block px-6 py-2 rounded-full bg-gradient-to-r from-blue-400 to-blue-500 text-white">
-          <h2>Our Sponsors</h2>
-        </div>
+        <h2 className="tracks-heading text-5xl font-bold text-center mb-12 text-gray-800">
+          Sponsors
+        </h2>
       </div>
 
       <div className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative h-[90vh] w-full mb-24">

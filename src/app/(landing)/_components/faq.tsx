@@ -44,7 +44,7 @@ export default function FAQ() {
             <div className="space-y-4 w-full sm:max-w-screen-lg mx-auto p-4 mt-24">
                 {/* Title */}
                 <div className="flex items-center justify-center">
-                    <h2 className="text-4xl font-bold text-gray-800 text-center">
+                    <h2 className="text-5xl font-bold text-gray-800 text-center">
                         Frequently Asked Questions
                     </h2>
                 </div>
