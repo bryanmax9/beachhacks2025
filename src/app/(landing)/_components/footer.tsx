@@ -12,9 +12,9 @@ export default function Footer() {
       {/* Floating Decorations */}
 
       {/* Links Section */}
-      <div className="footer-links">
+      {/* <div className="footer-links">
         <a href="https://forms.fillout.com/t/5pVGefwLjXus">Apply</a> • <a href="mailto:beachhacks@csulb.acm.org">Sponsor Us</a>
-      </div>
+      </div> */}
 
       {/* Social Media Icons */}
       <div className="social-icons">
