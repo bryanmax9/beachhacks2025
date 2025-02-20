@@ -37,7 +37,7 @@ export default function Prizes() {
       id="prizes"
       className="relative flex items-center flex-col justify-center align-middle w-full h-[70vh]"
     >
-      <h2 className="text-5xl font-bold mb-4 text-blue-900 bg-white bg-opacity-90 p-2 shadow-xl rounded-xl w-fit">
+      <h2 className="text-3xl lg:text-5xl font-bold mb-4 text-blue-900 bg-white bg-opacity-90 p-2 shadow-xl rounded-xl w-fit">
         Prizes (Coming soon!)
       </h2>
       {/* Floating Fish Decorations */}

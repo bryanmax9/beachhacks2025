@@ -53,7 +53,7 @@ export default function TeamsComponent() {
       <FloatingFish
         src={jelly_fish}
         alt="jelly_fish"
-        className="md:w-32 w-24 md:h-32 h-24 absolute z-10 md:top-5 md:left-20 left-5"
+        className="md:w-32 w-24 md:h-32 h-24 absolute md:top-5 md:left-20 left-5"
       />
       <FloatingFish
         src={blue_fish}
