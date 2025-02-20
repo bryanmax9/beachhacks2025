@@ -25,7 +25,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           href="https://fonts.googleapis.com/css2?family=Dynapuff&display=swap"
           rel="stylesheet"
         />
-        <link rel="icon" href="/logo.png" />
+        <link rel="icon" href="/logo.ico" />
         <title>BeachHacks 2025 - CSULB</title>
       </head>
 
