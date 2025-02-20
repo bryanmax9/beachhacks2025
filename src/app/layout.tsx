@@ -16,7 +16,6 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-
       <head>
         <link
           href="https://fonts.googleapis.com/css2?family=Happy+Monkey&display=swap"
@@ -26,8 +25,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
           href="https://fonts.googleapis.com/css2?family=Dynapuff&display=swap"
           rel="stylesheet"
         />
+        <link rel="icon" href="/logo.png" />
       </head>
-
 
       <body className={cn("antialiased", inter.className)}>
         <main>{children}</main>
