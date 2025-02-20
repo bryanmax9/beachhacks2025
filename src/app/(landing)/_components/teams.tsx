@@ -45,19 +45,19 @@ export default function TeamsComponent() {
         <TeamWidget name="Chuck Milton" role="tech" image="/charles.jpg" />
         <TeamWidget name="Mekhi Hart" role="tech" image="/mekhi.jpg" />
         <TeamWidget name="Ryan Tran" role="tech" image="/ryan.jpg" />
-        <TeamWidget name="Joseph David" role="tech" image="/joseph.jpg" />
+        <TeamWidget name="Joseph David" role="tech" image="/joseph.webp" />
+        <TeamWidget name="Noah Kim" role="Director" image="/noah.jpg" />
+        <TeamWidget name="Sroth Sinha" role="Director" image="/sroth.png" />
         <TeamWidget
-          name="Noah Kim"
-          role="tech, sponsorship"
-          image="/noah.jpg"
+          name="Keshav Jindal"
+          role="sponsorship"
+          image="/kesh.webp"
         />
         <TeamWidget
-          name="Sroth Sinha"
-          role="tech, sponsorship, logistics"
-          image="/sroth.png"
+          name="Krrish Kohli"
+          role="sponsorship"
+          image="/krish.webp"
         />
-        <TeamWidget name="Keshav Jindal" role="sponsorship" image="/kesh.jpg" />
-        <TeamWidget name="Krrish Kohli" role="sponsorship" image="/krish.jpg" />
         <TeamWidget name="Kiet Nguyen" role="sponsorship" image="/kiet.jpg" />
         <TeamWidget
           name="Tiago Borges"

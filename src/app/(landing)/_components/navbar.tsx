@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
@@ -26,9 +25,11 @@ const Navbar = () => {
 
     checkAuth();
 
-    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
-      setUserExists(event === "SIGNED_IN" && !!session?.user);
-    });
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        setUserExists(event === "SIGNED_IN" && !!session?.user);
+      }
+    );
 
     return () => {
       authListener?.subscription?.unsubscribe();
@@ -60,15 +61,16 @@ const Navbar = () => {
 
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const maxScroll =
+        document.documentElement.scrollHeight - window.innerHeight;
       const percentage = (scrollY / maxScroll) * 100;
 
       const maxPosition = getMaxPosition(window.innerWidth);
       const stepSize = getStepSize(window.innerWidth);
 
       const newPosition = Math.min(
-          Math.max(7.5, percentage * stepSize),
-          maxPosition
+        Math.max(7.5, percentage * stepSize),
+        maxPosition
       );
       setScrollPercentage(newPosition);
     };
@@ -77,15 +79,15 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isMounted, getMaxPosition, getStepSize]);
 
-  const handleMenuClick = useCallback((
-      event: React.MouseEvent<HTMLAnchorElement>,
-      targetId: string
-  ) => {
-    event.preventDefault();
-    const target = document.querySelector(targetId);
-    target?.scrollIntoView({ behavior: "smooth" });
-    setIsMenuOpen(false);
-  }, []);
+  const handleMenuClick = useCallback(
+    (event: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+      event.preventDefault();
+      const target = document.querySelector(targetId);
+      target?.scrollIntoView({ behavior: "smooth" });
+      setIsMenuOpen(false);
+    },
+    []
+  );
 
   const navLinks = [
     { href: "#track", label: "Tracks" },
@@ -95,97 +97,89 @@ const Navbar = () => {
     { href: "#team", label: "Team" },
   ];
 
-  const shouldShowCrab = isMounted && scrollPercentage > 0 && window.innerWidth > 900;
+  const shouldShowCrab =
+    isMounted && scrollPercentage > 0 && window.innerWidth > 900;
 
   return (
-      <>
-        {/* Moving Image (Above Navbar) */}
-        {shouldShowCrab && (
-            <div
-                className="moving-image"
-                style={{
-                  left: `${scrollPercentage}%`,
-                  transform: `translate(-50%, 0)`
-                }}
-            >
-              <Image
-                  src="/crab.png"
-                  alt="Moving Crab"
-                  width={120}
-                  height={120}
-                  priority
-              />
-            </div>
-        )}
+    <>
+      {/* Moving Image (Above Navbar) */}
+      {shouldShowCrab && (
+        <div
+          className="moving-image"
+          style={{
+            left: `${scrollPercentage}%`,
+            transform: `translate(-50%, 0)`,
+          }}
+        >
+          <Image
+            src="/crab.png"
+            alt="Moving Crab"
+            width={120}
+            height={120}
+            priority
+          />
+        </div>
+      )}
 
-        <nav className="navbar">
-          {/* Left Section: Logo */}
-          <div className="nav-left">
-            <Link href="/">
-              <Image
-                  src="/logo.png"
-                  alt="Logo"
-                  width={45}
-                  height={45}
-                  priority
-              />
-            </Link>
-          </div>
+      <nav className="navbar">
+        {/* Left Section: Logo */}
+        <div className="nav-left">
+          <Link href="/">
+            <Image src="/logo.png" alt="Logo" width={45} height={45} priority />
+          </Link>
+        </div>
 
-          {/* Desktop Navigation Links */}
-          <ul className="nav-links">
-            {navLinks.map(({ href, label }) => (
-                <li key={href}>
-                  <Link href={href}>{label}</Link>
-                </li>
-            ))}
-          </ul>
+        {/* Desktop Navigation Links */}
+        <ul className="nav-links">
+          {navLinks.map(({ href, label }) => (
+            <li key={href}>
+              <Link href={href}>{label}</Link>
+            </li>
+          ))}
+        </ul>
 
-          {/* Login Button */}
-          <div className="login-container">
-            <Link
-                href="https://forms.fillout.com/t/gqPTDdo53Zus"
-                className="nav-login"
-            >
-              {userExists ? "Dashboard" : "Apply"}
-            </Link>
-          </div>
-
-          {/* Burger Menu for Small Screens */}
-          <button
-              className="burger-menu"
-              onClick={() => setIsMenuOpen(true)}
-              aria-label="Open menu"
+        {/* Login Button */}
+        <div className="login-container">
+          <Link
+            href="https://forms.fillout.com/t/5pVGefwLjXus"
+            className="nav-login"
           >
-            ☰
-          </button>
+            {userExists ? "Dashboard" : "Apply"}
+          </Link>
+        </div>
 
-          {/* Mobile Menu Overlay */}
-          {isMenuOpen && (
-              <div className="mobile-menu active">
-                <button
-                    className="close-menu"
-                    onClick={() => setIsMenuOpen(false)}
-                    aria-label="Close menu"
-                >
-                  ✕
-                </button>
-                <ul>
-                  {navLinks.map(({ href, label }) => (
-                      <li key={href}>
-                        <a
-                            href={href}
-                            onClick={(e) => handleMenuClick(e, href)}
-                        >
-                          {label}
-                        </a>
-                      </li>
-                  ))}
-                </ul>
-              </div>
-          )}
-        </nav>
-      </>
+        {/* Burger Menu for Small Screens */}
+        <button
+          className="burger-menu"
+          onClick={() => setIsMenuOpen(true)}
+          aria-label="Open menu"
+        >
+          ☰
+        </button>
+
+        {/* Mobile Menu Overlay */}
+        {isMenuOpen && (
+          <div className="mobile-menu active">
+            <button
+              className="close-menu"
+              onClick={() => setIsMenuOpen(false)}
+              aria-label="Close menu"
+            >
+              ✕
+            </button>
+            <ul>
+              {navLinks.map(({ href, label }) => (
+                <li key={href}>
+                  <a href={href} onClick={(e) => handleMenuClick(e, href)}>
+                    {label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </nav>
+    </>
   );
 };
 

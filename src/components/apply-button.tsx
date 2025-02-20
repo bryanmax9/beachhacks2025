@@ -33,7 +33,7 @@ const ApplyButton = () => {
     <div className={cn("relative group", dynaPuff.className)}>
       <Link
         // href={isAuthenticated ? "/appstatus" : "/login"}
-        href="https://forms.fillout.com/t/gqPTDdo53Zus"
+        href="https://forms.fillout.com/t/5pVGefwLjXus"
         className={cn(
           "relative tracking-widest inline-flex items-center justify-center",
           "px-8 py-4 text-xl md:text-2xl font-bold",
