@@ -151,38 +151,26 @@ const Navbar = () => {
           </div>
 
           {/* Burger Menu for Small Screens */}
-          <button
-              className="burger-menu"
-              onClick={() => setIsMenuOpen(true)}
-              aria-label="Open menu"
-          >
-            ☰
-          </button>
+<button
+  className={`burger-menu ${isMenuOpen ? "open" : ""}`}
+  onClick={() => setIsMenuOpen(!isMenuOpen)}
+  aria-label="Toggle menu"
+>
+  ☰
+</button>
 
-          {/* Mobile Menu Overlay */}
-          {isMenuOpen && (
-              <div className="mobile-menu active">
-                <button
-                    className="close-menu"
-                    onClick={() => setIsMenuOpen(false)}
-                    aria-label="Close menu"
-                >
-                  ✕
-                </button>
-                <ul>
-                  {navLinks.map(({ href, label }) => (
-                      <li key={href}>
-                        <a
-                            href={href}
-                            onClick={(e) => handleMenuClick(e, href)}
-                        >
-                          {label}
-                        </a>
-                      </li>
-                  ))}
-                </ul>
-              </div>
-          )}
+{/* Mobile Menu (Dropdown Animation) */}
+<div className={`mobile-menu ${isMenuOpen ? "active" : ""}`}>
+  <ul>
+    {navLinks.map(({ href, label }, index) => (
+      <li key={href} style={{ animationDelay: `${0.1 * index}s` }}>
+        <a href={href} onClick={(e) => handleMenuClick(e, href)}>
+          {label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
         </nav>
       </>
   );

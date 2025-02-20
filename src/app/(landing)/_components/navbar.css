@@ -125,7 +125,7 @@
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Burger Menu Button */
+/* Burger Menu */
 .burger-menu {
   display: none;
   background: none;
@@ -133,52 +133,72 @@
   font-size: 2rem;
   cursor: pointer;
   color: white;
+  transition: transform 0.3s ease-in-out;
 }
 
-/* Mobile Menu Overlay (Right to Left Slide-in Animation) */
+/* Burger menu animation */
+.burger-menu.open {
+  transform: rotate(90deg);
+}
+
+/* Mobile Menu: Dropdown with Smooth Expansion */
 .mobile-menu {
-  position: fixed;
-  top: 0;
-  right: -100%; /* Start off-screen */
-  width: 100%;
-  height: 100vh;
-  background: linear-gradient(135deg, #e6b877, #d1a564);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 100;
-  transition: right 0.4s ease-in-out;
-}
-
-/* Show when active */
-.mobile-menu.active {
-  right: 0; /* Slide into view */
-}
-
-/* Close Button */
-.close-menu {
   position: absolute;
-  top: 15px;
-  right: 20px;
-  background: none;
-  border: none;
-  font-size: 2rem;
-  cursor: pointer;
-  color: white;
+  top: 103%;
+  left: 7.25%;
+  width: 85%;
+  background: linear-gradient(135deg, #e6b877, #d1a564);
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+/* Active dropdown menu */
+.mobile-menu.active {
+  max-height: 300px; /* Adjust as needed */
+  opacity: 1;
+  visibility: visible;
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* Mobile Menu Links */
 .mobile-menu ul {
   list-style: none;
-  padding: 0;
+  padding: 10px 0;
+  margin: 0;
+  text-align: center;
 }
 
+/* Dropdown List Items: Fade & Slide-In Effect */
 .mobile-menu li {
-  margin: 18px 0;
-  font-size: 1.6rem;
+  margin: 15px 0;
+  font-size: 1.4rem;
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: fadeInSlideDown 0.4s ease forwards;
 }
 
+/* Staggered animation delay */
+.mobile-menu.active li {
+  animation: fadeInSlideDown 0.4s ease forwards;
+}
+
+/* Keyframe for fade-in & slide-down */
+@keyframes fadeInSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile Menu Links */
 .mobile-menu a {
   color: white;
   text-decoration: none;
@@ -190,6 +210,18 @@
   opacity: 0.75;
   transform: scale(1.05);
 }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .nav-links {
+    display: none;
+  }
+
+  .burger-menu {
+    display: block;
+  }
+}
+
 
 /* Responsive Fixes */
 @media (max-width: 1024px) {
