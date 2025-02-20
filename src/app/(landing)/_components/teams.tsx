@@ -70,15 +70,15 @@ export default function TeamsComponent() {
         <TeamWidget name="Chuck Milton" role="Tech" image="/charles.jpg" />
         <TeamWidget name="Mekhi Hart" role="Tech" image="/mekhi.jpg" />
         <TeamWidget name="Ryan Tran" role="Tech" image="/ryan.jpg" />
-        <TeamWidget name="Joseph David" role="Tech" image="/joseph.jpg" />
-        <TeamWidget name="Noah Kim" role="Tech, Sponsorship" image="/noah.jpg" />
+        <TeamWidget name="Joseph David" role="Tech" image="/joseph.webp" />
+        <TeamWidget name="Noah Kim" role="Director" image="/noah.jpg" />
         <TeamWidget
           name="Sroth Sinha"
-          role="Tech, Sponsorship, Logistics"
+          role="Director"
           image="/sroth.png"
         />
-        <TeamWidget name="Keshav Jindal" role="Sponsorship" image="/kesh.jpg" />
-        <TeamWidget name="Krrish Kohli" role="Sponsorship" image="/krish.jpg" />
+        <TeamWidget name="Keshav Jindal" role="Sponsorship" image="/kesh.webp" />
+        <TeamWidget name="Krrish Kohli" role="Sponsorship" image="/krish.webp" />
         <TeamWidget name="Kiet Nguyen" role="Sponsorship" image="/kiet.jpg" />
         <TeamWidget
           name="Tiago Borges"
@@ -95,7 +95,7 @@ export default function TeamsComponent() {
           role="Sponsorship, Logistics"
           image="/phu.jpg"
         />
-        <TeamWidget name="Krisha" role="Logistics" image="/Krisha.jpg" />
+        <TeamWidget name="Krisha" role="Logistics" image="/Krisha.webp" />
         <TeamWidget name="Arnav" role="Logistics" image="/arnav.jpg" />
       </div>
     </div>
