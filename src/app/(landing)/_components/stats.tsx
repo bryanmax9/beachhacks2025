@@ -50,8 +50,6 @@ interface StatItem {
 }
 
 export default function Stats(): JSX.Element {
-  const [hackerCount, setHackerCount] = useState<number | null>(null);
-  const [schoolCount, setSchoolCount] = useState<number | null>(null);
 
   const [animate, setAnimate] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -59,9 +57,9 @@ export default function Stats(): JSX.Element {
   // Stats array for the other bubbles.
   const stats: StatItem[] = [
     { value: "10+", label: "Countries" },
-    { value: schoolCount !== null ? schoolCount : "0", label: "Universities" },
+    { value: "20+", label: "Universities" },
     { value: "$5,000", label: "Prizes" },
-    { value: hackerCount !== null ? hackerCount : "0", label: "Hackers" },
+    { value: "200", label: "Hackers" },
     { value: "24", label: "Hours" },
   ];
 
@@ -134,30 +132,6 @@ export default function Stats(): JSX.Element {
     };
   }, []);
 
-  useEffect(() => {
-    async function fetchData() {
-      const { data: hackerData, error: hackerError } = await supabase
-        .from("hacker_count")
-        .select("total_hackers");
-
-      if (hackerError) {
-        console.error("Error fetching hacker count:", hackerError);
-      } else if (hackerData && hackerData.length > 0) {
-        setHackerCount(hackerData[0].total_hackers);
-      }
-
-      const { data: schoolData, error: schoolError } = await supabase
-        .from("unique_school_count")
-        .select("total_schools");
-
-      if (schoolError) {
-        console.error("Error fetching school count:", schoolError);
-      } else if (schoolData && schoolData.length > 0) {
-        setSchoolCount(schoolData[0].total_schools);
-      }
-    }
-    fetchData();
-  }, []);
 
   // Generate random animation durations for bubbles.
   const randomDurations = useMemo(
@@ -231,9 +205,6 @@ export default function Stats(): JSX.Element {
                     />
                   </div>
                   <div className="stat-label">{stat.label}</div>
-                  <div className="stat-extra z-10 text-gray-800" style={{ fontSize: "0.7rem", marginTop: "0.25rem" }}>
-                    {`${capacity - (hackerCount || 0)} spots left!`}
-                  </div>
                 </div>
               </div>
             );
