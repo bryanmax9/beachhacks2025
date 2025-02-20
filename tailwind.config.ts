@@ -57,10 +57,12 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       screens: {
-        'sm': '320px',
+        'xs': '320px',
+        'sm': '375px',
         'md': '420px',
         'lg': '515px',
         'xl': '600px',
+        '1.5xl': '768px',
         '2xl': '961px',
       },
     },

@@ -24,7 +24,7 @@ export default function Hero() {
   const [palmPosition, setPalmPosition] = useState("-translate-x-full"); // Initial position for the left palm tree
 
   // Add check for window object
-  const isClient = typeof window !== 'undefined';
+  const isClient = typeof window !== "undefined";
 
   // Countdown logic
   useEffect(() => {
@@ -104,7 +104,7 @@ export default function Hero() {
   };
   return (
     <section
-      className="-mt-24 select-none hero relative h-[110vh] flex items-center bg-cover bg-center"
+      className="-mt-24 select-none hero relative h-[110vh]  flex items-center bg-cover bg-center"
       style={{
         backgroundImage: "linear-gradient(to bottom, #87CEEB, #B0E0E6)", // Sky blue gradient
       }}
@@ -162,7 +162,7 @@ export default function Hero() {
             dynaPuff.className
           )}
         >
-          March 22th-23th
+          March 22th-23rd
         </p>
         <div className={cn("countdown", dynaPuff.className)}>
           <div>

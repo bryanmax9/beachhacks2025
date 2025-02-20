@@ -1,29 +1,9 @@
-"use server";
-import { redirect } from "next/navigation";
-import { createServer } from "@/lib/supabase/server";
-import { getUserRole } from "@/middleware";
+import SetUserAcceptance from "./SetUserAcceptance";
 
-export default async function AdminPage() {
-    const supabase = await createServer();
-
-    const {
-        data: { user },
-    } = await supabase.auth.getUser();
-
-    if (!user) {
-        redirect("/");
-    }
-
-    const isAdmin = await getUserRole(user.id);
-
-    if (!isAdmin) {
-        redirect("/");
-    }
-
+export default function Page() {
     return (
-        <div>
-            <h1>Admin Dashboard</h1>
-
-        </div>
-    );
+        <>
+        <SetUserAcceptance/>
+        </>
+    )
 }

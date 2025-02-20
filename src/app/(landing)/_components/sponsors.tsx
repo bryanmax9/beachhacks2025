@@ -13,13 +13,13 @@ const Sponsors = () => {
   }, []);
 
   const goldSponsorClass =
-    "sm:w-[7vh] sm:h-[7vh] md:w-[9vh] md:h-[9vh] lg:w-[11vh] lg:h-[11vh] xl:w-[13vh] xl:h-[13vh] 2xl:w-[15vh] 2xl:h-[15vh] rounded-full overflow-hidden flex items-center justify-center bg-white sm:border-[0.4rem] lg:border-[0.45rem] xl:border-[0.65rem]";
+    "xs:w-[7vh] xs:h-[7vh] sm:w-[8vh] sm:h-[8vh] md:w-[9vh] md:h-[9vh] lg:w-[11vh] lg:h-[11vh] xl:w-[13vh] xl:h-[13vh] 1.5xl:w-[14vh] 1.5xl:h-[14vh] 2xl:w-[15vh] 2xl:h-[15vh] rounded-full overflow-hidden flex items-center justify-center bg-white xs:border-[0.4rem] lg:border-[0.45rem] xl:border-[0.65rem]";
 
-  const silverSponsorClass =
-    "sm:w-[5vh] sm:h-[5vh] md:w-[7vh] md:h-[7vh] lg:w-[9vh] lg:h-[9vh] xl:w-[11vh] xl:h-[11vh] 2xl:w-[13vh] 2xl:h-[13vh] rounded-full overflow-hidden flex items-center justify-center bg-white sm:border-[0.4rem] lg:border-[0.45rem] xl:border-[0.65rem]";
+  const smallGoldSponsorClass =
+    "xs:w-[6vh] xs:h-[6vh] sm:w-[7vh] sm:h-[7vh] md:w-[7vh] md:h-[7vh] lg:w-[9vh] lg:h-[9vh] xl:w-[11vh] xl:h-[11vh] 1.5xl:w-[13vh] 1.5xl:h-[13vh] 2xl:w-[15vh] 2xl:h-[15vh] rounded-full overflow-hidden flex items-center justify-center bg-white xs:border-[0.4rem] lg:border-[0.45rem] xl:border-[0.65rem]";
 
-  const blueSponsorClass =
-    "sm:w-[5vh] sm:h-[5vh] md:w-[7vh] md:h-[7vh] lg:w-[9vh] lg:h-[9vh] xl:w-[11vh] xl:h-[11vh] 2xl:w-[13vh] 2xl:h-[13vh] rounded-full overflow-hidden flex items-center justify-center bg-white sm:border-[0.4rem] lg:border-[0.45rem] xl:border-[0.65rem]";
+  const genericSponsorClass =
+    "xs:w-[7vh] xs:h-[7vh] sm:w-[8vh] sm:h-[8vh] md:w-[9vh] md:h-[9vh] lg:w-[11vh] lg:h-[11vh] xl:w-[12vh] xl:h-[12vh] 1.5xl:w-[13vh] 1.5xl:h-[13vh] 2xl:w-[13vh] 2xl:h-[13vh] rounded-full overflow-hidden flex items-center justify-center bg-white xs:border-[0.4rem] lg:border-[0.45rem] xl:border-[0.65rem]";
 
   const goldSubmarineAnimation = {
     animate: {
@@ -28,7 +28,7 @@ const Sponsors = () => {
     },
     transition: {
       x: {
-        duration: 22, 
+        duration: 22,
         ease: "linear",
         repeat: Number.POSITIVE_INFINITY,
       },
@@ -47,7 +47,7 @@ const Sponsors = () => {
     },
     transition: {
       x: {
-        duration: 24, 
+        duration: 24,
         ease: "linear",
         repeat: Number.POSITIVE_INFINITY,
       },
@@ -228,7 +228,7 @@ const Sponsors = () => {
                       src="/asi-logo.png"
                       alt="Sponsor-ASI"
                       borderColor="#705A00"
-                      sponsorClass={goldSponsorClass}
+                      sponsorClass={smallGoldSponsorClass}
                     />
                   </a>
                 </div>
@@ -239,7 +239,7 @@ const Sponsors = () => {
       </div>
 
       {/* Silver submarine section */}
-      <div className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative h-[70vh] w-full mb-24">
+      <div className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative h-[75vh] w-full mb-24">
         <motion.div
           className="submarine-container relative flex items-center w-full h-full"
           {...silverSubmarineAnimation}
@@ -253,14 +253,22 @@ const Sponsors = () => {
                 className="w-full z-[2] relative"
                 draggable="false"
               />
-              <div className="sponsors absolute top-[67%] left-[44%] -translate-x-1/2 flex justify-around items-center w-[30%] z-[3]">
+              <div className="sponsors absolute top-[67%] left-[44%] -translate-x-1/2 flex justify-around items-center w-[30%] gap-4 z-[3]">
                 <a href="https://www.codeandcoffee.dev/" target="_blank">
                   <SponsorLogo
                     src="/code-and-coffee.svg"
                     alt="Sponsor-3-code-and-coffee"
                     borderColor="#777777"
                     customStyle={{ transform: "scale(0.87)" }}
-                    sponsorClass={silverSponsorClass}
+                    sponsorClass={genericSponsorClass}
+                  />
+                </a>
+                <a href="https://www.codepath.org/" target="_blank">
+                  <SponsorLogo
+                    src="/code_path_logo.png"
+                    alt="Sponsor-4-codepath"
+                    borderColor="#777777"
+                    sponsorClass={genericSponsorClass}
                   />
                 </a>
               </div>
@@ -270,7 +278,7 @@ const Sponsors = () => {
       </div>
 
       {/* Blue submarine section */}
-      <div className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative h-[70vh] w-full mb-16">
+      <div className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative h-[75vh] w-full mb-16">
         <motion.div
           className="submarine-container relative flex items-center w-full h-full"
           {...blueSubmarineAnimation}
@@ -284,24 +292,24 @@ const Sponsors = () => {
                 className="w-full z-[2] relative"
                 draggable="false"
               />
-              <div className="sponsors absolute top-[65%] left-[42%] -translate-x-1/2 flex justify-around items-center w-[40%] gap-4 z-[3]">
+              <div className="sponsors absolute top-[65%] left-[42%] -translate-x-1/2 flex justify-around items-center w-[40%] gap-4.5 z-[3]">
                 <a
                   href="https://balsamiq.com/?gad_source=1&gclid=CjwKCAiA74G9BhAEEiwA8kNfpVWbLV0lGKPMG9zPEz4gXWk22PcAEhz-Q7A3fwhNBavZ_eBRoNHfMhoClUEQAvD_BwE"
                   target="_blank"
                 >
                   <SponsorLogo
                     src="/balsamiq-1690452164916-2x.png"
-                    alt="Sponsor-4-balsamiq"
+                    alt="Sponsor-5-balsamiq"
                     borderColor="#5D7FA3"
-                    sponsorClass={blueSponsorClass}
+                    sponsorClass={genericSponsorClass}
                   />
                 </a>
                 <a href="https://www.interviewcake.com/" target="_blank">
                   <SponsorLogo
                     src="/cake_logo_blue_gray.svg"
-                    alt="Sponsor-5-interview-cake"
+                    alt="Sponsor-6-interview-cake"
                     borderColor="#5D7FA3"
-                    sponsorClass={blueSponsorClass}
+                    sponsorClass={genericSponsorClass}
                   />
                 </a>
               </div>

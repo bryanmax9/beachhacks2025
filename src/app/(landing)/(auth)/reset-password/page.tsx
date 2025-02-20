@@ -1,78 +1,91 @@
-'use client';
+"use client";
 
 import { useState } from "react";
 import { createBrowser } from "@/lib/supabase/client";
-import { useRouter } from "next/navigation";
+import OceanWavesNoSand from "../../../../components/ocean-waves-no-sand";
+import { dynaPuff } from "@/assets/fonts";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { Loader } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
-export default function ResetPasswordPage() {
-    const router = useRouter();
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [message, setMessage] = useState("");
-    const [loading, setLoading] = useState(false);
+export default function ForgotPasswordPage() {
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
-    const handlePasswordReset = async () => {
-        if (password !== confirmPassword) {
-            setMessage("Passwords do not match.");
-            return;
-        }
+  const handlePasswordReset = async () => {
+    if (!email) {
+      setMessage("Please provide a valid email address.");
+      return;
+    }
 
-        if (password.length < 8) {
-            setMessage("Password must be at least 8 characters.");
-            return;
-        }
+    setLoading(true);
+    setMessage("");
+    const supabase = createBrowser();
 
-        setLoading(true);
-        setMessage("");
-        const supabase = createBrowser();
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
 
-        const { error } = await supabase.auth.updateUser({ password });
+    if (error) {
+      setMessage(
+        error.message || "An error occurred while sending the reset email."
+      );
+    } else {
+      setMessage(
+        "A password reset email has been sent. Please check your inbox."
+      );
+    }
 
-        if (error) {
-            setMessage(error.message || "An error occurred while resetting the password.");
-        } else {
-            setMessage("Password reset successful! Redirecting to login...");
-            setTimeout(() => router.push("/login"), 2000);
-        }
+    setLoading(false);
+  };
 
-        setLoading(false);
-    };
-
-    return (
-        <div className="w-full flex flex-col items-center">
-            <h1 className="text-4xl my-20">Reset Password</h1>
-            <div className="w-full max-w-md">
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                    New Password
-                </label>
-                <input
-                    id="password"
-                    type="password"
-                    placeholder="********"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                />
-                <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mt-4">
-                    Confirm New Password
-                </label>
-                <input
-                    id="confirmPassword"
-                    type="password"
-                    placeholder="********"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                />
-                <button
-                    onClick={handlePasswordReset}
-                    disabled={loading}
-                    className="mt-4 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                    {loading ? "Resetting..." : "Reset Password"}
-                </button>
-                {message && <p className="mt-4 text-sm text-gray-700">{message}</p>}
-            </div>
+  return (
+    <OceanWavesNoSand>
+      <div className={cn(`flex justify-center items-center min-h-screen`, dynaPuff.className)}>
+        <div className="w-full max-w-md p-6 bg-white shadow-md rounded-2xl flex flex-col">
+          <h2 className="text-center text-2xl font-semibold mb-6">Forgot Password</h2>
+          <div className="space-y-4 flex-grow">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            />
+            <Button
+              onClick={handlePasswordReset}
+              disabled={loading}
+              className="mt-4 w-full flex justify-center items-center space-x-2"
+            >
+              {loading ? <Loader className="animate-spin" /> : <span>Send Reset Email</span>}
+            </Button>
+            {message && <p className="mt-4 text-sm text-gray-700 text-center">{message}</p>}
+          </div>
+          <div className="mt-6 text-center">
+            <Link href="/login" className="text-blue-500 hover:underline">
+              Back to Login
+            </Link>
+          </div>
         </div>
-    );
+      </div>
+      <img
+        src="/red_fish.png"
+        className="absolute z-[-1] animate-swim-across-components-red-fish"
+      />
+      <img
+        src="/red_fish.png"
+        className="absolute top-2/3 z-[-1] animate-swim-across-components-red-fish"
+      />
+      <img
+        src="/green_fish.png"
+        className="absolute top-1.5 z-[-1] animate-swim-across-components-green-fish transform"
+      />
+    </OceanWavesNoSand>
+  );
 }
