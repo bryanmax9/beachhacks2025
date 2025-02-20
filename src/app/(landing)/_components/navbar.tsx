@@ -144,7 +144,7 @@ const Navbar = () => {
           {/* Login Button */}
           <div className="login-container">
             <Link
-                href={userExists ? "/appstatus" : "/login"}
+                href="https://forms.fillout.com/t/gqPTDdo53Zus"
                 className="nav-login"
             >
               {userExists ? "Dashboard" : "Sign In"}
