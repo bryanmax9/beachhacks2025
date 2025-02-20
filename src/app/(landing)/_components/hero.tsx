@@ -162,7 +162,7 @@ export default function Hero() {
             dynaPuff.className
           )}
         >
-          March 22ed
+          March 22nd-23rd
         </p>
         <div className={cn("countdown", dynaPuff.className)}>
           <div>
