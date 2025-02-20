@@ -169,7 +169,7 @@ const Sponsors = () => {
           dynaPuff.className
         )}
       >
-        <div className="inline-block px-6 py-2 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 text-white">
+        <div className="inline-block px-6 py-2 rounded-full bg-gradient-to-r from-blue-400 to-blue-500 text-white">
           <h2>Our Sponsors</h2>
         </div>
       </div>

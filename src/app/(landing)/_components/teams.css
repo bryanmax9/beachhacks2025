@@ -1,0 +1,10 @@
+.teams-section {
+    position: relative;
+    overflow: hidden; /* Keeps shark within section bounds */
+    font-family: "Dynapuff", cursive;
+}
+
+.teams-heading {
+    position: relative;   /* Needed for z-index to apply */
+    z-index: 5;          /* Higher than the shark's z-index of 0 */
+}

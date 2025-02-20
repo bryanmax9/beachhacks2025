@@ -146,7 +146,7 @@ export default function Stats(): JSX.Element {
       className="space-y-6 w-full p-4 max-w-6xl relative overflow-hidden stats-section"
     >
       <div>
-        <h2 className="stats-heading text-3xl font-bold text-center mb-12 text-gray-800">
+        <h2 className="stats-heading text-4xl font-bold text-center mb-12 text-gray-800">
           Event Stats
         </h2>
 

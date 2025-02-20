@@ -47,7 +47,7 @@ const ApplyButton = () => {
         )}
       >
         <span className="relative z-10">
-          {isAuthenticated ? "Dashboard 😎" : "Apply Now! 🌴"}
+          Apply Now! 🌴
         </span>
 
         {/* Animated wave effect */}

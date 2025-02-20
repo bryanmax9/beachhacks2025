@@ -5,10 +5,10 @@ import Image from "next/image";
 export default function Prizes() {
   return (
     <div
-      id="prices"
+      id="prizes"
       className="relative flex items-center flex-col justify-center align-middle w-full h-[70vh]"
     >
-      <h2 className="text-3xl font-bold mb-4 text-blue-900 bg-white bg-opacity-90 p-2 shadow-xl rounded-xl w-fit">
+      <h2 className="text-4xl font-bold mb-4 text-blue-900 bg-white bg-opacity-90 p-2 shadow-xl rounded-xl w-fit">
         Prizes (Coming soon!)
       </h2>
       {/* star fish container to scale on mobile */}

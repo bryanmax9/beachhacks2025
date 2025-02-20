@@ -7,7 +7,7 @@ export const faqs = [
     },
     {
         question: "Who can participate?",
-        answer: "Beach hacks are open to students of all skill levels, from beginners to experienced developers. Participants can be from any field of study, not just computer science or engineering.",
+        answer: "BeachHacks is open to university students (that are 18+) of all skill levels, from beginners to experienced developers. Participants can be from any field of study, not just computer science or engineering.",
     },
     {
         question: "Do I need to have coding experience to participate in a hackathon?",
@@ -19,7 +19,7 @@ export const faqs = [
     },
     {
         question: "How much does it cost to attend?",
-        answer: " Beach hacks is free to attend. We provide meals to attendants who participate!",
+        answer: " BeachHacks is completely free to attend. We provide meals to attendants who participate!",
     },
     {
         question: "Do I need a team to participate?",

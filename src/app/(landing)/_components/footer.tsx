@@ -13,7 +13,7 @@ export default function Footer() {
 
       {/* Links Section */}
       <div className="footer-links">
-        <a href="#apply">Apply</a> • <a href="#sponsors">Sponsor Us</a>
+        <a href="https://forms.fillout.com/t/5pVGefwLjXus">Apply</a> • <a href="mailto:beachhacks@csulb.acm.org">Sponsor Us</a>
       </div>
 
       {/* Social Media Icons */}
