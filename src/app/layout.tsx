@@ -26,6 +26,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           rel="stylesheet"
         />
         <link rel="icon" href="/logo.png" />
+        <title>BeachHacks 2025 - CSULB</title>
       </head>
 
       <body className={cn("antialiased", inter.className)}>

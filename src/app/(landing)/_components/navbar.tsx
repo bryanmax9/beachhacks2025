@@ -147,7 +147,7 @@ const Navbar = () => {
                 href="https://forms.fillout.com/t/gqPTDdo53Zus"
                 className="nav-login"
             >
-              {userExists ? "Dashboard" : "Sign In"}
+              {userExists ? "Dashboard" : "Apply"}
             </Link>
           </div>
 
