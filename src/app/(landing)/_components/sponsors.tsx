@@ -128,7 +128,7 @@ const Sponsors = () => {
   // Motion animations for submarines (unchanged).
   const goldSubmarineAnimation = {
     animate: {
-      x: ["100vw", "-115vw"],
+      x: ["100vw", "-190vw"],
       y: [0, -10, 0],
     },
     transition: {
@@ -139,7 +139,7 @@ const Sponsors = () => {
 
   const silverSubmarineAnimation = {
     animate: {
-      x: ["100vw", "-60vw"],
+      x: ["100vw", "-100vw"],
       y: [0, 10, 0],
     },
     transition: {
@@ -150,7 +150,7 @@ const Sponsors = () => {
 
   const blueSubmarineAnimation = {
     animate: {
-      x: ["100vw", "-60vw"],
+      x: ["100vw", "-100vw"],
       y: [0, 10, 0],
     },
     transition: {
