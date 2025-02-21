@@ -41,7 +41,7 @@ function FloatingFish({
 
 export default function Prizes() {
   return (
-    <div id="prizes" className="prizesSection relative">
+    <div id="prizes" className="prizesSection relative mb-16">
       <div
         className={cn(
           "sponsors-header text-center sm:text-3xl md:text-3.5xl lg:text-4xl xl:text-4.5xl 2xl:text-5xl font-bold drop-shadow-md",
@@ -49,7 +49,7 @@ export default function Prizes() {
         )}
       >
         <h2 className="tracks-heading text-5xl font-bold text-center mb-12 text-gray-800">
-          Prizes(Coming Zoon)
+          Prizes(Coming Soon)
         </h2>
       </div>
 
@@ -62,7 +62,7 @@ export default function Prizes() {
       <FloatingFish
         src={red_fish}
         alt="red_fish"
-        className="absolute z-10 md:top-10 top-80 md:right-10 right-4 w-24 h-24 md:w-32 md:h-32"
+        className="absolute z-[-1] md:top-10 top-80 md:right-10 right-4 w-24 h-24 md:w-32 md:h-32"
       />
 
       <div className="cardsContainer">
