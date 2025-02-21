@@ -3,40 +3,137 @@
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { dynaPuff } from "@/assets/fonts";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+
+// Helper to determine a simple breakpoint from window width.
+const getBreakpoint = (width) => {
+  if (width < 640) return "xs";
+  if (width < 768) return "sm";
+  if (width < 1024) return "md";
+  if (width < 1280) return "lg";
+  if (width < 1536) return "xl";
+  if (width < 1920) return "1.5xl";
+  return "2xl";
+};
 
 const Sponsors = () => {
   const [isClient, setIsClient] = useState(false);
+  const [breakpoint, setBreakpoint] = useState("xs");
 
+  // Create refs for each submarine container.
+  const goldContainerRef = useRef(null);
+  const silverContainerRef = useRef(null);
+  const blueContainerRef = useRef(null);
+
+  // State for container heights.
+  const [goldHeight, setGoldHeight] = useState(0);
+  const [silverHeight, setSilverHeight] = useState(0);
+  const [blueHeight, setBlueHeight] = useState(0);
+
+  // Update breakpoint and container heights on mount and resize.
   useEffect(() => {
     setIsClient(true);
-  }, []);
+    if (typeof window !== "undefined") {
+      setBreakpoint(getBreakpoint(window.innerWidth));
+      const updateContainerHeights = () => {
+        if (goldContainerRef.current) {
+          setGoldHeight(goldContainerRef.current.clientHeight);
+        }
+        if (silverContainerRef.current) {
+          setSilverHeight(silverContainerRef.current.clientHeight);
+        }
+        if (blueContainerRef.current) {
+          setBlueHeight(blueContainerRef.current.clientHeight);
+        }
+      };
 
-  const goldSponsorClass =
-    "xs:w-[7vh] xs:h-[7vh] sm:w-[8vh] sm:h-[8vh] md:w-[9vh] md:h-[9vh] lg:w-[11vh] lg:h-[11vh] xl:w-[13vh] xl:h-[13vh] 1.5xl:w-[14vh] 1.5xl:h-[14vh] 2xl:w-[15vh] 2xl:h-[15vh] rounded-full overflow-hidden flex items-center justify-center bg-white xs:border-[0.4rem] lg:border-[0.45rem] xl:border-[0.65rem]";
+      const handleResize = () => {
+        const newBp = getBreakpoint(window.innerWidth);
+        if (newBp !== breakpoint) {
+          setBreakpoint(newBp);
+        }
+        updateContainerHeights();
+      };
 
-  const smallGoldSponsorClass =
-    "xs:w-[6vh] xs:h-[6vh] sm:w-[7vh] sm:h-[7vh] md:w-[7vh] md:h-[7vh] lg:w-[9vh] lg:h-[9vh] xl:w-[11vh] xl:h-[11vh] 1.5xl:w-[13vh] 1.5xl:h-[13vh] 2xl:w-[15vh] 2xl:h-[15vh] rounded-full overflow-hidden flex items-center justify-center bg-white xs:border-[0.4rem] lg:border-[0.45rem] xl:border-[0.65rem]";
+      updateContainerHeights();
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }
+  }, [breakpoint]);
 
-  const genericSponsorClass =
-    "xs:w-[7vh] xs:h-[7vh] sm:w-[8vh] sm:h-[8vh] md:w-[9vh] md:h-[9vh] lg:w-[11vh] lg:h-[11vh] xl:w-[12vh] xl:h-[12vh] 1.5xl:w-[13vh] 1.5xl:h-[13vh] 2xl:w-[13vh] 2xl:h-[13vh] rounded-full overflow-hidden flex items-center justify-center bg-white xs:border-[0.4rem] lg:border-[0.45rem] xl:border-[0.65rem]";
+  // Multipliers relative to container height (instead of viewport height).
+  const goldSizes = {
+    xs: 0.11,
+    sm: 0.11,
+    md: 0.11,
+    lg: 0.11,
+    xl: 0.11,
+    "1.5xl": 0.13,
+    "2xl": 0.14,
+  };
 
+  const smallGoldSizes = {
+    xs: 0.09,
+    sm: 0.09,
+    md: 0.09,
+    lg: 0.09,
+    xl: 0.09,
+    "1.5xl": 0.09,
+    "2xl": 0.09,
+  };
+
+  const genericSizes = {
+    xs: 0.13,
+    sm: 0.13,
+    md: 0.13,
+    lg: 0.13,
+    xl: 0.13,
+    "1.5xl": 0.13,
+    "2xl": 0.13,
+  };
+
+  const silverSizes = {
+    xs: 0.10,
+    sm: 0.10,
+    md: 0.10,
+    lg: 0.10,
+    xl: 0.10,
+    "1.5xl": 0.11,
+    "2xl": 0.11,
+  };
+
+  // Compute a fixed pixel size based on a container's height.
+  const computeSize = (containerHeight, sizesMapping) => {
+    if (!containerHeight) return 0;
+    return containerHeight * sizesMapping[breakpoint];
+  };
+
+  // Computed sizes for sponsor logos based on their respective container heights.
+  const goldSponsorSize = computeSize(goldHeight, goldSizes);
+  const smallGoldSponsorSize = computeSize(goldHeight, smallGoldSizes);
+  const silverSponsorSize = computeSize(silverHeight, silverSizes);
+  const genericSponsorSize = computeSize(blueHeight, genericSizes);
+
+  // Define border widths mapping (using rem values) per breakpoint.
+  const borderWidths = {
+    xs: "0.4rem",
+    sm: "0.4rem",
+    md: "0.4rem",
+    lg: "0.45rem",
+    xl: "0.65rem",
+    "1.5xl": "0.65rem",
+    "2xl": "0.65rem",
+  };
+
+  // Motion animations for submarines (unchanged).
   const goldSubmarineAnimation = {
     animate: {
       x: ["100vw", "-190vw"],
       y: [0, -10, 0],
     },
     transition: {
-      x: {
-        duration: 13,
-        ease: "linear",
-        repeat: Number.POSITIVE_INFINITY,
-      },
-      y: {
-        duration: 5,
-        ease: "easeInOut",
-        repeat: Number.POSITIVE_INFINITY,
-      },
+      x: { duration: 25, ease: "linear", repeat: Number.POSITIVE_INFINITY },
+      y: { duration: 5, ease: "easeInOut", repeat: Number.POSITIVE_INFINITY },
     },
   };
 
@@ -46,57 +143,42 @@ const Sponsors = () => {
       y: [0, 10, 0],
     },
     transition: {
-      x: {
-        duration: 14,
-        ease: "linear",
-        repeat: Number.POSITIVE_INFINITY,
-      },
-      y: {
-        duration: 5,
-        ease: "easeInOut",
-        repeat: Number.POSITIVE_INFINITY,
-      },
+      x: { duration: 20, ease: "linear", repeat: Number.POSITIVE_INFINITY },
+      y: { duration: 5, ease: "easeInOut", repeat: Number.POSITIVE_INFINITY },
     },
   };
+
   const blueSubmarineAnimation = {
     animate: {
       x: ["100vw", "-100vw"],
-      y: [0, 20, 0],
+      y: [0, 10, 0],
     },
     transition: {
-      x: {
-        duration: 15,
-        ease: "linear",
-        repeat: Number.POSITIVE_INFINITY,
-      },
-      y: {
-        duration: 5,
-        ease: "easeInOut",
-        repeat: Number.POSITIVE_INFINITY,
-      },
+      x: { duration: 18, ease: "linear", repeat: Number.POSITIVE_INFINITY },
+      y: { duration: 5, ease: "easeInOut", repeat: Number.POSITIVE_INFINITY },
     },
   };
 
   const bubbleVariants = {
     initial: { y: 0, opacity: 0, scale: 0 },
-    animate: {
-      y: -100,
-      opacity: [0, 1, 0],
-      scale: [0, 1, 1.5],
-    },
+    animate: { y: -100, opacity: [0, 1, 0], scale: [0, 1, 1.5] },
   };
 
-  const SponsorLogo = ({
-    src,
-    alt,
-    borderColor,
-    customStyle,
-    sponsorClass,
-  }) => {
+  // SponsorLogo component – sizes and borders are computed based on container-relative measurements.
+  const SponsorLogo = ({ src, alt, borderColor, customStyle, computedSize }) => {
+    const sizeStyle = {
+      width: computedSize ? computedSize + "px" : undefined,
+      height: computedSize ? computedSize + "px" : undefined,
+    };
     return (
       <motion.div
-        className={cn(sponsorClass, "group")}
-        style={{ borderColor }}
+        className={cn("rounded-full overflow-hidden flex items-center justify-center bg-white group")}
+        style={{
+          ...sizeStyle,
+          borderStyle: "solid",
+          borderWidth: borderWidths[breakpoint],
+          borderColor: borderColor,
+        }}
         whileHover={{ scale: 1.1 }}
         transition={{ type: "spring", stiffness: 400, damping: 10 }}
       >
@@ -113,16 +195,9 @@ const Sponsors = () => {
 
   const BubbleTrail = ({ top, right }) => {
     if (!isClient) return null;
-
     return (
       <div className="absolute" style={{ top, right, zIndex: 1 }}>
-        <motion.div
-          className="relative"
-          style={{
-            width: "100px",
-            height: "200px",
-          }}
-        >
+        <motion.div className="relative" style={{ width: "100px", height: "200px" }}>
           {[...Array(15)].map((_, i) => (
             <motion.div
               key={i}
@@ -139,15 +214,9 @@ const Sponsors = () => {
                 delay: i * 0.2,
               }}
               style={{
-                width: `${Math.max(
-                  6,
-                  Math.min(10 + Math.random() * 15, 15)
-                )}px`,
-                height: `${Math.max(
-                  6,
-                  Math.min(10 + Math.random() * 15, 15)
-                )}px`,
-                left: `${i * 5 + Math.random() * 5}px`, // More controlled horizontal spread
+                width: `${Math.max(6, Math.min(10 + Math.random() * 15, 15))}px`,
+                height: `${Math.max(6, Math.min(10 + Math.random() * 15, 15))}px`,
+                left: `${i * 5 + Math.random() * 5}px`,
                 background: `radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(173, 216, 230, 0.4))`,
                 boxShadow: `0 0 5px rgba(255, 255, 255, 0.5), inset 0 0 5px rgba(255, 255, 255, 0.5)`,
               }}
@@ -159,10 +228,7 @@ const Sponsors = () => {
   };
 
   return (
-    <section
-      id="sponsors"
-      className="sponsors-section w-full h-full overflow-hidden"
-    >
+    <section id="sponsors" className="sponsors-section w-full h-full overflow-hidden">
       <div
         className={cn(
           "sponsors-header text-center sm:text-3xl md:text-3.5xl lg:text-4xl xl:text-4.5xl 2xl:text-5xl font-bold drop-shadow-md",
@@ -174,27 +240,34 @@ const Sponsors = () => {
         </h2>
       </div>
 
-      <div className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative h-[90vh] w-full mb-24">
+      {/* Gold Submarine Section */}
+      <div
+        ref={goldContainerRef}
+        className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative w-full mb-24"
+      >
         <motion.div
           className="submarine-container relative flex items-center w-full h-full"
           {...goldSubmarineAnimation}
         >
           <div className="relative w-[961px] min-w-[360px]">
             <div className="relative">
-              <BubbleTrail top="68%" right="-5%" />
+              <BubbleTrail top="50%" right="0%" />
               <img
-                src="/gold-submarine.svg"
+                src="/goldsub.png"
                 alt="Submarine"
                 className="w-full z-[5] relative"
                 draggable="false"
               />
-              <div className="sponsors absolute top-[67%] left-[43%] -translate-x-1/2 flex justify-around items-center w-[40%] gap-4 z-[5]">
+              <div
+                className="sponsors absolute top-[53.5%] left-[43%] -translate-x-1/2 flex justify-around items-center gap-4 z-[5]"
+                style={{ width: "43.5%" }}
+              >
                 <a href="https://google.com/" target="_blank">
                   <SponsorLogo
                     src="https://loodibee.com/wp-content/uploads/Google-Logo.png"
                     alt="Sponsor-1-Google"
                     borderColor="#705A00"
-                    sponsorClass={goldSponsorClass}
+                    computedSize={goldSponsorSize}
                   />
                 </a>
                 <a href="https://dain.org/" target="_blank">
@@ -203,7 +276,7 @@ const Sponsors = () => {
                     alt="Sponsor-2-DainAI"
                     borderColor="#705A00"
                     customStyle={{ transform: "scale(2)" }}
-                    sponsorClass={goldSponsorClass}
+                    computedSize={goldSponsorSize}
                   />
                 </a>
               </div>
@@ -212,23 +285,26 @@ const Sponsors = () => {
                 <img
                   src="/chain.png"
                   alt="Connecting Chain"
-                  className="absolute -left-[17%] top-[70%] w-[25%] h-auto opacity-90 transform scale-y-[-1] z-[2]"
+                  className="absolute -left-[25%] top-[58%] w-[25%] h-auto opacity-90 transform scale-y-[-1] z-[2]"
                   draggable="false"
                 />
-                <BubbleTrail top="68%" right="-6%" />
+                <BubbleTrail top="50%" right="10%" />
                 <img
-                  src="/small-gold-sub.svg"
+                  src="/goldsub.png"
                   alt="Small Gold Submarine"
-                  className="w-full relative z-[3]"
+                  className="w-full relative z-[3] absolute -left-[10%]"
                   draggable="false"
                 />
-                <div className="sponsors absolute top-[64%] left-[44%] -translate-x-1/2 flex justify-around items-center w-[30%] z-[4]">
+                <div
+                  className="sponsors absolute top-[53.5%] left-[44.5%] -translate-x-1/2 flex justify-around items-center z-[4]"
+                  style={{ width: "30%" }}
+                >
                   <a href="https://www.asicsulb.org/corporate/" target="_blank">
                     <SponsorLogo
                       src="/asi-logo.png"
                       alt="Sponsor-ASI"
                       borderColor="#705A00"
-                      sponsorClass={smallGoldSponsorClass}
+                      computedSize={smallGoldSponsorSize}
                     />
                   </a>
                 </div>
@@ -238,29 +314,35 @@ const Sponsors = () => {
         </motion.div>
       </div>
 
-      {/* Silver submarine section */}
-      <div className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative h-[75vh] w-full mb-24">
+      {/* Silver Submarine Section */}
+      <div
+        ref={silverContainerRef}
+        className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative w-full mb-24"
+      >
         <motion.div
           className="submarine-container relative flex items-center w-full h-full"
           {...silverSubmarineAnimation}
         >
           <div className="relative w-[801px] min-w-[360px]">
             <div className="relative">
-              <BubbleTrail top="68%" right="-5%" />
+              <BubbleTrail top="48%" right="-2%" />
               <img
-                src="/silver-submarine.svg"
+                src="/silversub.png"
                 alt="Submarine"
                 className="w-full z-[2] relative"
                 draggable="false"
               />
-              <div className="sponsors absolute top-[67%] left-[43%] -translate-x-1/2 flex justify-around items-center w-[47%] gap-4 z-[3]">
+              <div
+                className="sponsors absolute top-[49%] left-[48%] -translate-x-1/2 flex justify-around items-center z-[3] gap-1"
+                style={{ width: "30%" }}
+              >
                 <a href="https://www.codeandcoffee.dev/" target="_blank">
                   <SponsorLogo
                     src="/code-and-coffee.svg"
                     alt="Sponsor-3-code-and-coffee"
                     borderColor="#777777"
                     customStyle={{ transform: "scale(0.87)" }}
-                    sponsorClass={genericSponsorClass}
+                    computedSize={silverSponsorSize}
                   />
                 </a>
                 <a href="https://www.codepath.org/" target="_blank">
@@ -268,7 +350,7 @@ const Sponsors = () => {
                     src="/code_path_logo.png"
                     alt="Sponsor-4-codepath"
                     borderColor="#777777"
-                    sponsorClass={genericSponsorClass}
+                    computedSize={silverSponsorSize}
                   />
                 </a>
                 <a href="https://www.patientsafetytech.com/" target="_blank">
@@ -277,7 +359,7 @@ const Sponsors = () => {
                     alt="Sponsor-5-pstc"
                     borderColor="#777777"
                     customStyle={{ transform: "scale(1.25)" }}
-                    sponsorClass={genericSponsorClass}
+                    computedSize={silverSponsorSize}
                   />
                 </a>
               </div>
@@ -286,22 +368,28 @@ const Sponsors = () => {
         </motion.div>
       </div>
 
-      {/* Blue submarine section */}
-      <div className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative h-[75vh] w-full mb-16">
+      {/* Blue Submarine Section */}
+      <div
+        ref={blueContainerRef}
+        className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative w-full mb-16"
+      >
         <motion.div
           className="submarine-container relative flex items-center w-full h-full"
           {...blueSubmarineAnimation}
         >
-          <div className="relative w-[744px] min-w-[360px]">
+          <div className="relative w-[744px] min-w-[360px] mb-4">
             <div className="relative">
               <BubbleTrail top="68%" right="-5%" />
               <img
-                src="/blue-submarine.svg"
+                src="/bronzesub.png"
                 alt="Submarine"
                 className="w-full z-[2] relative"
                 draggable="false"
               />
-              <div className="sponsors absolute top-[65%] left-[40%] -translate-x-1/2 flex justify-around items-center w-[49%] gap-4.5 z-[3]">
+              <div
+                className="sponsors absolute top-[59%] left-[40.75%] -translate-x-1/2 flex justify-around items-center z-[3]"
+                style={{ width: "43%" }}
+              >
                 <a
                   href="https://balsamiq.com/?gad_source=1&gclid=CjwKCAiA74G9BhAEEiwA8kNfpVWbLV0lGKPMG9zPEz4gXWk22PcAEhz-Q7A3fwhNBavZ_eBRoNHfMhoClUEQAvD_BwE"
                   target="_blank"
@@ -309,26 +397,26 @@ const Sponsors = () => {
                   <SponsorLogo
                     src="/balsamiq-1690452164916-2x.png"
                     alt="Sponsor-6-balsamiq"
-                    borderColor="#5D7FA3"
+                    borderColor="#5C4033"
                     customStyle={{ transform: "scale(1.2)" }}
-                    sponsorClass={genericSponsorClass}
+                    computedSize={genericSponsorSize}
                   />
                 </a>
                 <a href="https://www.interviewcake.com/" target="_blank">
                   <SponsorLogo
                     src="/cake_logo_blue_gray.svg"
                     alt="Sponsor-7-interview-cake"
-                    borderColor="#5D7FA3"
-                    sponsorClass={genericSponsorClass}
+                    borderColor="#5C4033"
+                    computedSize={genericSponsorSize}
                   />
                 </a>
                 <a href="https://github.com/" target="_blank">
                   <SponsorLogo
                     src="/github-logo.png"
                     alt="Sponsor-8-github"
-                    borderColor="#5D7FA3"
+                    borderColor="#5C4033"
                     customStyle={{ transform: "scale(0.87)" }}
-                    sponsorClass={genericSponsorClass}
+                    computedSize={genericSponsorSize}
                   />
                 </a>
               </div>
