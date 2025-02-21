@@ -11,8 +11,8 @@ import TeamsComponent from "./_components/teams";
 import FAQ from "@/app/(landing)/_components/faq";
 import Navbar from "@/app/(landing)/_components/navbar";
 import Footer from "@/app/(landing)/_components/footer";
-import { redirect } from "next/navigation";
-
+// import { redirect } from "next/navigation";
+import { Analytics } from "@vercel/analytics/react";
 
 export default function Home() {
   return (
@@ -28,6 +28,7 @@ export default function Home() {
         <TeamsComponent />
         <Footer />
       </OceanWaves>
+      <Analytics />
     </div>
   );
 }
