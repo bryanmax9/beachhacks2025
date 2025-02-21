@@ -77,8 +77,8 @@ export default function TeamsComponent() {
           role="Director"
           image="/sroth.png"
         />
-        <TeamWidget name="Keshav Jindal" role="Sponsorship" image="/kesh.webp" />
-        <TeamWidget name="Krrish Kohli" role="Sponsorship" image="/krish.webp" />
+        <TeamWidget name="Keshav Jindal" role="Sponsorship, Logistics" image="/kesh.webp" />
+        <TeamWidget name="Krrish Kohli" role="Sponsorship, Logistics" image="/krish.webp" />
         <TeamWidget name="Kiet Nguyen" role="Sponsorship" image="/kiet.jpg" />
         <TeamWidget
           name="Tiago Borges"
