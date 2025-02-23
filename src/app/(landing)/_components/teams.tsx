@@ -63,7 +63,7 @@ export default function TeamsComponent() {
 
       {/* Team Grid Layout */}
       <div className="flex flex-wrap justify-center gap-6 max-w-6xl w-full px-4 z-10">
-        <TeamWidget name="Justine Cruz" role="logistics, sponsorship, tech" image="/justine.jpg" />
+        <TeamWidget name="Justine Cruz" role="Logistics, Sponsorship, Tech" image="/justine.jpg" />
         <TeamWidget name="Vansh Patel" role="Tech, UI/UX" image="/vansh.jpg" />
         <TeamWidget name="Praz" role="Tech" image="/praz.jpg" />
         <TeamWidget name="Bryan Tineo" role="Tech" image="/bryan.png" />
