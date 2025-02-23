@@ -83,13 +83,13 @@ const Sponsors = () => {
   };
 
   const genericSizes = {
-    xs: 0.13,
-    sm: 0.13,
-    md: 0.13,
-    lg: 0.13,
-    xl: 0.13,
-    "1.5xl": 0.13,
-    "2xl": 0.13,
+    xs: 0.15,
+    sm: 0.15,
+    md: 0.15,
+    lg: 0.15,
+    xl: 0.15,
+    "1.5xl": 0.15,
+    "2xl": 0.15,
   };
 
   const silverSizes = {
@@ -333,7 +333,7 @@ const Sponsors = () => {
                 draggable="false"
               />
               <div
-                className="sponsors absolute top-[49%] left-[48%] -translate-x-1/2 flex justify-around items-center z-[3] gap-1"
+                className="sponsors absolute top-[49.28%] left-[48.3%] lg:left-[47.5%] -translate-x-1/2 flex justify-around items-center z-[3] gap-1 lg:gap-1.25 xl:gap-2"
                 style={{ width: "30%" }}
               >
                 <a href="https://www.codeandcoffee.dev/" target="_blank">
@@ -387,7 +387,7 @@ const Sponsors = () => {
                 draggable="false"
               />
               <div
-                className="sponsors absolute top-[59%] left-[40.75%] -translate-x-1/2 flex justify-around items-center z-[3]"
+                className="sponsors absolute top-[57.75%] left-[40.75%] -translate-x-1/2 flex justify-around items-center z-[3]"
                 style={{ width: "43%" }}
               >
                 <a
