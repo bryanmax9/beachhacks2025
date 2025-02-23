@@ -10,6 +10,10 @@ export const faqs = [
         answer: "BeachHacks is open to university students (that are 18+) of all skill levels, from beginners to experienced developers. Participants can be from any field of study, not just computer science or engineering.",
     },
     {
+        question: "Where will it be?",
+        answer: "BeachHacks will be held at the University Student Union building (USU) building.",
+    },
+    {
         question: "Do I need to have coding experience to participate in a hackathon?",
         answer: "No, you don’t need coding experience to participate! Many hackathons have workshops, mentors, and resources to help beginners get started. Participants with skills in design, project management, or business can also contribute to teams.",
     },

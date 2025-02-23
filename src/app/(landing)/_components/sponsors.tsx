@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
+import { color, motion } from "framer-motion";
 import { dynaPuff } from "@/assets/fonts";
 import { useEffect, useState, useRef } from "react";
 
@@ -165,7 +165,7 @@ const Sponsors = () => {
   };
 
   // SponsorLogo component – sizes and borders are computed based on container-relative measurements.
-  const SponsorLogo = ({ src, alt, borderColor, customStyle, computedSize }) => {
+  const SponsorLogo = ({ src, alt, borderColor, customStyle, computedSize, containerBgColor }) => {
     const sizeStyle = {
       width: computedSize ? computedSize + "px" : undefined,
       height: computedSize ? computedSize + "px" : undefined,
@@ -178,6 +178,7 @@ const Sponsors = () => {
           borderStyle: "solid",
           borderWidth: borderWidths[breakpoint],
           borderColor: borderColor,
+          backgroundColor: containerBgColor || "white",
         }}
         whileHover={{ scale: 1.1 }}
         transition={{ type: "spring", stiffness: 400, damping: 10 }}
@@ -333,8 +334,8 @@ const Sponsors = () => {
                 draggable="false"
               />
               <div
-                className="sponsors absolute top-[49.28%] left-[48.3%] lg:left-[47.5%] -translate-x-1/2 flex justify-around items-center z-[3] gap-1 lg:gap-1.25 xl:gap-2"
-                style={{ width: "30%" }}
+                className="sponsors absolute top-[49.28%] left-[48.3%] -translate-x-1/2 flex justify-around items-center z-[3]"
+                style={{ width: "34%" }}
               >
                 <a href="https://www.codeandcoffee.dev/" target="_blank">
                   <SponsorLogo
@@ -387,8 +388,8 @@ const Sponsors = () => {
                 draggable="false"
               />
               <div
-                className="sponsors absolute top-[57.75%] left-[40.75%] -translate-x-1/2 flex justify-around items-center z-[3]"
-                style={{ width: "43%" }}
+                className="sponsors absolute top-[57.75%] left-[47.75%] -translate-x-1/2 flex justify-around items-center z-[3]"
+                style={{ width: "57%" }}
               >
                 <a
                   href="https://balsamiq.com/?gad_source=1&gclid=CjwKCAiA74G9BhAEEiwA8kNfpVWbLV0lGKPMG9zPEz4gXWk22PcAEhz-Q7A3fwhNBavZ_eBRoNHfMhoClUEQAvD_BwE"
@@ -417,6 +418,16 @@ const Sponsors = () => {
                     borderColor="#5C4033"
                     customStyle={{ transform: "scale(0.87)" }}
                     computedSize={genericSponsorSize}
+                  />
+                </a>
+                <a href="https://www.bazalu.com/" target="_blank">
+                  <SponsorLogo
+                    src="/bazalu.png"
+                    alt="Sponsor-9-bazalu"
+                    borderColor="#5C4033"
+                    customStyle={{ transform: "scale(0.87)" }}
+                    computedSize={genericSponsorSize}
+                    containerBgColor={"#8C52FF"}
                   />
                 </a>
               </div>
