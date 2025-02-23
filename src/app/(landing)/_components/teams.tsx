@@ -67,7 +67,7 @@ export default function TeamsComponent() {
         <TeamWidget name="Vansh Patel" role="Tech, UI/UX" image="/vansh.jpg" />
         <TeamWidget name="Praz" role="Tech" image="/praz.jpg" />
         <TeamWidget name="Bryan Tineo" role="Tech" image="/bryan.png" />
-        <TeamWidget name="Chuck Milton" role="Tech" image="/charles.jpg" />
+        <TeamWidget name="Charles Milton" role="Tech" image="/charles.jpg" />
         <TeamWidget name="Mekhi Hart" role="Tech" image="/mekhi.jpg" />
         <TeamWidget name="Ryan Tran" role="Tech" image="/ryan.jpg" />
         <TeamWidget name="Joseph David" role="Tech" image="/joseph.webp" />
