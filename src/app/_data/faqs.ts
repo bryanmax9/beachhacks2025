@@ -11,8 +11,10 @@ export const faqs = [
     },
     {
         question: "Where will it be?",
-        answer: "BeachHacks will be held at the University Student Union (USU) building.",
-    },
+        answer: 
+          `BeachHacks will be held at the University Student Union (USU) building.<br/><br/>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3553.697406876821!2d-118.11864491473897!3d33.781113163066664!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dd31db1fa57aad%3A0xc8ff9bfd14922f0a!2sUniversity%20Student%20Union!5e1!3m2!1sen!2sus!4v1740350692449!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`,
+      },
     {
         question: "Do I need to have coding experience to participate in a hackathon?",
         answer: "No, you don’t need coding experience to participate! Many hackathons have workshops, mentors, and resources to help beginners get started. Participants with skills in design, project management, or business can also contribute to teams.",

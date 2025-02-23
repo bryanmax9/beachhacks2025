@@ -75,7 +75,11 @@ export default function FAQ() {
                                 openIndexes.includes(index) ? "max-h-[300px]" : "max-h-0"
                             }`}
                         >
-                            <p className="text-gray-600 p-4">{faq.answer}</p>
+                            {faq.question === "Where will it be?" ? (
+                                <div className="text-gray-600 p-4" dangerouslySetInnerHTML={{ __html: faq.answer }} />
+                            ) : (
+                                <p className="text-gray-600 p-4">{faq.answer}</p>
+                            )}
                         </div>
                     </div>
                 ))}
