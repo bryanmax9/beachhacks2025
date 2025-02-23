@@ -11,7 +11,7 @@ export const faqs = [
     },
     {
         question: "Where will it be?",
-        answer: "BeachHacks will be held at the University Student Union building (USU) building.",
+        answer: "BeachHacks will be held at the University Student Union (USU) building.",
     },
     {
         question: "Do I need to have coding experience to participate in a hackathon?",
