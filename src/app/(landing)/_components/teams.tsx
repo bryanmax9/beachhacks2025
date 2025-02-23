@@ -37,7 +37,7 @@ export default function TeamsComponent() {
   return (
     <div
       id="team"
-      className="relative flex flex-col justify-center items-center w-full mt-20 pb-60 teams-section"
+      className="relative flex flex-col justify-center items-center w-full mt-28 pb-60 teams-section"
     >
       {/* Title */}
       <h2 className="teams-heading text-5xl font-bold text-center mb-12 text-gray-800">

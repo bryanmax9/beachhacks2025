@@ -27,7 +27,7 @@ export const faqs = [
     },
     {
         question: "What should I bring?",
-        answer: "Bring your laptop, charger, and any other tools you might need, like a mouse or headphones. Also bring deodorant.",
+        answer: "Bring your laptop, charger, and any other tools you might need, like a mouse or headphones. Make sure to have your ID and university ID with you upon entry. Also bring deodorant.",
     },
 ];
 

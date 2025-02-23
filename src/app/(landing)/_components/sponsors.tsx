@@ -68,8 +68,8 @@ const Sponsors = () => {
     md: 0.11,
     lg: 0.11,
     xl: 0.11,
-    "1.5xl": 0.13,
-    "2xl": 0.14,
+    "1.5xl": 0.11,
+    "2xl": 0.11,
   };
 
   const smallGoldSizes = {
@@ -98,8 +98,8 @@ const Sponsors = () => {
     md: 0.10,
     lg: 0.10,
     xl: 0.10,
-    "1.5xl": 0.11,
-    "2xl": 0.11,
+    "1.5xl": 0.10,
+    "2xl": 0.10,
   };
 
   // Compute a fixed pixel size based on a container's height.
@@ -243,7 +243,7 @@ const Sponsors = () => {
       {/* Gold Submarine Section */}
       <div
         ref={goldContainerRef}
-        className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative w-full mb-24"
+        className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative w-full"
       >
         <motion.div
           className="submarine-container relative flex items-center w-full h-full"
@@ -317,7 +317,7 @@ const Sponsors = () => {
       {/* Silver Submarine Section */}
       <div
         ref={silverContainerRef}
-        className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative w-full mb-24"
+        className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative w-full"
       >
         <motion.div
           className="submarine-container relative flex items-center w-full h-full"
@@ -371,7 +371,7 @@ const Sponsors = () => {
       {/* Blue Submarine Section */}
       <div
         ref={blueContainerRef}
-        className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative w-full mb-16"
+        className="sponsors-list flex justify-center items-center text-2xl overflow-hidden relative w-full mb-28"
       >
         <motion.div
           className="submarine-container relative flex items-center w-full h-full"

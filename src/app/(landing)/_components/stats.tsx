@@ -143,7 +143,7 @@ export default function Stats(): JSX.Element {
     <div
       id="faq"
       ref={containerRef}
-      className="space-y-6 w-full p-4 max-w-6xl relative overflow-hidden stats-section"
+      className="space-y-6 w-full p-4 max-w-6xl relative overflow-hidden stats-section mt-32"
     >
       <div>
         <h2 className="stats-heading text-5xl font-bold text-center mb-12 text-gray-800">

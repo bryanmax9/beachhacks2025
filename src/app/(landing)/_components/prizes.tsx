@@ -41,7 +41,7 @@ function FloatingFish({
 
 export default function Prizes() {
   return (
-    <div id="prizes" className="prizesSection relative mb-16">
+    <div id="prizes" className="prizesSection relative">
       <div
         className={cn(
           "sponsors-header text-center sm:text-3xl md:text-3.5xl lg:text-4xl xl:text-4.5xl 2xl:text-5xl font-bold drop-shadow-md",
@@ -156,7 +156,7 @@ export default function Prizes() {
               <Image
                 src="/patient.png"
                 alt="Rock Icon"
-                width={300}
+                width={250}
                 height={100}
                 className="cardImage"
               />
