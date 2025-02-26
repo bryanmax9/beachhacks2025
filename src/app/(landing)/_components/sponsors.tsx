@@ -93,13 +93,13 @@ const Sponsors = () => {
   };
 
   const silverSizes = {
-    xs: 0.10,
-    sm: 0.10,
-    md: 0.10,
-    lg: 0.10,
-    xl: 0.10,
-    "1.5xl": 0.10,
-    "2xl": 0.10,
+    xs: 0.1,
+    sm: 0.1,
+    md: 0.1,
+    lg: 0.1,
+    xl: 0.1,
+    "1.5xl": 0.1,
+    "2xl": 0.1,
   };
 
   // Compute a fixed pixel size based on a container's height.
@@ -165,14 +165,23 @@ const Sponsors = () => {
   };
 
   // SponsorLogo component – sizes and borders are computed based on container-relative measurements.
-  const SponsorLogo = ({ src, alt, borderColor, customStyle, computedSize, containerBgColor }) => {
+  const SponsorLogo = ({
+    src,
+    alt,
+    borderColor,
+    customStyle,
+    computedSize,
+    containerBgColor,
+  }) => {
     const sizeStyle = {
       width: computedSize ? computedSize + "px" : undefined,
       height: computedSize ? computedSize + "px" : undefined,
     };
     return (
       <motion.div
-        className={cn("rounded-full overflow-hidden flex items-center justify-center bg-white group")}
+        className={cn(
+          "rounded-full overflow-hidden flex items-center justify-center bg-white group"
+        )}
         style={{
           ...sizeStyle,
           borderStyle: "solid",
@@ -198,7 +207,10 @@ const Sponsors = () => {
     if (!isClient) return null;
     return (
       <div className="absolute" style={{ top, right, zIndex: 1 }}>
-        <motion.div className="relative" style={{ width: "100px", height: "200px" }}>
+        <motion.div
+          className="relative"
+          style={{ width: "100px", height: "200px" }}
+        >
           {[...Array(15)].map((_, i) => (
             <motion.div
               key={i}
@@ -215,8 +227,14 @@ const Sponsors = () => {
                 delay: i * 0.2,
               }}
               style={{
-                width: `${Math.max(6, Math.min(10 + Math.random() * 15, 15))}px`,
-                height: `${Math.max(6, Math.min(10 + Math.random() * 15, 15))}px`,
+                width: `${Math.max(
+                  6,
+                  Math.min(10 + Math.random() * 15, 15)
+                )}px`,
+                height: `${Math.max(
+                  6,
+                  Math.min(10 + Math.random() * 15, 15)
+                )}px`,
                 left: `${i * 5 + Math.random() * 5}px`,
                 background: `radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(173, 216, 230, 0.4))`,
                 boxShadow: `0 0 5px rgba(255, 255, 255, 0.5), inset 0 0 5px rgba(255, 255, 255, 0.5)`,
@@ -229,7 +247,10 @@ const Sponsors = () => {
   };
 
   return (
-    <section id="sponsors" className="sponsors-section w-full h-full overflow-hidden">
+    <section
+      id="sponsors"
+      className="sponsors-section w-full h-full overflow-hidden"
+    >
       <div
         className={cn(
           "sponsors-header text-center sm:text-3xl md:text-3.5xl lg:text-4xl xl:text-4.5xl 2xl:text-5xl font-bold drop-shadow-md",
@@ -260,8 +281,8 @@ const Sponsors = () => {
                 draggable="false"
               />
               <div
-                className="sponsors absolute top-[53.5%] left-[43%] -translate-x-1/2 flex justify-around items-center gap-4 z-[5]"
-                style={{ width: "43.5%" }}
+                className="sponsors absolute top-[53.5%] left-[43%] -translate-x-1/2 flex justify-around items-center gap-1 z-[5]"
+                style={{ width: "34%" }}
               >
                 <a href="https://google.com/" target="_blank">
                   <SponsorLogo
@@ -275,6 +296,15 @@ const Sponsors = () => {
                   <SponsorLogo
                     src="/dainai.png"
                     alt="Sponsor-2-DainAI"
+                    borderColor="#705A00"
+                    customStyle={{ transform: "scale(2)" }}
+                    computedSize={goldSponsorSize}
+                  />
+                </a>
+                <a href="https://dain.org/" target="_blank">
+                  <SponsorLogo
+                    src="/bootLogo.webp"
+                    alt="Sponsor-3-Boot.Dev"
                     borderColor="#705A00"
                     customStyle={{ transform: "scale(2)" }}
                     computedSize={goldSponsorSize}

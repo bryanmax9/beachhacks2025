@@ -175,6 +175,34 @@ export default function Prizes() {
             </div>
           </div>
         </div>
+
+
+        {/* Card 5 */}
+        <div className="flipCard">
+          <div className="flipCardInner">
+            <div className="flipCardFront">
+              <Image
+                src="/bootLogo2.webp"
+                alt="Rock Icon"
+                width={200}
+                height={200}
+                className="cardImage"
+              />
+              <h3>Boot.Dev</h3>
+            </div>
+            <div className="flipCardBack">
+              <Image
+                src="/question.png"
+                alt="Cold Hard Cache Prize"
+                width={120}
+                height={120}
+                className="cardImage"
+              />
+              <p>TBD</p>
+              <p>Criteria: TBD</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
