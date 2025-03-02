@@ -5,8 +5,8 @@ import { cn } from "@/lib/utils";
 import { inter } from "@/assets/fonts";
 
 export const metadata: Metadata = {
-  title: "BeachHacks 2025 - CSULB",
-  description: "CSULB Beach hacks hackathon for 2025",
+  title: "BeachHacks 8.0 - CSULB",
+  description: "BeachHacks at CSULB 2025",
 };
 
 interface RootLayoutProps {
