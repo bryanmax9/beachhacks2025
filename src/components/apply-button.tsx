@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { createBrowser } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
 import { dynaPuff } from "@/assets/fonts";
+import confetti from "canvas-confetti";
 
 const ApplyButton = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -13,14 +13,13 @@ const ApplyButton = () => {
   useEffect(() => {
     const supabase = createBrowser();
     async function checkAuth() {
-      const { data, error } = await supabase.auth.getUser();
+      const { data } = await supabase.auth.getUser();
       setIsAuthenticated(!!data?.user);
     }
     checkAuth();
 
-    // Subscribe to auth state changes (optional but recommended)
     const { data: authListener } = supabase.auth.onAuthStateChange(
-      (event, session) => {
+      (_, session) => {
         setIsAuthenticated(!!session?.user);
       }
     );
@@ -29,11 +28,23 @@ const ApplyButton = () => {
     };
   }, []);
 
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    // Fire confetti from the center with a big spread
+    confetti({
+      particleCount: 300,
+      spread: 360,
+      startVelocity: 60,
+      origin: { x: 0.5, y: 0.5 },
+      zIndex: 9999,
+    });
+  };
+
   return (
     <div className={cn("relative group", dynaPuff.className)}>
       <Link
-        // href={isAuthenticated ? "/appstatus" : "/login"}
-        href="https://forms.fillout.com/t/5pVGefwLjXus"
+        href="#"
+        onClick={handleClick}
         className={cn(
           "relative tracking-widest inline-flex items-center justify-center",
           "px-8 py-4 text-xl md:text-2xl font-bold",
@@ -46,11 +57,7 @@ const ApplyButton = () => {
           "overflow-hidden"
         )}
       >
-        <span className="relative z-10">
-          Apply Now! 🌴
-        </span>
-
-        {/* Animated wave effect */}
+        <span className="relative z-10">Apply Now! 🌴</span>
         <div className="absolute inset-0 overflow-hidden">
           <div
             className={cn(

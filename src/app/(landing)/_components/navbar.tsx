@@ -6,6 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import "@/app/(landing)/_components/navbar.css";
 import { createBrowser } from "@/lib/supabase/client";
+import ApplyButton from "@/components/apply-button";
 
 const Navbar = () => {
   const [scrollPercentage, setScrollPercentage] = useState(7.5);
@@ -142,12 +143,7 @@ const Navbar = () => {
 
           {/* Login Button */}
           <div className="login-container">
-            <Link
-                href="https://forms.fillout.com/t/5pVGefwLjXus"
-                className="nav-login"
-            >
-              Apply
-            </Link>
+            <ApplyButton></ApplyButton>
           </div>
 
           {/* Burger Menu for Small Screens */}
