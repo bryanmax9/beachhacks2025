@@ -301,7 +301,7 @@ const Sponsors = () => {
                     computedSize={goldSponsorSize}
                   />
                 </a>
-                <a href="https://dain.org/" target="_blank">
+                <a href="https://www.boot.dev/" target="_blank">
                   <SponsorLogo
                     src="/bootLogo.webp"
                     alt="Sponsor-3-Boot.Dev"
@@ -327,9 +327,17 @@ const Sponsors = () => {
                   draggable="false"
                 />
                 <div
-                  className="sponsors absolute top-[53.5%] left-[44.5%] -translate-x-1/2 flex justify-around items-center z-[4]"
-                  style={{ width: "30%" }}
+                  className="sponsors absolute top-[53.5%] left-[38%] -translate-x-1/2 flex justify-around items-center z-[4]"
+                  style={{ width: "22%" }}
                 >
+                  <a href="https://www.asicsulb.org/corporate/" target="_blank">
+                    <SponsorLogo
+                      src="/COE_LB.png"
+                      alt="Sponsor-ASI"
+                      borderColor="#705A00"
+                      computedSize={smallGoldSponsorSize}
+                    />
+                  </a>
                   <a href="https://www.asicsulb.org/corporate/" target="_blank">
                     <SponsorLogo
                       src="/asi-logo.png"
