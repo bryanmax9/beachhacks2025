@@ -189,7 +189,7 @@ export default function Hero() {
             dynaPuff.className
           )}
         >
-          Application are Closed!
+          Applications are Closed!
         </p>
       </div>
 
