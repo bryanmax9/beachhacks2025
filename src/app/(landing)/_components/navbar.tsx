@@ -1,19 +1,21 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import "@/app/(landing)/_components/navbar.css";
 import { createBrowser } from "@/lib/supabase/client";
-import ApplyButton from "@/components/apply-button";
+import confetti from "canvas-confetti";
 
 const Navbar = () => {
   const [scrollPercentage, setScrollPercentage] = useState(7.5);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [userExists, setUserExists] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const [applyClosed, setApplyClosed] = useState(false);
   const pathname = usePathname();
+  const applyButtonRef = useRef<HTMLButtonElement>(null);
 
   // Check auth state on mount and subscribe to changes
   useEffect(() => {
@@ -26,11 +28,9 @@ const Navbar = () => {
 
     checkAuth();
 
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        setUserExists(event === "SIGNED_IN" && !!session?.user);
-      }
-    );
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      setUserExists(event === "SIGNED_IN" && !!session?.user);
+    });
 
     return () => {
       authListener?.subscription?.unsubscribe();
@@ -62,17 +62,13 @@ const Navbar = () => {
 
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      const maxScroll =
-        document.documentElement.scrollHeight - window.innerHeight;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
       const percentage = (scrollY / maxScroll) * 100;
 
       const maxPosition = getMaxPosition(window.innerWidth);
       const stepSize = getStepSize(window.innerWidth);
 
-      const newPosition = Math.min(
-        Math.max(7.5, percentage * stepSize),
-        maxPosition
-      );
+      const newPosition = Math.min(Math.max(7.5, percentage * stepSize), maxPosition);
       setScrollPercentage(newPosition);
     };
 
@@ -90,6 +86,23 @@ const Navbar = () => {
     []
   );
 
+  // Trigger confetti from the button's position
+  const handleApplyClick = () => {
+    if (applyButtonRef.current) {
+      const rect = applyButtonRef.current.getBoundingClientRect();
+      const x = (rect.left + rect.width / 2) / window.innerWidth;
+      const y = (rect.top + rect.height / 2) / window.innerHeight;
+      confetti({
+        particleCount: 150,
+        spread: 60,
+        origin: { x, y },
+      });
+    } else {
+      confetti({ particleCount: 150, spread: 60 });
+    }
+    setApplyClosed(true);
+  };
+
   const navLinks = [
     { href: "#tracks", label: "Tracks" },
     { href: "#sponsors", label: "Sponsors" },
@@ -98,8 +111,7 @@ const Navbar = () => {
     { href: "#team", label: "Team" },
   ];
 
-  const shouldShowCrab =
-    isMounted && scrollPercentage > 0 && window.innerWidth > 900;
+  const shouldShowCrab = isMounted && scrollPercentage > 0 && window.innerWidth > 900;
 
   return (
     <>
@@ -109,16 +121,10 @@ const Navbar = () => {
           className="moving-image"
           style={{
             left: `${scrollPercentage}%`,
-            transform: `translate(-50%, 0)`,
+            transform: `translate(-50%, 0)`
           }}
         >
-          <Image
-            src="/crab.png"
-            alt="Moving Crab"
-            width={120}
-            height={120}
-            priority
-          />
+          <Image src="/crab.png" alt="Moving Crab" width={120} height={120} priority />
         </div>
       )}
 
@@ -139,10 +145,16 @@ const Navbar = () => {
           ))}
         </ul>
 
-        {/* Login Button */}
-        {/* <div className="login-container">
-            <ApplyButton></ApplyButton>
-          </div> */}
+        {/* Apply Confetti Button */}
+        <div className="login-container">
+          {applyClosed ? (
+            <div className="nav-closed-message">Application Closed! 🌴</div>
+          ) : (
+            <button ref={applyButtonRef} onClick={handleApplyClick} className="nav-login">
+              Apply
+            </button>
+          )}
+        </div>
 
         {/* Burger Menu for Small Screens */}
         <button
