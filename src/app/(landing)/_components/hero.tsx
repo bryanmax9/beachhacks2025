@@ -183,6 +183,14 @@ export default function Hero() {
           </div>
         </div>
         <ApplyButton />
+        <p
+          className={cn(
+            "content-description font-semibold",
+            dynaPuff.className
+          )}
+        >
+          Application are Closed!
+        </p>
       </div>
 
       {/* First SVG Wave */}
