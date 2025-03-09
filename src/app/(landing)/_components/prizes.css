@@ -14,10 +14,10 @@
   color: #fff;
   margin-bottom: 2rem;
   text-align: center;
-  text-shadow: 2px 2px 4px #000; /* Slight glow for underwater effect */
+  text-shadow: 2px 2px 4px #000; /* Underwater glow effect */
 }
 
-/* Container for the cards */
+/* Cards Container */
 .cardsContainer {
   display: flex;
   flex-wrap: wrap;
@@ -25,14 +25,13 @@
   justify-content: center;
 }
 
-/* Flipping Card Wrapper
-   Increased width/height so the rock image can be bigger */
+/* Flipping Card Wrapper */
 .flipCard {
   background-color: transparent;
   width: 300px;
   height: 400px;
   perspective: 1000px; /* 3D perspective */
-  border-radius: 0; /* Remove rounding so the rock stands out */
+  border-radius: 0; /* No rounding for the rock effect */
 }
 
 /* Inner element that flips */
@@ -45,12 +44,12 @@
   transform-style: preserve-3d;
 }
 
-/* Trigger flip on hover */
+/* Flip on hover */
 .flipCard:hover .flipCardInner {
   transform: rotateY(180deg);
 }
 
-/* Front & Back faces */
+/* Front & Back Faces */
 .flipCardFront,
 .flipCardBack {
   position: absolute;
@@ -61,21 +60,15 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  backface-visibility: hidden; /* Hide back side when flipping */
+  backface-visibility: hidden;
   color: #fff;
-
-  /* Use the rock image as the entire background. 
-     If your rock image has transparency around it, 
-     the corners will effectively disappear. */
   background: url("/rock.png") center/contain no-repeat;
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-
-
-/* FRONT TEXT STYLING */
+/* Front Face Text Styling */
 .flipCardFront h3 {
   margin-top: auto;
   margin-bottom: 100px;
@@ -84,52 +77,45 @@
   font-size: 1.5rem;
 }
 
-
-
+/* Image Styling for Cards */
 .cardImage {
   display: block;
-  margin: 100px auto 1rem auto;
-  /* drop-shadow creates a shadow matching the image’s silhouette if transparent */
+  margin: 100px auto 1rem;
   filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.8));
 }
 
-
-/* BACK face: Slightly darker or different texture */
+/* Back Face Styling */
 .flipCardBack {
   background: url("/rock.png") center/cover no-repeat;
   transform: rotateY(180deg);
-
-  /* Center contents and add spacing for improved layout */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 1.5rem; /* a bit more padding */
-  gap: 0.75rem; /* space between elements */
+  padding: 1.5rem;
+  gap: 0.75rem;
 }
 
-/* Make the prize image look like a circular badge */
+/* Circular Prize Image Badge */
 .flipCardBack .cardImage {
-  width: 130px;         /* slightly larger */
+  width: 130px;
   height: 130px;
-  border-radius: 50%;   /* circular */
-  border: 3px solid #fff; 
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6); 
-  margin-bottom: 0rem;
-  object-fit: cover;    /* ensures the image fills the circle nicely */
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+  margin-bottom: 0;
+  object-fit: cover;
 }
 
-/* Text styling on the back for clarity */
+/* Back Face Text Styling */
 .flipCardBack p {
-  margin: 0; 
+  margin: 0;
   text-align: center;
   color: #fff;
   text-shadow: 1px 1px 3px #000;
-  line-height: 1.3;
-  max-width: 75%; /* so text doesn’t span too wide */
-}
-
-/* Optional: If you want each line of text separated slightly more */
-.flipCardBack p + p {
-  margin-top: -0.5rem;
+  line-height: 1.2;      /* increased line height */
+  max-width: 75%;
+  font-size: 1.2rem;     /* slightly larger text */
+  font-family: "Arial", sans-serif; /* a clean, modern font */
+  letter-spacing: 0.5px; /* subtle spacing between letters */
 }

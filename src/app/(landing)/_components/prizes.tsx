@@ -1,25 +1,25 @@
 "use client";
+
 import Image from "next/image";
 import { motion } from "framer-motion";
-import red_fish from "../../../../public/redfish.png";
-import star_fish from "../../../../public/starfish.png";
-import "./prizes.css"; // Plain CSS file
+import redFish from "../../../../public/redfish.png";
+import starFish from "../../../../public/starfish.png";
+import "./prizes.css";
 import { cn } from "@/lib/utils";
 import { dynaPuff } from "@/assets/fonts";
 
-// FloatingFish component for decorative animations
-function FloatingFish({
-  src,
-  alt,
-  className,
-}: {
-  src: any;
+interface FloatingFishProps {
+  src: any; // Optionally replace with StaticImageData if available
   alt: string;
   className?: string;
-}) {
+}
+
+// FloatingFish component for decorative animations
+function FloatingFish({ src, alt, className }: FloatingFishProps) {
   const randomX = Math.random() * 20 - 10; // between -10 and 10
   const randomY = Math.random() * 20 - 10;
   const duration = Math.random() * 4 + 4; // between 4 and 8 seconds
+
   return (
     <motion.div
       className={className}
@@ -28,7 +28,7 @@ function FloatingFish({
         y: [0, randomY, 0],
       }}
       transition={{
-        duration: duration,
+        duration,
         repeat: Infinity,
         repeatType: "mirror",
         ease: "easeInOut",
@@ -49,59 +49,30 @@ export default function Prizes() {
         )}
       >
         <h2 className="tracks-heading text-5xl font-bold text-center mb-12 text-gray-800">
-          Prizes(Coming Soon)
+          Prizes
         </h2>
       </div>
 
       {/* Floating Fish Decorations */}
       <FloatingFish
-        src={star_fish}
-        alt="star_fish"
+        src={starFish}
+        alt="Star Fish"
         className="absolute z-10 bottom-4 md:left-10 left-5 w-24 h-24 md:w-32 md:h-32"
       />
       <FloatingFish
-        src={red_fish}
-        alt="red_fish"
+        src={redFish}
+        alt="Red Fish"
         className="absolute z-[-1] md:top-10 top-80 md:right-10 right-4 w-24 h-24 md:w-32 md:h-32"
       />
 
       <div className="cardsContainer">
-        {/* Card 1 */}
-        <div className="flipCard">
-          <div className="flipCardInner">
-            {/* FRONT */}
-            <div className="flipCardFront">
-              <Image
-                src="/craby.png" /* Replace with your front image */
-                alt="Rock Icon"
-                width={100}
-                height={100}
-                className="cardImage"
-              />
-              <h3>Beginner Track</h3>
-            </div>
-            {/* BACK */}
-            <div className="flipCardBack">
-              <Image
-                src="/question.png" /* Replace with your prize image */
-                alt="Clean Code Prize"
-                width={120}
-                height={120}
-                className="cardImage"
-              />
-              <p>Win this by focusing on writing high-quality code!</p>
-              <p>Criteria: Best code structure, clarity, etc.</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Card 2 */}
+        {/* Card for DAIN AI */}
         <div className="flipCard">
           <div className="flipCardInner">
             <div className="flipCardFront">
               <Image
                 src="/dainBanner.png"
-                alt="Rock Icon"
+                alt="DAIN AI Banner"
                 width={400}
                 height={100}
                 className="cardImage"
@@ -110,25 +81,26 @@ export default function Prizes() {
             </div>
             <div className="flipCardBack">
               <Image
-                src="/question.png"
-                alt="Hack2School Prize"
+                src="/money.png"
+                alt="DAIN AI Prize"
                 width={120}
                 height={120}
                 className="cardImage"
               />
-              <p>TBD</p>
-              <p>Criteria: TBD</p>
+              <p>1st Place: $1,000</p>
+              <p>2nd Place: $500</p>
+              <p>3rd Place: $250</p>
             </div>
           </div>
         </div>
 
-        {/* Card 3 */}
+        {/* Card for BeachHacks */}
         <div className="flipCard">
           <div className="flipCardInner">
             <div className="flipCardFront">
               <Image
                 src="/logo.png"
-                alt="Rock Icon"
+                alt="BeachHacks Logo"
                 width={100}
                 height={100}
                 className="cardImage"
@@ -137,25 +109,25 @@ export default function Prizes() {
             </div>
             <div className="flipCardBack">
               <Image
-                src="/winnerACM.jpg"
-                alt="Cold Hard Cache Prize"
+                src="/switchmonitor.png"
+                alt="BeachHacks Prize"
                 width={120}
                 height={120}
                 className="cardImage"
               />
-              <p>For the best project Overall On the Hackaton🦭</p>
-              <p>Criteria: Must use caching, DB indexing, etc.</p>
+              <p>Best Overall: Nintendo Switch</p>
+              <p>2nd Best Overall: Monitor</p>
             </div>
           </div>
         </div>
 
-        {/* Card 4 */}
+        {/* Card for Patient Safety (Heart of the Matter) */}
         <div className="flipCard">
           <div className="flipCardInner">
             <div className="flipCardFront">
               <Image
                 src="/patient.png"
-                alt="Rock Icon"
+                alt="Patient Safety Icon"
                 width={250}
                 height={100}
                 className="cardImage"
@@ -164,26 +136,24 @@ export default function Prizes() {
             </div>
             <div className="flipCardBack">
               <Image
-                src="/question.png"
-                alt="Heart of the Matter Prize"
+                src="/giftcard.png"
+                alt="Patient Safety Prize"
                 width={120}
                 height={120}
                 className="cardImage"
               />
-              <p>TBD</p>
-              <p>Criteria: TBD</p>
+              <p>$185 gift card for each hacker in the winning team</p>
             </div>
           </div>
         </div>
 
-
-        {/* Card 5 */}
+        {/* Card for Boot.Dev */}
         <div className="flipCard">
           <div className="flipCardInner">
             <div className="flipCardFront">
               <Image
                 src="/bootLogo2.webp"
-                alt="Rock Icon"
+                alt="Boot.Dev Logo"
                 width={200}
                 height={200}
                 className="cardImage"
@@ -192,14 +162,13 @@ export default function Prizes() {
             </div>
             <div className="flipCardBack">
               <Image
-                src="/question.png"
-                alt="Cold Hard Cache Prize"
+                src="/bootsub.png"
+                alt="Boot.Dev Prize"
                 width={120}
                 height={120}
                 className="cardImage"
               />
-              <p>TBD</p>
-              <p>Criteria: TBD</p>
+              <p>Best Beginner Prize: 1 year of Boot.Dev subscription</p>
             </div>
           </div>
         </div>
