@@ -306,7 +306,7 @@ const Sponsors = () => {
                     src="/bootLogo.webp"
                     alt="Sponsor-3-Boot.Dev"
                     borderColor="#705A00"
-                    customStyle={{ transform: "scale(2)", marginTop: "11%" }}
+                    customStyle={{ transform: "scale(2)", marginTop: "12%", marginLeft: "1%" }}
                     computedSize={goldSponsorSize}
                   />
                 </a>
