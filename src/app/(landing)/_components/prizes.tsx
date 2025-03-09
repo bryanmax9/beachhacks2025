@@ -153,7 +153,7 @@ export default function Prizes() {
             <div className="flipCardFront">
               <Image
                 src="/bootLogo2.webp"
-                alt="Boot.Dev Logo"
+                alt="Boot.dev Logo"
                 width={200}
                 height={200}
                 className="cardImage"
@@ -168,7 +168,7 @@ export default function Prizes() {
                 height={120}
                 className="cardImage"
               />
-              <p>Best Beginner Prize: 1 year of Boot.Dev subscription</p>
+              <p>Best Beginner Prize: 1 year of Boot.dev subscription</p>
             </div>
           </div>
         </div>
