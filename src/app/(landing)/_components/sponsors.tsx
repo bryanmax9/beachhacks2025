@@ -327,8 +327,8 @@ const Sponsors = () => {
                   draggable="false"
                 />
                 <div
-                  className="sponsors absolute top-[53.5%] left-[38%] -translate-x-1/2 flex justify-around items-center z-[4]"
-                  style={{ width: "22%" }}
+                  className="sponsors absolute top-[53.5%] left-[38.5%] -translate-x-1/2 flex justify-around items-center z-[4]"
+                  style={{ width: "23%" }}
                 >
                   <a href="https://www.asicsulb.org/corporate/" target="_blank">
                     <SponsorLogo
