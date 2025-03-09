@@ -71,7 +71,7 @@
 /* Front Face Text Styling */
 .flipCardFront h3 {
   margin-top: auto;
-  margin-bottom: 100px;
+  margin-bottom: 25%;
   text-shadow: 1px 1px 3px #000;
   font-family: "Bangers", cursive;
   font-size: 1.5rem;
@@ -81,6 +81,7 @@
 .cardImage {
   display: block;
   margin: 100px auto 1rem;
+  margin-bottom: 0;
   filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.8));
 }
 

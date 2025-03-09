@@ -152,18 +152,18 @@ export default function Prizes() {
           <div className="flipCardInner">
             <div className="flipCardFront">
               <Image
-                src="/bootLogo2.webp"
+                src="/bootlogo.png"
                 alt="Boot.dev Logo"
                 width={200}
                 height={200}
-                className="cardImage"
+                className="cardImage mt-4"
               />
-              <h3>Boot.Dev</h3>
+              <h3>Boot.dev</h3>
             </div>
             <div className="flipCardBack">
               <Image
                 src="/bootsub.png"
-                alt="Boot.Dev Prize"
+                alt="Boot.dev Prize"
                 width={120}
                 height={120}
                 className="cardImage"
