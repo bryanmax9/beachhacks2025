@@ -81,7 +81,7 @@ export default function Prizes() {
             </div>
             <div className="flipCardBack">
               <Image
-                src="/giftcard.png"
+                src="/solana.avif"
                 alt="DAIN AI Prize"
                 width={120}
                 height={120}
@@ -169,6 +169,31 @@ export default function Prizes() {
                 className="cardImage"
               />
               <p>Best Beginner Prize: 1 year of Boot.dev subscription</p>
+            </div>
+          </div>
+        </div>
+        {/* Card for Sybersecurity Club */}
+        <div className="flipCard">
+          <div className="flipCardInner">
+            <div className="flipCardFront">
+              <Image
+                src="/csulbCyber.jpg"
+                alt="Boot.dev Logo"
+                width={200}
+                height={200}
+                className="cardImage mt-4"
+              />
+              <h3>CyberSecurity</h3>
+            </div>
+            <div className="flipCardBack">
+              <Image
+                src="/badusb.webp"
+                alt="Boot.dev Prize"
+                width={120}
+                height={120}
+                className="cardImage"
+              />
+              <p>1st Place: Bad USB (USB that triggers malicious payloads on connected computers☠️)</p>
             </div>
           </div>
         </div>
