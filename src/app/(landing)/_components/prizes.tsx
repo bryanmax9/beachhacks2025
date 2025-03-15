@@ -81,7 +81,7 @@ export default function Prizes() {
             </div>
             <div className="flipCardBack">
               <Image
-                src="/money.png"
+                src="/giftcard.png"
                 alt="DAIN AI Prize"
                 width={120}
                 height={120}
