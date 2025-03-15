@@ -20,7 +20,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <OceanWaves>
-        <TracksPage />
+        {/* <TracksPage /> */}
         <Sponsors />
         <Prizes />
         <Stats />
