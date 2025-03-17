@@ -13,6 +13,7 @@ import Navbar from "@/app/(landing)/_components/navbar";
 import Footer from "@/app/(landing)/_components/footer";
 // import { redirect } from "next/navigation";
 import { Analytics } from "@vercel/analytics/react";
+
 import Schedule from "@/app/(landing)/_components/schedules";
 
 export default function Home() {
@@ -22,7 +23,8 @@ export default function Home() {
       <Hero />
       <OceanWaves>
         {/* <TracksPage /> */}
-        <Schedule/>
+        <Schedule />
+        <TracksPage />
         <Sponsors />
         <Prizes />
         <Stats />
