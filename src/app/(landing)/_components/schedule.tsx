@@ -20,7 +20,7 @@ const scheduleData = [
       { time: "5:15 PM - 6:15 PM", description: "AI w/ Startup Founder" },
       {
         time: "6:30 PM - 7:30 PM",
-        description: "AI Dinner & Cybersecurity Workshop",
+        description: "Dinner & Cybersecurity Workshop",
       },
       { time: "7:30 PM - 8:30 PM", description: "AI Club Workshop" },
       { time: "9:00 PM - 10:00 PM", description: "VR Club Workshop" },
