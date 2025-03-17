@@ -9,7 +9,14 @@ export default function Schedule() {
         { time: "10:00 AM - 10:30 AM", event: "Opening Ceremony" },
         { time: "10:30 AM", event: "Hacking Begins! Good luck and have fun :)" },
         { time: "1:00 PM - 1:30 PM", event: "Lunch" },
-        { time: "6:30 PM - 7:30 PM", event: "Dinner" }
+        { time: "1:30 PM - 2:30 PM", event: "GitHub Workshop" },
+        { time: "2:45 PM - 3:45 PM", event: "API Workshop" },
+        { time: "4:00 PM - 5:00 PM", event: "Google Workshop" },
+        { time: "5:15 PM - 6:15 PM", event: "AI w/ Startup Founder" },
+        { time: "6:30 PM - 7:30 PM", event: "Dinner & Cybersecurity Workshop" },
+        { time: "7:30 PM - 8:30 PM", event: "AI Club Workshop" },
+        { time: "9:00 PM - 10:00 PM", event: "VR Club Workshop" },
+        { time: "10:30 PM - 11:30 PM", event: "LeetCode Competition" },
       ]
     },
     {
