@@ -5,6 +5,7 @@ export default function Schedule() {
   const schedule = [
     {
       day: "Saturday 3/22", events: [
+        { time: "9:00 AM - 10:00 AM", event: "Check in" },
         { time: "10:00 AM - 10:30 AM", event: "Opening Ceremony" },
         { time: "10:30 AM", event: "Hacking Begins! Good luck and have fun :)" },
         { time: "1:00 PM - 1:30 PM", event: "Lunch" },
