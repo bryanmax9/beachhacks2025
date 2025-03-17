@@ -104,7 +104,8 @@ const Navbar = () => {
   };
 
   const navLinks = [
-    { href: "#tracks", label: "Tracks" },
+    // { href: "#tracks", label: "Tracks" },
+    { href: "#schedule", label: "Schedule" },
     { href: "#sponsors", label: "Sponsors" },
     { href: "#prizes", label: "Prizes" },
     { href: "#faq", label: "FAQ" },

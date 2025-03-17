@@ -1,0 +1,100 @@
+/* 1) Full-page (or main container) background */
+.schedule-background {
+  min-height: 50vh;
+  min-width: 50vw;
+  padding: 2rem;
+  padding-bottom: 6rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* so content stays near the top */
+}
+
+/* 2) Main schedule container */
+.schedule-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  color: #003f4f; /* A dark teal color for text */
+}
+
+/* 3) Header styling */
+.schedule-header {
+  text-align: center;
+  font-size: 2rem;
+  color: #fff; /* Contrasts with the ocean background */
+  margin-bottom: 2rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* 4) Each day’s container */
+.schedule-day {
+  background-color: rgba(255, 255, 255, 0.9); /* Slight transparency */
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  transition: transform 0.2s ease-in-out;
+}
+
+.schedule-day:hover {
+  transform: scale(1.01);
+}
+
+/* 5) Day title (e.g. "Saturday 3/22") */
+.schedule-day-title {
+  font-size: 1.6rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #02758f; /* A slightly darker teal for emphasis */
+  border-bottom: 2px solid #b3ecff; /* Light aqua underline */
+  padding-bottom: 0.5rem;
+}
+
+/* 6) Event list */
+.schedule-events {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* 7) Individual event */
+.schedule-event {
+  margin-bottom: 1rem;
+  line-height: 1.4;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 6px;
+  padding: 0.5rem;
+  transition: background 0.2s ease;
+}
+
+.schedule-event:hover {
+  background: rgba(255, 255, 255, 1);
+}
+
+/* 8) Time and description styling */
+.event-time {
+  font-weight: 600;
+  color: #003f4f;
+  margin-bottom: 0.25rem;
+}
+
+.event-description {
+  color: #004f5f;
+  font-weight: 400;
+}
+
+/* 9) Responsive tweaks for mobile */
+@media (max-width: 600px) {
+  .schedule-day-title {
+    font-size: 1.4rem;
+  }
+
+  .event-time,
+  .event-description {
+    font-size: 0.95rem;
+  }
+}
