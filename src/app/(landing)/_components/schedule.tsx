@@ -1,4 +1,3 @@
-
 import React from "react";
 import "./schedule.css";
 
@@ -12,9 +11,22 @@ const scheduleData = [
         time: "10:30 AM",
         description: "Hacking Begins! Good luck and have fun :)",
       },
+      {
+        time: "10:15 AM - 11:15 AM",
+        description: "Patient Safety 101 Workshop",
+      },
+      {
+        time: "12:00 PM - 1:00 PM",
+        description: "DAIN AI Workshop",
+      },
+
       { time: "1:00 PM - 1:30 PM", description: "Lunch" },
       { time: "1:30 PM - 2:30 PM", description: "GitHub Workshop" },
-      { time: "2:00 PM - 4:00 PM", description: "Cyber Competition-cyber security  booth, check out anytime in between for the competition." },
+      {
+        time: "2:00 PM - 4:00 PM",
+        description:
+          "Cyber Competition-cyber security  booth, check out anytime in between for the competition.",
+      },
       { time: "2:45 PM - 3:45 PM", description: "API Workshop" },
       { time: "4:00 PM - 5:00 PM", description: "Google Workshop" },
       { time: "5:15 PM - 6:15 PM", description: "AI w/ Startup Founder" },
