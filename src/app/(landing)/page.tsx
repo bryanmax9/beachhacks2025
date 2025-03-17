@@ -14,7 +14,7 @@ import Footer from "@/app/(landing)/_components/footer";
 // import { redirect } from "next/navigation";
 import { Analytics } from "@vercel/analytics/react";
 
-import Schedule from "@/app/(landing)/_components/schedules";
+import Schedule from "@/app/(landing)/_components/schedule";
 
 export default function Home() {
   return (
@@ -24,7 +24,6 @@ export default function Home() {
       <OceanWaves>
         {/* <TracksPage /> */}
         <Schedule />
-        <TracksPage />
         <Sponsors />
         <Prizes />
         <Stats />
