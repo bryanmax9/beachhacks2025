@@ -10,9 +10,12 @@ const scheduleData = [
       {
         time: "10:30 AM",
         description: "Hacking Begins! Good luck and have fun :)",
+      },{
+        time: "10:30 AM - 10:45 AM",
+        description: "Team-Matching",
       },
       {
-        time: "10:15 AM - 11:15 AM",
+        time: "10:45 AM - 11:45 AM",
         description: "Patient Safety 101 Workshop",
       },
       {
