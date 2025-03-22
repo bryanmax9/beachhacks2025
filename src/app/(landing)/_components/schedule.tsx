@@ -46,7 +46,7 @@ const scheduleData = [
     day: "Sunday 3/23",
     events: [
       { time: "7:00 AM - 8:00 AM", description: "Breakfast" },
-      { time: "10:30 AM", description: "Submission Hard Deadline" },
+      { time: "*10:30 AM", description: "Submission Hard Deadline" },
       { time: "11:00 AM - 12:30 PM", description: "Judging" },
       { time: "12:30 PM - 1:00 PM", description: "Closing Ceremony" },
     ],
