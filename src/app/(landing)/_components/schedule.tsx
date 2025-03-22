@@ -10,7 +10,7 @@ const scheduleData = [
       {
         time: "10:30 AM",
         description: "Hacking Begins! Good luck and have fun :)",
-      },{
+      }, {
         time: "10:30 AM - 10:45 AM",
         description: "Team-Matching",
       },
@@ -46,7 +46,7 @@ const scheduleData = [
     day: "Sunday 3/23",
     events: [
       { time: "7:00 AM - 8:00 AM", description: "Breakfast" },
-      { time: "10:00 AM - 11:00 AM", description: "Project Submissions" },
+      { time: "*10:30 AM", description: "Submission Hard Deadline" },
       { time: "11:00 AM - 12:30 PM", description: "Judging" },
       { time: "12:30 PM - 1:00 PM", description: "Closing Ceremony" },
     ],
